@@ -1881,6 +1881,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             UserDefaults.standard.removeObject(forKey: "einstellungenNachStart")
             einstellungenZeigen()
         }
+        autostartNachziehen()
         starteUpdateUhr()
         let warten = wartendeDateien
         wartendeDateien = []
@@ -2063,6 +2064,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func sicherungOeffnen() {
         try? fm.createDirectory(atPath: helfer.e.sicherungsordner, withIntermediateDirectories: true)
         NSWorkspace.shared.open(URL(fileURLWithPath: helfer.e.sicherungsordner))
+    }
+
+    /// macOS merkt sich beim Anmeldeobjekt den Ort der App. Wer sie startet, „Beim Anmelden starten“ einschaltet
+    /// und sie danach verschiebt (aus „Downloads“ nach „Programme“), hätte sonst einen Autostart, der ins Leere
+    /// zeigt, ohne es zu merken. Beim ersten Start mit dieser Fassung ist der frühere Ort unbekannt, deshalb
+    /// wird dann einmal neu angemeldet.
+    func autostartNachziehen() {
+        let ort = Bundle.main.bundleURL.standardizedFileURL.path
+        guard !ort.contains("/AppTranslocation/") else { return }      // dort liegt die App nur zum Schein
+        let d = UserDefaults.standard
+        let vorher = d.string(forKey: "appOrt")
+        d.set(ort, forKey: "appOrt")
+        guard vorher != ort, SMAppService.mainApp.status == .enabled else { return }
+        do {
+            try SMAppService.mainApp.unregister()
+            try SMAppService.mainApp.register()
+            helfer.q.async { protokoll(L("Autostart neu angemeldet, die App liegt jetzt in \(ort)")) }
+        } catch {
+            helfer.q.async { melde(L("Der Autostart ließ sich nach dem Umzug der App nicht neu anmelden. Schalte „Beim Anmelden starten“ in den Einstellungen einmal aus und wieder ein.")) }
+        }
     }
 
     // MARK: Updates

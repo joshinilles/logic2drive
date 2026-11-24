@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.6.2",
+    "datum": "2026-11-24",
+    "de": [
+      "Der Autostart funktioniert weiter, wenn du die App nach dem ersten Start in einen anderen Ordner legst, zum Beispiel nach „Programme“."
+    ],
+    "en": [
+      "Open at Login keeps working when you move the app to another folder after its first launch, for example to Applications."
+    ],
+    "fr": [
+      "L’ouverture à l’ouverture de session continue de fonctionner si tu déplaces l’app dans un autre dossier après son premier lancement, par exemple dans Applications."
+    ],
+    "ar": [
+      "يستمر التشغيل عند تسجيل الدخول في العمل إذا نقلت التطبيق إلى مجلد آخر بعد تشغيله الأول، مثلًا إلى مجلد التطبيقات."
+    ],
+    "fa": [
+      "اگر برنامه را پس از اولین اجرا به پوشه‌ی دیگری، مثلاً «برنامه‌ها»، منتقل کنید، اجرا هنگام ورود به سیستم همچنان کار می‌کند."
+    ]
+  },
+  {
     "version": "0.6.1",
     "datum": "2026-11-24",
     "de": [

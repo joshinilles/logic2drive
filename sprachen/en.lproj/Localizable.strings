@@ -815,3 +815,9 @@
 
 /* einstellungen.swift */
 "Logic2Drive – Einstellungen" = "Logic2Drive – Settings";
+
+/* main.swift, Autostart nach Umzug */
+"Autostart neu angemeldet, die App liegt jetzt in %@" = "Open at Login registered again, the app is now in %@";
+
+/* main.swift, Autostart nach Umzug */
+"Der Autostart ließ sich nach dem Umzug der App nicht neu anmelden. Schalte „Beim Anmelden starten“ in den Einstellungen einmal aus und wieder ein." = "Open at Login couldn’t be registered again after the app was moved. Turn “Open at Login” off and on again in Settings.";

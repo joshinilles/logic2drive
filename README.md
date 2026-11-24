@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6.1). It has been tested on a single Mac with test
+**Status: early version (0.6.2). It has been tested on a single Mac with test
 projects and a handful of real ones. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
