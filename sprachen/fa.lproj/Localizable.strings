@@ -1,0 +1,817 @@
+/* Logic2Drive – فارسی. Keys are the German source texts; do not change them. */
+
+/* main.swift:108 */
+"Zuletzt, heute %@: %@" = "آخرین کار، امروز %@: %@";
+
+/* main.swift:108 */
+"Zuletzt, gestern %@: %@" = "آخرین کار، دیروز %@: %@";
+
+/* main.swift:108 */
+"Zuletzt, %@: %@" = "آخرین کار، %@: %@";
+
+/* main.swift:259 */
+"Projekt nicht lesbar: %@" = "پروژه خوانده نمی‌شود: %@";
+
+/* main.swift:260 */
+"Teile des Projekts sind nicht geladen" = "بخش‌هایی از پروژه بارگذاری نشده‌اند";
+
+/* main.swift:261 */
+"Projekt enthält Verknüpfungen, die ich nicht übernehme" = "پروژه میان‌برهایی دارد که من آن‌ها را برنمی‌دارم";
+
+/* main.swift:262, main.swift:1286 */
+"Zu wenig freier Speicher" = "فضای خالی کافی نیست";
+
+/* main.swift:271 */
+"Kopieren fehlgeschlagen: %@" = "کپی کردن ناموفق بود: %@";
+
+/* main.swift:275 */
+"Kopie nicht bereinigt: %@" = "کپی پاک‌سازی نشد: %@";
+
+/* main.swift:278 */
+"Packen fehlgeschlagen: %@" = "فشرده کردن ناموفق بود: %@";
+
+/* main.swift:280 */
+"Zip fehlerhaft: %@" = "فایل Zip خراب است: %@";
+
+/* main.swift:284 */
+"Probe-Entpacken fehlgeschlagen: %@" = "بازکردن آزمایشی ناموفق بود: %@";
+
+/* main.swift:286 */
+"Zip weicht vom Projekt ab: %@" = "فایل Zip با پروژه تفاوت دارد: %@";
+
+/* main.swift:287 */
+"Das Projekt hat sich beim Packen geändert" = "پروژه هنگام فشرده کردن تغییر کرد";
+
+/* main.swift:290 */
+"Zip nicht lesbar" = "فایل Zip خوانده نمی‌شود";
+
+/* main.swift:341 */
+"Nicht lesbare Datei beiseitegelegt: %@" = "پرونده‌ی ناخوانا کنار گذاشته شد: %@";
+
+/* main.swift:344 */
+"Nicht lesbare Datei ließ sich nicht beiseitelegen: %@" = "پرونده‌ی ناخوانا کنار گذاشته نشد: %@";
+
+/* main.swift:368 */
+"Einstellungen nicht lesbar, es wird kein Ordner beobachtet" = "تنظیمات خوانده نمی‌شود، هیچ پوشه‌ای زیر نظر گرفته نمی‌شود";
+
+/* main.swift:531 */
+"Einstellungen nicht gespeichert: %@" = "تنظیمات ذخیره نشد: %@";
+
+/* main.swift:542 */
+"Die Einstellung ließ sich nicht speichern. Es bleibt alles, wie es war." = "تنظیم ذخیره نشد. همه چیز مثل قبل می‌ماند.";
+
+/* main.swift:555 */
+"Beobachtet jetzt: %@" = "اکنون زیر نظر: %@";
+
+/* main.swift:555 */
+"nichts" = "هیچ‌چیز";
+
+/* main.swift:597 */
+"Sicherung nach %@ Tagen in den Papierkorb gelegt: %@/%@" = "پشتیبان پس از %@ روز به سطل زباله منتقل شد: %@/%@";
+
+/* main.swift:600 */
+"Sicherung nicht weggeräumt (%@/%@): %@" = "پشتیبان پاک‌سازی نشد (%@/%@): %@";
+
+/* main.swift:624, main.swift:636 */
+"Die Auftragsliste ist nicht lesbar. Logic2Drive speichert nichts mehr, bis das geklärt ist." = "فهرست کارها خوانده نمی‌شود. تا زمانی که این مشکل حل نشود، Logic2Drive چیزی ذخیره نمی‌کند.";
+
+/* main.swift:631 */
+"Auftragsliste nicht lesbar: %@" = "فهرست کارها خوانده نمی‌شود: %@";
+
+/* main.swift:633 */
+"Die Auftragsliste war nicht lesbar und wurde beiseitegelegt. Prüfe bitte, ob in „In Arbeit“ noch Projekte liegen." = "فهرست کارها خوانده نمی‌شد و کنار گذاشته شد. لطفاً بررسی کنید که در «In Arbeit» هنوز پروژه‌ای مانده است یا نه.";
+
+/* main.swift:650 */
+"Logic2Drive kann seinen Stand nicht speichern. Ist die Platte voll?" = "Logic2Drive نمی‌تواند وضعیت خود را ذخیره کند. شاید دیسک پر است؟";
+
+/* main.swift:661 */
+"Logic2Drive %@ gestartet. Beobachtet: %@" = "Logic2Drive %@ شروع شد. زیر نظر: %@";
+
+/* main.swift:665 */
+"Die Einstellungen von Logic2Drive sind nicht lesbar. Bis einstellungen.json repariert ist, wird kein Ordner beobachtet." = "تنظیمات Logic2Drive خوانده نمی‌شود. تا زمانی که einstellungen.json درست نشود، هیچ پوشه‌ای زیر نظر گرفته نمی‌شود.";
+
+/* main.swift:668 */
+"Der beobachtete Ordner „%@“ ist nicht da. Neue Projekte dort werden nicht eingepackt." = "پوشه‌ی زیر نظر «%@» وجود ندارد. پروژه‌های جدید آن‌جا فشرده نمی‌شوند.";
+
+/* main.swift:708 */
+"Internet ist wieder da, Drive bekommt Zeit zum Abgleichen" = "اینترنت دوباره وصل شد، Drive زمان همگام‌سازی می‌گیرد";
+
+/* main.swift:726 */
+"Logic2Drive hängt seit über 30 Minuten an einem Schritt und wartet vielleicht auf Google Drive. Deine Arbeit bleibt lokal erhalten." = "Logic2Drive بیش از 30 دقیقه است روی یک مرحله گیر کرده و شاید منتظر Google Drive است. کار شما در همین مک می‌ماند.";
+
+/* main.swift:742 */
+"Mac ist aufgewacht, Drive bekommt Zeit zum Abgleichen" = "مک از خواب بیدار شد، Drive زمان همگام‌سازی می‌گیرد";
+
+/* main.swift:753 */
+"Warte auf Internet" = "در انتظار اینترنت";
+
+/* main.swift:755 */
+"Drive gleicht noch ab (noch %@ s)" = "Drive هنوز همگام‌سازی می‌کند (%@ ثانیه دیگر)";
+
+/* main.swift:784 */
+"Ein Durchlauf über die beobachteten Ordner hat %@ Sekunden gedauert" = "یک بررسی پوشه‌های زیر نظر %@ ثانیه طول کشید";
+
+/* main.swift:854 */
+"Logic2Drive darf Logic nicht abfragen. Erlaube es unter Systemeinstellungen > Datenschutz & Sicherheit > Automation. Bis dahin wird nichts zurückgelegt, solange Logic läuft." = "Logic2Drive اجازه ندارد از Logic پرس‌وجو کند. این اجازه را در تنظیمات سیستم، بخش Privacy & Security و سپس Automation بدهید. تا آن زمان، تا وقتی Logic باز است، چیزی برگردانده نمی‌شود.";
+
+/* main.swift:859 */
+"Logic2Drive bekommt seit über 5 Minuten keine Antwort von Logic. Bis dahin wird nichts zurückgelegt." = "Logic2Drive بیش از 5 دقیقه است از Logic پاسخی نمی‌گیرد. تا آن زمان چیزی برگردانده نمی‌شود.";
+
+/* main.swift:912 */
+"„%@“ enthält Verknüpfungen und kann nicht automatisch eingepackt werden." = "«%@» میان‌برهایی دارد و به صورت خودکار فشرده نمی‌شود.";
+
+/* main.swift:918 */
+"Neues Paket erkannt: %@" = "پروژه‌ی جدید پیدا شد: %@";
+
+/* main.swift:928 */
+"%@ liegt schon in der Cloud und wird trotzdem eingepackt, weil hier daran gearbeitet wurde" = "%@ از قبل در فضای ابری است و با این حال فشرده می‌شود، چون این‌جا روی آن کار شده است";
+
+/* main.swift:965 */
+"Die bisherige Zip ließ sich nicht sichern: %@" = "فایل Zip قبلی پشتیبان‌گیری نشد: %@";
+
+/* main.swift:969 */
+"Die Sicherung der bisherigen Zip ist unvollständig" = "پشتیبان فایل Zip قبلی ناقص است";
+
+/* main.swift:971 */
+"Bisherige Zip vor dem Ersetzen gesichert: %@" = "فایل Zip قبلی پیش از جایگزینی پشتیبان‌گیری شد: %@";
+
+/* main.swift:980, main.swift:981 */
+"Drive-Datei nicht ersetzbar: %@" = "پرونده‌ی Drive جایگزین نشد: %@";
+
+/* main.swift:1030 */
+"Zip wird hochgeladen" = "فایل Zip در حال بارگذاری است";
+
+/* main.swift:1032 */
+"Eingepackt: %@ -> %@, %@ Byte" = "فشرده شد: %@ به %@، %@ بایت";
+
+/* main.swift:1035 */
+"Einpacken fehlgeschlagen (%@): %@" = "فشرده کردن ناموفق بود (%@): %@";
+
+/* main.swift:1038 */
+"„%@“ ließ sich nicht einpacken: %@" = "«%@» فشرده نشد: %@";
+
+/* main.swift:1050 */
+"Paket gerade nicht lesbar, neuer Versuch folgt" = "پروژه فعلاً خوانده نمی‌شود، دوباره تلاش می‌شود";
+
+/* main.swift:1056 */
+"Drive hat %@ umbenannt in %@, ich führe das Paket weiter" = "Drive نام %@ را به %@ تغییر داد، من پروژه را ادامه می‌دهم";
+
+/* main.swift:1062 */
+"Paket %@ liegt nicht mehr im Drive-Ordner, die Zip bleibt" = "پروژه‌ی %@ دیگر در پوشه‌ی Drive نیست، فایل Zip می‌ماند";
+
+/* main.swift:1068 */
+"Kann Logic gerade nicht abfragen, das Paket bleibt liegen" = "فعلاً نمی‌توانم از Logic پرس‌وجو کنم، پروژه می‌ماند";
+
+/* main.swift:1072, main.swift:1126, main.swift:1684 */
+"Ist in Logic offen, wird nach dem Schließen aufgeräumt" = "در Logic باز است، بعد از بستن پاک‌سازی می‌شود";
+
+/* main.swift:1077 */
+"Paket wurde gerade geändert, warte" = "پروژه همین حالا تغییر کرده، صبر می‌کنم";
+
+/* main.swift:1094 */
+"Paket aus dem Drive-Ordner genommen: %@, liegt in %@" = "پروژه از پوشه‌ی Drive برداشته شد: %@، در %@ است";
+
+/* main.swift:1101 */
+"Wird aufgeräumt" = "در حال پاک‌سازی";
+
+/* main.swift:1105 */
+"Aufräumen fehlgeschlagen: %@" = "پاک‌سازی ناموفق بود: %@";
+
+/* main.swift:1106 */
+"Aufräumen fehlgeschlagen (%@): %@" = "پاک‌سازی ناموفق بود (%@): %@";
+
+/* main.swift:1107 */
+"„%@“ liegt als Zip in Drive, das Paket ließ sich aber nicht wegräumen." = "«%@» به صورت فایل Zip در Drive است، اما پروژه جمع نشد.";
+
+/* main.swift:1115 */
+"Zip gerade nicht lesbar, neuer Versuch folgt" = "فایل Zip فعلاً خوانده نمی‌شود، دوباره تلاش می‌شود";
+
+/* main.swift:1119 */
+"Die Zip von %@ wurde inzwischen von jemand anderem geändert" = "فایل Zip پروژه‌ی %@ در این فاصله شخص دیگری تغییر داده است";
+
+/* main.swift:1143 */
+"Neuer Stand wird hochgeladen" = "نسخه‌ی جدید در حال بارگذاری است";
+
+/* main.swift:1145 */
+"Paket %@ hat sich noch geändert, Zip neu gepackt: %@ Byte" = "پروژه‌ی %@ باز هم تغییر کرد، فایل Zip دوباره ساخته شد: %@ بایت";
+
+/* main.swift:1147 */
+"Neu packen fehlgeschlagen (%@): %@" = "فشرده کردن دوباره ناموفق بود (%@): %@";
+
+/* main.swift:1148, main.swift:1189, main.swift:1601 */
+"Fehler, neuer Versuch folgt: %@" = "خطا، دوباره تلاش می‌شود: %@";
+
+/* main.swift:1149 */
+"„%@“ ließ sich nicht neu einpacken: %@" = "«%@» دوباره فشرده نشد: %@";
+
+/* main.swift:1158 */
+"Drive-Ordner fehlt" = "پوشه‌ی Drive نیست";
+
+/* main.swift:1158, main.swift:1574 */
+"Der Drive-Ordner existiert nicht mehr" = "پوشه‌ی Drive دیگر وجود ندارد";
+
+/* main.swift:1159 */
+"Der Drive-Ordner von „%@“ existiert nicht mehr. Die lokale Kopie bleibt." = "پوشه‌ی Drive مربوط به «%@» دیگر وجود ندارد. کپی محلی می‌ماند.";
+
+/* main.swift:1183, main.swift:1594 */
+"Konflikt: wird als eigene Fassung hochgeladen" = "تداخل: به عنوان نسخه‌ی خودتان بارگذاری می‌شود";
+
+/* main.swift:1185 */
+"KONFLIKT: %@. Neue Fassung daneben: %@" = "تداخل: %@. نسخه‌ی جدید در کنار آن: %@";
+
+/* main.swift:1188 */
+"Eigene Fassung fehlgeschlagen (%@): %@" = "ذخیره‌ی نسخه‌ی خودتان ناموفق بود (%@): %@";
+
+/* main.swift:1190 */
+"Der Stand von „%@“ ließ sich nicht als eigene Fassung ablegen: %@. Die lokale Kopie bleibt." = "نسخه‌ی «%@» به عنوان نسخه‌ی خودتان ذخیره نشد: %@. کپی محلی می‌ماند.";
+
+/* main.swift:1199 */
+"Leere Datei von Drive in den Papierkorb gelegt: %@" = "پرونده‌ی خالی از Drive به سطل زباله منتقل شد: %@";
+
+/* main.swift:1201 */
+"Leere Datei nicht entfernt: %@" = "پرونده‌ی خالی برداشته نشد: %@";
+
+/* main.swift:1206 */
+"Abgelegt: %@" = "گذاشته شد: %@";
+
+/* main.swift:1208, main.swift:1756 */
+"„%@“ wurde inzwischen geändert. Dein Stand liegt als eigene Fassung daneben." = "«%@» در این فاصله تغییر کرده است. نسخه‌ی شما در کنار آن به عنوان نسخه‌ی خودتان ذخیره شده است.";
+
+/* main.swift:1210 */
+"„%@“ liegt jetzt als Zip in Google Drive." = "«%@» اکنون به صورت فایل Zip در Google Drive است.";
+
+/* main.swift:1223 */
+"%@ ist schon ausgecheckt, öffne die Arbeitskopie" = "%@ از قبل برداشته شده است، نسخه‌ی کاری را باز می‌کنم";
+
+/* main.swift:1225 */
+"Du öffnest deinen eigenen Stand von „%@“. Die neuere Fassung in der Zip kannst du öffnen, sobald dein Stand hochgeladen ist." = "شما نسخه‌ی خودتان از «%@» را باز می‌کنید. وقتی نسخه‌ی شما بارگذاری شد، می‌توانید نسخه‌ی جدیدتر داخل فایل Zip را باز کنید.";
+
+/* main.swift:1236 */
+"Arbeitskopie von %@ fehlt, der alte Auftrag wird aufgegeben und die Zip neu geöffnet" = "نسخه‌ی کاری %@ نیست، کار قبلی رها می‌شود و فایل Zip دوباره باز می‌شود";
+
+/* main.swift:1242 */
+"%@ arbeitet seit %@ auf „%@“ an diesem Projekt. Wenn du es trotzdem öffnest, entstehen zwei Fassungen." = "%@ از %@ در «%@» روی این پروژه کار می‌کند. اگر با این حال آن را باز کنید، دو نسخه پدید می‌آید.";
+
+/* main.swift:1244, main.swift:1250 */
+"Nicht geöffnet, in Arbeit bei %@: %@" = "باز نشد، %@ روی آن کار می‌کند: %@";
+
+/* main.swift:1248 */
+"„%@“ ist gerade in Arbeit" = "«%@» همین حالا در دست کار است";
+
+/* main.swift:1261 */
+"„%@“ ließ sich nicht öffnen: %@" = "«%@» باز نشد: %@";
+
+/* main.swift:1280 */
+"Laden fehlgeschlagen: %@" = "بارگیری ناموفق بود: %@";
+
+/* main.swift:1284 */
+"Die Zip kam nicht vollständig an" = "فایل Zip کامل نرسید";
+
+/* main.swift:1288 */
+"Die Zip ist beschädigt: %@" = "فایل Zip آسیب دیده است: %@";
+
+/* main.swift:1292 */
+"Entpacken fehlgeschlagen: %@" = "باز کردن فایل فشرده ناموفق بود: %@";
+
+/* main.swift:1294 */
+"In der Zip steckt kein Logic-Projekt" = "در فایل Zip پروژه‌ی Logic وجود ندارد";
+
+/* main.swift:1295 */
+"Die Zip enthält Verknüpfungen, die ich nicht übernehme" = "فایل Zip میان‌برهایی دارد که من آن‌ها را برنمی‌دارم";
+
+/* main.swift:1301, main.swift:1456 */
+"Arbeitskopie nicht lesbar" = "نسخه‌ی کاری خوانده نمی‌شود";
+
+/* main.swift:1317 */
+"Wird in Logic geöffnet" = "در Logic باز می‌شود";
+
+/* main.swift:1318 */
+"Ausgecheckt: %@ -> %@" = "نسخه‌ی کاری برداشته شد: %@ به %@";
+
+/* main.swift:1331 */
+"Die Sperre im Drive-Ordner ließ sich nicht anlegen (%@)" = "قفل در پوشه‌ی Drive ساخته نشد (%@)";
+
+/* main.swift:1335 */
+"Die Sperre im Drive-Ordner ließ sich nicht anlegen" = "قفل در پوشه‌ی Drive ساخته نشد";
+
+/* main.swift:1356 */
+"Logic ließ sich nicht öffnen: %@" = "Logic باز نشد: %@";
+
+/* main.swift:1357 */
+"Logic ließ sich nicht öffnen. Die Arbeitskopie liegt im Arbeitsordner." = "Logic باز نشد. نسخه‌ی کاری در پوشه‌ی کار است.";
+
+/* main.swift:1364 */
+"Keine Logic-Zip, ans Archivprogramm weitergereicht: %@" = "فایل Zip پروژه‌ی Logic نیست، به برنامه‌ی آرشیو داده شد: %@";
+
+/* main.swift:1380, main.swift:1401 */
+"Arbeitskopie von %@ wurde umbenannt: %@" = "نام نسخه‌ی کاری %@ تغییر کرد: %@";
+
+/* main.swift:1407 */
+"Anderes Paket am Platz der Arbeitskopie" = "پروژه‌ی دیگری جای نسخه‌ی کاری است";
+
+/* main.swift:1407, main.swift:1652, main.swift:1652 */
+"Arbeitskopie fehlt" = "نسخه‌ی کاری نیست";
+
+/* main.swift:1411 */
+"Unter dem Namen der Arbeitskopie von „%@“ liegt ein anderes Paket. Logic2Drive packt es nicht ein. Leg das ursprüngliche Paket zurück oder gib den Auftrag im Menü auf." = "زیر نام نسخه‌ی کاری «%@» پروژه‌ی دیگری قرار دارد. Logic2Drive آن را فشرده نمی‌کند. پروژه‌ی اصلی را سر جایش برگردانید یا کار را از منو رها کنید.";
+
+/* main.swift:1412 */
+"Die Arbeitskopie von „%@“ ist nicht mehr im Arbeitsordner. Leg genau dieses Paket zurück, zum Beispiel aus dem Papierkorb, oder gib den Auftrag im Menü auf." = "نسخه‌ی کاری «%@» دیگر در پوشه‌ی کار نیست. همین پروژه را برگردانید، مثلاً از سطل زباله، یا کار را از منو رها کنید.";
+
+/* main.swift:1417 */
+"Arbeitskopie von %@ ist wieder da" = "نسخه‌ی کاری %@ دوباره سر جایش است";
+
+/* main.swift:1418, main.swift:1433, main.swift:1439 */
+"Geschlossen, wird gleich zurückgelegt" = "بسته شد، به زودی برگردانده می‌شود";
+
+/* main.swift:1422, main.swift:1507, main.swift:1680 */
+"Kann Logic gerade nicht abfragen" = "فعلاً نمی‌توانم از Logic پرس‌وجو کنم";
+
+/* main.swift:1429 */
+"In Logic geöffnet: %@" = "در Logic باز شد: %@";
+
+/* main.swift:1430, main.swift:1448, main.swift:1511 */
+"In Logic geöffnet" = "در Logic باز شد";
+
+/* main.swift:1432 */
+"Geschlossen: %@, warte %@ Sekunden Ruhe" = "بسته شد: %@، %@ ثانیه صبر می‌کنم تا آرام شود";
+
+/* main.swift:1438 */
+"%@: Logic ist beendet, warte %@ Sekunden Ruhe" = "%@: Logic بسته شد، %@ ثانیه صبر می‌کنم تا آرام شود";
+
+/* main.swift:1441 */
+"Nicht als geöffnet erkannt" = "به عنوان باز تشخیص داده نشد";
+
+/* main.swift:1442 */
+"„%@“ wurde nicht als geöffnet erkannt. Wenn du nicht daran arbeitest, wähle im Menü „Jetzt zurücklegen“." = "«%@» به عنوان باز تشخیص داده نشد. اگر روی آن کار نمی‌کنید، از منو «Jetzt zurücklegen» را انتخاب کنید.";
+
+/* main.swift:1447 */
+"Wieder geöffnet: %@" = "دوباره باز شد: %@";
+
+/* main.swift:1457 */
+"Die Arbeitskopie von „%@“ ist nicht lesbar und kann nicht zurückgelegt werden. Sie bleibt im Arbeitsordner." = "نسخه‌ی کاری «%@» خوانده نمی‌شود و نمی‌تواند برگردانده شود. در پوشه‌ی کار می‌ماند.";
+
+/* main.swift:1476 */
+"Die Arbeitskopie von „%@“ liegt nicht mehr an ihrem Platz." = "نسخه‌ی کاری «%@» دیگر سر جایش نیست.";
+
+/* main.swift:1480 */
+"Ich kann Logic gerade nicht abfragen. Beende Logic ganz, dann lege ich „%@“ zurück." = "فعلاً نمی‌توانم از Logic پرس‌وجو کنم. Logic را کامل ببندید، بعد «%@» را برمی‌گردانم.";
+
+/* main.swift:1484 */
+"„%@“ ist noch in Logic offen. Bitte zuerst schließen." = "«%@» هنوز در Logic باز است. لطفاً اول آن را ببندید.";
+
+/* main.swift:1488 */
+"Die Arbeitskopie von „%@“ ist nicht lesbar." = "نسخه‌ی کاری «%@» خوانده نمی‌شود.";
+
+/* main.swift:1500 */
+"Auftrag aufgegeben: %@, eine vorhandene Arbeitskopie bleibt liegen" = "کار رها شد: %@، نسخه‌ی کاری موجود می‌ماند";
+
+/* main.swift:1517, main.swift:1594 */
+"Wird hochgeladen" = "در حال بارگذاری";
+
+/* main.swift:1520 */
+"Unverändert: %@, nichts hochzuladen" = "بدون تغییر: %@، چیزی برای بارگذاری نیست";
+
+/* main.swift:1522 */
+"„%@“ war unverändert. Die Zip in Drive bleibt, wie sie ist." = "«%@» تغییری نکرده بود. فایل Zip در Drive همان طور که هست می‌ماند.";
+
+/* main.swift:1526, main.swift:1562 */
+"%@, lege danach zurück" = "%@، بعد از آن برمی‌گردانم";
+
+/* main.swift:1554 */
+"Logic lässt sich gerade nicht abfragen" = "فعلاً نمی‌شود از Logic پرس‌وجو کرد";
+
+/* main.swift:1556 */
+"Wieder geöffnet beim Packen: %@, Zurücklegen abgebrochen" = "هنگام فشرده کردن دوباره باز شد: %@، برگرداندن لغو شد";
+
+/* main.swift:1565 */
+"Die Zip in Drive ist gerade nicht lesbar" = "فایل Zip در Drive فعلاً خوانده نمی‌شود";
+
+/* main.swift:1596 */
+"KONFLIKT: %@ hat sich in Drive geändert, neue Fassung daneben: %@" = "تداخل: %@ در Drive تغییر کرده، نسخه‌ی جدید در کنار آن: %@";
+
+/* main.swift:1597 */
+"Zurückgelegt: %@, %@ Byte, Upload läuft" = "برگردانده شد: %@، %@ بایت، بارگذاری در جریان است";
+
+/* main.swift:1600 */
+"Zurücklegen fehlgeschlagen (%@): %@" = "برگرداندن ناموفق بود (%@): %@";
+
+/* main.swift:1602 */
+"„%@“ ließ sich nicht zurücklegen: %@. Die lokale Kopie bleibt." = "«%@» برگردانده نشد: %@. کپی محلی می‌ماند.";
+
+/* main.swift:1624 */
+"Wieder in Logic geöffnet" = "دوباره در Logic باز شد";
+
+/* main.swift:1626 */
+"Wieder in Arbeit während des Uploads: %@, die Arbeitskopie bleibt" = "هنگام بارگذاری دوباره در دست کار شد: %@، نسخه‌ی کاری می‌ماند";
+
+/* main.swift:1641 */
+"Zip weicht wiederholt ab" = "فایل Zip بارها تفاوت دارد";
+
+/* main.swift:1641 */
+"Zip in Drive weicht wiederholt ab, bitte prüfen" = "فایل Zip در Drive بارها تفاوت دارد، لطفاً بررسی کنید";
+
+/* main.swift:1642 */
+"Die Zip von „%@“ weicht in Drive wiederholt ab. Logic2Drive legt keine weitere Fassung an, die lokale Kopie bleibt." = "فایل Zip پروژه‌ی «%@» در Drive بارها تفاوت دارد. Logic2Drive نسخه‌ی دیگری نمی‌سازد، کپی محلی می‌ماند.";
+
+/* main.swift:1653 */
+"Die Zip und die Arbeitskopie von „%@“ sind nicht mehr da. Gib den Auftrag im Menü auf." = "فایل Zip و نسخه‌ی کاری «%@» دیگر نیستند. کار را از منو رها کنید.";
+
+/* main.swift:1655 */
+"Die Zip und das Paket von „%@“ sind nicht mehr im Drive-Ordner." = "فایل Zip و پروژه‌ی «%@» دیگر در پوشه‌ی Drive نیستند.";
+
+/* main.swift:1670, main.swift:1738 */
+"Kann Logic gerade nicht abfragen, die Kopie bleibt" = "فعلاً نمی‌توانم از Logic پرس‌وجو کنم، کپی می‌ماند";
+
+/* main.swift:1691 */
+"Die Zip liegt nicht mehr im Drive-Ordner" = "فایل Zip دیگر در پوشه‌ی Drive نیست";
+
+/* main.swift:1696 */
+"Upload-Fehler: %@" = "خطای بارگذاری: %@";
+
+/* main.swift:1697 */
+"„%@“ ließ sich nicht hochladen: %@. Die lokale Kopie bleibt." = "«%@» بارگذاری نشد: %@. کپی محلی می‌ماند.";
+
+/* main.swift:1709 */
+"Drive meldet für %@ eine falsche Größe, der Inhalt stimmt" = "Drive اندازه‌ی نادرستی برای %@ گزارش می‌دهد، محتوا درست است";
+
+/* main.swift:1712 */
+"Die Zip in Drive hat sich geändert" = "فایل Zip در Drive تغییر کرده است";
+
+/* main.swift:1719 */
+"Upload dauert ungewöhnlich lange" = "بارگذاری غیرعادی طول کشیده";
+
+/* main.swift:1719 */
+"Seit über einer Stunde nicht in Drive angekommen" = "بیش از یک ساعت است به Drive نرسیده";
+
+/* main.swift:1720 */
+"„%@“ ist seit über einer Stunde nicht in Google Drive angekommen. Ist Drive pausiert oder das Konto voll? Die lokale Kopie bleibt." = "«%@» بیش از یک ساعت است به Google Drive نرسیده. آیا Drive متوقف شده یا حساب پر است؟ کپی محلی می‌ماند.";
+
+/* main.swift:1728 */
+"Prüfsumme der Zip in Drive weicht ab" = "مجموع کنترلی فایل Zip در Drive تفاوت دارد";
+
+/* main.swift:1748 */
+"%@ wurde nach dem Packen noch geändert, die Arbeitskopie bleibt" = "%@ بعد از فشرده شدن باز هم تغییر کرد، نسخه‌ی کاری می‌ماند";
+
+/* main.swift:1753 */
+"Upload bestätigt: %@" = "بارگذاری تأیید شد: %@";
+
+/* main.swift:1758 */
+"„%@“ ist wieder in Google Drive." = "«%@» دوباره در Google Drive است.";
+
+/* main.swift:1775 */
+"Arbeitskopie nicht in den Papierkorb gelegt: %@" = "نسخه‌ی کاری به سطل زباله منتقل نشد: %@";
+
+/* main.swift:1808 */
+"WÜRDE EINPACKEN: %@" = "فشرده می‌شد: %@ (آزمایشی)";
+
+/* main.swift:1813 */
+"Geladene Pakete: %@, davon normal in der Cloud: %@, würde einpacken: %@" = "پروژه‌های روی این مک: %@، از آن میان عادی در فضای ابری: %@، فشرده می‌شد: %@";
+
+/* main.swift:1852, main.swift:1990 */
+"Abbrechen" = "لغو";
+
+/* main.swift:1853 */
+"Trotzdem öffnen" = "با این حال باز شود";
+
+/* main.swift:1891 */
+"Logic2Drive meldet ein Problem" = "Logic2Drive مشکلی گزارش می‌کند";
+
+/* main.swift:1897, main.swift:2128 */
+"Logic2Drive %@" = "Logic2Drive %@";
+
+/* main.swift:1916, willkommen.swift:68 */
+"Gerade nichts in Arbeit" = "فعلاً کاری در جریان نیست";
+
+/* main.swift:1925 */
+"   Auftrag aufgeben und Sperre lösen" = "   رها کردن کار و باز کردن قفل";
+
+/* main.swift:1930 */
+"   Jetzt zurücklegen" = "   همین حالا برگردان";
+
+/* main.swift:1943, willkommen.swift:152 */
+"Google Drive beobachten" = "زیر نظر گرفتن Google Drive";
+
+/* main.swift:1945, willkommen.swift:162 */
+"Beim Anmelden starten" = "اجرا هنگام ورود به سیستم";
+
+/* main.swift:1946 */
+"Updates von selbst einspielen" = "نصب خودکار به‌روزرسانی‌ها";
+
+/* main.swift:1955 */
+"Über Logic2Drive" = "درباره‌ی Logic2Drive";
+
+/* main.swift:1955 */
+"Einführung zeigen" = "نمایش معرفی";
+
+/* main.swift:1956 */
+"Nach Updates suchen" = "جست‌وجوی به‌روزرسانی";
+
+/* main.swift:1957 */
+"Arbeitsordner öffnen" = "باز کردن پوشه‌ی کار";
+
+/* main.swift:1957 */
+"Sicherung öffnen" = "باز کردن پوشه‌ی پشتیبان";
+
+/* main.swift:1958 */
+"Protokoll öffnen" = "باز کردن گزارش";
+
+/* main.swift:1963, main.swift:2172 */
+"Beenden" = "خروج";
+
+/* main.swift:1974 */
+"Beobachtet keinen Ordner" = "هیچ پوشه‌ای زیر نظر نیست";
+
+/* main.swift:1975, willkommen.swift:66 */
+"Beobachtet dein Google Drive" = "Google Drive شما زیر نظر است";
+
+/* main.swift:1976 */
+"Beobachtet: " = "زیر نظر: ";
+
+/* main.swift:1997 */
+"Google Drive nicht mehr beobachten?" = "Google Drive دیگر زیر نظر گرفته نشود؟";
+
+/* main.swift:1997 */
+"Neue Logic-Projekte in Google Drive werden dann nicht mehr automatisch eingepackt. Laufende Aufträge laufen zu Ende." = "پروژه‌های جدید Logic در Google Drive دیگر خودکار فشرده نمی‌شوند. کارهای در جریان تا پایان ادامه می‌یابند.";
+
+/* main.swift:1997 */
+"Ausschalten" = "خاموش کردن";
+
+/* main.swift:2009 */
+"Kein Google Drive gefunden" = "Google Drive پیدا نشد";
+
+/* main.swift:2009 */
+"Auf diesem Mac ist Google Drive nicht eingerichtet oder nicht angemeldet." = "Google Drive در این مک راه‌اندازی نشده یا واردش نشده‌اید.";
+
+/* main.swift:2013 */
+"Einstellungen nicht lesbar" = "تنظیمات خوانده نمی‌شود";
+
+/* main.swift:2013 */
+"Solange die Einstellungen nicht lesbar sind, lässt sich das Beobachten nicht einschalten." = "تا وقتی تنظیمات خوانده نمی‌شود، زیر نظر گرفتن را نمی‌شود روشن کرد.";
+
+/* main.swift:2019 */
+"Logic2Drive packt dann jedes Logic-Projekt als Zip ein, das an diesem Mac neu in Google Drive gespeichert oder dort geändert wird. Das passiert erst, wenn das Projekt in Logic geschlossen ist. Das Original bleibt %@ Tage im Sicherungsordner." = "آن‌وقت Logic2Drive هر پروژه‌ی Logic را که در این مک تازه در Google Drive ذخیره یا آن‌جا تغییر داده شود، به صورت فایل Zip فشرده می‌کند. این کار فقط وقتی انجام می‌شود که پروژه در Logic بسته شده باشد. نسخه‌ی اصلی %@ روز در پوشه‌ی پشتیبان می‌ماند.";
+
+/* main.swift:2021 */
+"\n\nIm Moment hängt kein Projekt im Upload." = "\n\nدر حال حاضر هیچ پروژه‌ای در بارگذاری گیر نکرده است.";
+
+/* main.swift:2024 */
+"\n\n1 Projekt hängt gerade im Upload und wird gleich eingepackt:\n%@" = "\n\n1 پروژه الان در بارگذاری گیر کرده و به زودی فشرده می‌شود:\n%@";
+
+/* main.swift:2025 */
+"\n\n%@ Projekte hängen gerade im Upload und werden gleich eingepackt:\n%@%@" = "\n\n%@ پروژه الان در بارگذاری گیر کرده‌اند و به زودی فشرده می‌شوند:\n%@%@";
+
+/* main.swift:2027 */
+"Google Drive beobachten?" = "Google Drive زیر نظر گرفته شود؟";
+
+/* main.swift:2027, main.swift:2036 */
+"Einschalten" = "روشن کردن";
+
+/* main.swift:2036 */
+"Logic-Zips per Doppelklick öffnen?" = "فایل‌های Zip پروژه‌ی Logic با دوبار کلیک باز شوند؟";
+
+/* main.swift:2036 */
+"macOS unterscheidet Zips nur an der Endung .zip. Logic2Drive wird deshalb das Standardprogramm für alle Zips. Eine Zip mit Logic-Projekt (Name.logicx.zip) öffnet sich in Logic, jede andere geht sofort an das Archivprogramm weiter." = "macOS فایل‌های Zip را فقط از پسوند .zip تشخیص می‌دهد. برای همین Logic2Drive برنامه‌ی پیش‌فرض همه‌ی فایل‌های Zip می‌شود. فایل Zip حاوی پروژه‌ی Logic (Name.logicx.zip) را در Logic باز می‌کند و هر فایل Zip دیگر را فوراً به برنامه‌ی آرشیو می‌دهد.";
+
+/* main.swift:2046 */
+"Das Standardprogramm ließ sich nicht ändern" = "برنامه‌ی پیش‌فرض تغییر نکرد";
+
+/* main.swift:2060 */
+"Der Autostart ließ sich nicht ändern" = "اجرای خودکار هنگام ورود تغییر نکرد";
+
+/* main.swift:2074 */
+"Logic2Drive wurde auf Version %@ aktualisiert." = "Logic2Drive به نسخه‌ی %@ به‌روزرسانی شد.";
+
+/* main.swift:2107 */
+"Update: %@" = "به‌روزرسانی: %@";
+
+/* main.swift:2117 */
+"Version %@ wird eingespielt, sobald nichts in Arbeit ist" = "نسخه‌ی %@ به محض اینکه کاری در جریان نباشد نصب می‌شود";
+
+/* main.swift:2118 */
+"Update auf %@ geladen und geprüft, wartet auf Ruhe" = "به‌روزرسانی به %@ بارگیری و بررسی شد، منتظر آرام شدن است";
+
+/* main.swift:2122 */
+"Version %@ ist da – hier klicken" = "نسخه‌ی %@ آماده است – برای نصب اینجا را کلیک کنید";
+
+/* main.swift:2124 */
+"Version %@ ist da" = "نسخه‌ی %@ آماده است";
+
+/* main.swift:2124 */
+"Sie ließ sich nicht von selbst einspielen: %@" = "به صورت خودکار نصب نشد: %@";
+
+/* main.swift:2125 */
+"Du findest sie über die Zeile oben im Menü." = "آن را در سطر بالای منو پیدا می‌کنید.";
+
+/* main.swift:2128 */
+"Du hast die neueste Version" = "شما جدیدترین نسخه را دارید";
+
+/* main.swift:2128 */
+"Die Suche hat nicht geklappt" = "جست‌وجو نتیجه نداد";
+
+/* main.swift:2143 */
+"Update auf %@ eingesetzt, Logic2Drive startet neu" = "به‌روزرسانی به %@ نصب شد، Logic2Drive دوباره شروع می‌شود";
+
+/* main.swift:2146 */
+"Update auf %@ nicht eingesetzt: %@" = "به‌روزرسانی به %@ نصب نشد: %@";
+
+/* main.swift:2150 */
+"Version %@ ließ sich nicht einspielen – hier klicken" = "نسخه‌ی %@ نصب نشد – برای جزئیات اینجا را کلیک کنید";
+
+/* main.swift:2170 */
+"Ein Auftrag läuft noch. Solange Logic2Drive beendet ist, wird nichts nach Google Drive zurückgelegt. Deine Arbeit bleibt lokal erhalten." = "یک کار هنوز در جریان است. تا وقتی Logic2Drive بسته است، چیزی به Google Drive برگردانده نمی‌شود. کار شما در همین مک می‌ماند.";
+
+/* main.swift:2171 */
+"%@ Aufträge laufen noch. Solange Logic2Drive beendet ist, wird nichts nach Google Drive zurückgelegt. Deine Arbeit bleibt lokal erhalten." = "%@ کار هنوز در جریان است. تا وقتی Logic2Drive بسته است، چیزی به Google Drive برگردانده نمی‌شود. کار شما در همین مک می‌ماند.";
+
+/* main.swift:2172 */
+"Logic2Drive beenden?" = "از Logic2Drive خارج می‌شوید؟";
+
+/* main.swift:2191 */
+"Quelltext auf GitHub" = "کد منبع در GitHub";
+
+/* main.swift:2223 */
+"Aufruf: --willkommen-bild <Datei.png> [an|aus|ohne-drive] [1|2]" = "روش استفاده: --willkommen-bild <Datei.png> [an|aus|ohne-drive] [1|2]";
+
+/* main.swift:2231 */
+"Aufruf: --zeichen-bild <Datei.png> <Pixel> [app]" = "روش استفاده: --zeichen-bild <Datei.png> <Pixel> [app]";
+
+/* main.swift:2237 */
+"Aufruf: --app-symbol <Ordner.iconset>" = "روش استفاده: --app-symbol <Ordner.iconset>";
+
+/* main.swift:2249 */
+"Aufruf: --oeffne <Zip> [--trotzdem]" = "روش استفاده: --oeffne <Zip> [--trotzdem]";
+
+/* main.swift:2257 */
+"Logic2Drive läuft schon." = "Logic2Drive از قبل در حال اجراست.";
+
+/* willkommen.swift:98 */
+"So sieht es aus, wenn du auf das Zeichen klickst." = "وقتی روی نماد آن کلیک می‌کنید، این‌طور دیده می‌شود.";
+
+/* willkommen.swift:118 */
+"Willkommen bei Logic2Drive" = "به Logic2Drive خوش آمدید";
+
+/* willkommen.swift:118 */
+"Drei Dinge einschalten" = "سه مورد را روشن کنید";
+
+/* willkommen.swift:121 */
+"Google Drive kommt mit Logic-Projekten nicht zurecht, mit Zips schon. Logic2Drive legt deine Projekte deshalb als Zip in Google Drive ab und öffnet sie per Doppelklick wieder in Logic." = "Google Drive با پروژه‌های Logic مشکل دارد، اما با فایل‌های Zip مشکلی ندارد. برای همین Logic2Drive پروژه‌های شما را به صورت فایل Zip در Google Drive می‌گذارد و با دوبار کلیک دوباره در Logic باز می‌کند.";
+
+/* willkommen.swift:122 */
+"Danach läuft alles von selbst. Du kannst jeden Punkt später im Menü oben rechts ändern." = "بعد از آن همه چیز خودکار پیش می‌رود. هر مورد را بعداً می‌توانید از منوی بالا سمت راست تغییر دهید.";
+
+/* willkommen.swift:139 */
+"Du findest Logic2Drive oben rechts in der Menüleiste" = "Logic2Drive را در نوار منو، بالا سمت راست پیدا می‌کنید";
+
+/* willkommen.swift:140 */
+"Logic2Drive hat kein Fenster und kein Symbol im Dock. Ein Klick auf das Zeichen zeigt dir, was gerade läuft." = "Logic2Drive پنجره و نمادی در Dock ندارد. با یک کلیک روی نماد می‌بینید الان چه در جریان است.";
+
+/* willkommen.swift:153 */
+"Logic2Drive packt Logic-Projekte in deinem Google Drive als Zip ein. Nur so kommen sie vollständig bei den anderen an." = "Logic2Drive پروژه‌های Logic را در Google Drive شما به صورت فایل Zip فشرده می‌کند. فقط این طور کامل به دست بقیه می‌رسند.";
+
+/* willkommen.swift:154 */
+"Auf diesem Mac ist Google Drive noch nicht eingerichtet. Melde dich zuerst dort an." = "Google Drive هنوز در این مک راه‌اندازی نشده است. اول واردش شوید.";
+
+/* willkommen.swift:158 */
+"Projekte per Doppelklick öffnen" = "باز کردن پروژه‌ها با دوبار کلیک";
+
+/* willkommen.swift:159 */
+"Ein Doppelklick auf eine Projekt-Zip öffnet das Projekt direkt in Logic. Alle anderen Zips öffnen sich wie gewohnt." = "دوبار کلیک روی فایل Zip یک پروژه، آن را مستقیم در Logic باز می‌کند. فایل‌های Zip دیگر مثل همیشه باز می‌شوند.";
+
+/* willkommen.swift:163 */
+"Logic2Drive startet von selbst, wenn du deinen Mac einschaltest." = "Logic2Drive با روشن کردن مک خودش شروع می‌شود.";
+
+/* willkommen.swift:166 */
+"Fragt dein Mac später, ob Logic2Drive Logic Pro steuern darf, klicke bitte auf „Erlauben“. Nur so lässt sich erkennen, wann ein Projekt geschlossen ist." = "اگر مک بعداً پرسید که Logic2Drive اجازه دارد Logic Pro را کنترل کند یا نه، لطفاً روی «اجازه دادن» کلیک کنید. این‌طور می‌شود فهمید پروژه کی بسته شده است.";
+
+/* willkommen.swift:184 */
+"Schritt 1 von 2" = "مرحله‌ی 1 از 2";
+
+/* willkommen.swift:186 */
+"Weiter" = "ادامه";
+
+/* willkommen.swift:190 */
+"Alles ist eingeschaltet." = "همه چیز روشن است.";
+
+/* willkommen.swift:190 */
+"Noch nicht alles eingeschaltet." = "هنوز همه چیز روشن نشده است.";
+
+/* willkommen.swift:192 */
+"Zurück" = "بازگشت";
+
+/* willkommen.swift:193 */
+"Fertig" = "تمام";
+
+/* willkommen.swift:193 */
+"Später fertig machen" = "بعداً تمام کنم";
+
+/* update.swift:67 */
+"Die Update-Quelle antwortet nicht" = "منبع به‌روزرسانی پاسخ نمی‌دهد";
+
+/* update.swift:70 */
+"Die Antwort der Update-Quelle ist nicht lesbar" = "پاسخ منبع به‌روزرسانی خوانده نمی‌شود";
+
+/* update.swift:76 */
+"Version %@ ist veröffentlicht, aber ohne %@" = "نسخه‌ی %@ منتشر شده، اما بدون %@";
+
+/* update.swift:80 */
+"Das Paket von Version %@ liegt an einer unerwarteten Adresse" = "بسته‌ی نسخه‌ی %@ در نشانی غیرمنتظره‌ای است";
+
+/* update.swift:87 */
+"Das Paket enthält keine App" = "بسته برنامه‌ای ندارد";
+
+/* update.swift:89 */
+"Das Paket enthält eine andere App" = "بسته برنامه‌ی دیگری دارد";
+
+/* update.swift:91 */
+"Die App im Paket trägt nicht die angekündigte Version %@" = "برنامه‌ی داخل بسته نسخه‌ی اعلام‌شده %@ را ندارد";
+
+/* update.swift:95 */
+"Die Signatur des Pakets ist nicht lesbar" = "امضای بسته خوانده نمی‌شود";
+
+/* update.swift:102 */
+"Die Signaturregel ließ sich nicht bilden" = "قاعده‌ی امضا ساخته نشد";
+
+/* update.swift:107 */
+"unbekannt" = "نامشخص";
+
+/* update.swift:108 */
+"Die Signatur des Pakets stimmt nicht (%@)" = "امضای بسته درست نیست (%@)";
+
+/* update.swift:116 */
+"Das Paket ließ sich nicht laden" = "بسته بارگیری نشد";
+
+/* update.swift:120 */
+"Das Paket ließ sich nicht entpacken" = "بسته باز نشد";
+
+/* update.swift:123 */
+"Das Paket enthält keine Logic2Drive.app" = "بسته Logic2Drive.app ندارد";
+
+/* update.swift:133 */
+"Die App liegt an einem Ort, an dem sie sich nicht selbst ersetzen kann" = "برنامه جایی است که نمی‌تواند خودش را جایگزین کند";
+
+/* update.swift:149 */
+"Nach dem Einsetzen stimmte die Signatur nicht mehr, die bisherige Version ist zurück (%@)" = "بعد از نصب امضا دیگر درست نبود، نسخه‌ی قبلی برگردانده شد (%@)";
+
+/* update.swift:156 */
+"aktuell: %@" = "فعلی: %@";
+
+/* update.swift:157 */
+"neu: %@" = "جدید: %@";
+
+/* update.swift:158 */
+"neu: %@, aber diese App ist nicht mit einer Developer ID signiert" = "جدید: %@، اما این برنامه با Developer ID امضا نشده است";
+
+/* update.swift:161 */
+"eingespielt: %@" = "نصب شد: %@";
+
+/* update.swift:163 */
+"abgelehnt: %@" = "رد شد: %@";
+
+/* einstellungen.swift */
+"Einstellungen …" = "تنظیمات…";
+
+/* einstellungen.swift */
+"Die Sprache wechselt beim nächsten Start" = "زبان در اجرای بعدی تغییر می‌کند";
+
+/* einstellungen.swift */
+"Gerade läuft noch ein Auftrag. Logic2Drive startet deshalb nicht von selbst neu." = "هنوز یک کار در حال اجراست. برای همین Logic2Drive خودش دوباره شروع نمی‌شود.";
+
+/* einstellungen.swift */
+"Aufruf: --einstellungen-bild <Datei.png>" = "روش استفاده: --einstellungen-bild <Datei.png>";
+
+/* einstellungen.swift */
+"Allgemein" = "عمومی";
+
+/* einstellungen.swift */
+"Sprache" = "زبان";
+
+/* einstellungen.swift */
+"Wie der Mac" = "مثل مک";
+
+/* einstellungen.swift */
+"Nach einem Wechsel startet Logic2Drive neu." = "پس از تغییر، Logic2Drive دوباره شروع می‌شود.";
+
+/* einstellungen.swift */
+"Updates" = "به‌روزرسانی‌ها";
+
+/* einstellungen.swift */
+"Version" = "نسخه";
+
+/* einstellungen.swift */
+"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist." = "Logic2Drive نسخه‌های جدید را دانلود می‌کند و به محض اینکه پروژه‌ای در جریان نباشد نصب می‌کند.";
+
+/* einstellungen.swift */
+"Was ist neu" = "تازه‌ها";
+
+/* einstellungen.swift */
+"Version %@" = "نسخه‌ی %@";
+
+/* einstellungen.swift */
+"Google Drive kommt mit Logic-Projekten nicht zurecht, mit Zips schon. Logic2Drive legt Projekte deshalb als Zip in Google Drive ab und öffnet sie per Doppelklick wieder in Logic." = "Google Drive با پروژه‌های Logic مشکل دارد، اما با فایل‌های Zip مشکلی ندارد. برای همین Logic2Drive پروژه‌ها را به صورت فایل Zip در Google Drive می‌گذارد و با دوبار کلیک دوباره در Logic باز می‌کند.";
+
+/* einstellungen.swift */
+"Gebaut von Joshua Nilles im Auftrag der bibletunes gGmbH." = "ساخته‌ی Joshua Nilles به سفارش bibletunes gGmbH.";
+
+/* einstellungen.swift */
+"Logic2Drive – Einstellungen" = "Logic2Drive – تنظیمات";

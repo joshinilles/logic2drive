@@ -1,0 +1,41 @@
+[
+  {
+    "version": "0.6",
+    "datum": "2026-11-24",
+    "de": [
+      "Logic2Drive hält sich selbst aktuell: Neue Versionen kommen von GitHub und werden eingespielt, sobald kein Projekt in Arbeit ist.",
+      "Neues Einstellungsfenster mit Schaltern, Sprache und Updates.",
+      "Fünf Sprachen: Deutsch, Englisch, Französisch, Arabisch und Persisch.",
+      "Willkommensfenster beim ersten Start und ein eigenes Zeichen in der Menüleiste.",
+      "Bevor Logic2Drive eine Zip in Google Drive ersetzt, wird die bisherige für 14 Tage auf deinem Mac gesichert."
+    ],
+    "en": [
+      "Logic2Drive keeps itself up to date: it downloads new versions from GitHub and installs them as soon as no project is in progress.",
+      "New settings window with switches, language and updates.",
+      "Five languages: German, English, French, Arabic and Persian.",
+      "A welcome window on first launch and its own icon in the menu bar.",
+      "Before Logic2Drive replaces a zip in Google Drive, it keeps the previous one on your Mac for 14 days."
+    ],
+    "fr": [
+      "Logic2Drive se met à jour tout seul : il télécharge les nouvelles versions depuis GitHub et les installe dès qu’aucun projet n’est en cours de travail.",
+      "Nouvelle fenêtre de réglages avec des interrupteurs, la langue et les mises à jour.",
+      "Cinq langues : allemand, anglais, français, arabe et persan.",
+      "Une fenêtre de bienvenue au premier lancement et sa propre icône dans la barre des menus.",
+      "Avant de remplacer un Zip dans Google Drive, Logic2Drive conserve le précédent pendant 14 jours sur ton Mac."
+    ],
+    "ar": [
+      "يحدّث Logic2Drive نفسه بنفسه: ينزّل الإصدارات الجديدة من GitHub ويثبّتها بمجرد ألا يكون أي مشروع قيد العمل.",
+      "نافذة إعدادات جديدة فيها المفاتيح واللغة والتحديثات.",
+      "خمس لغات: الألمانية والإنجليزية والفرنسية والعربية والفارسية.",
+      "نافذة ترحيب عند التشغيل الأول ورمز خاص به في شريط القوائم.",
+      "قبل أن يستبدل Logic2Drive ملف Zip في Google Drive، يحتفظ بالسابق منه على الـ Mac الخاص بك لمدة 14 يومًا."
+    ],
+    "fa": [
+      "Logic2Drive خودش را به‌روز نگه می‌دارد: نسخه‌های جدید را از GitHub دانلود می‌کند و به محض اینکه پروژه‌ای در جریان نباشد نصب می‌کند.",
+      "پنجره‌ی تنظیمات جدید با کلیدها، زبان و به‌روزرسانی‌ها.",
+      "پنج زبان: آلمانی، انگلیسی، فرانسوی، عربی و فارسی.",
+      "پنجره‌ی خوش‌آمدگویی در اجرای اول و نمادی مخصوص خودش در نوار منو.",
+      "پیش از اینکه Logic2Drive فایل Zip را در Google Drive جایگزین کند، نسخه‌ی قبلی را 14 روز روی مک شما نگه می‌دارد."
+    ]
+  }
+]

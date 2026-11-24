@@ -1,0 +1,817 @@
+/* Logic2Drive – English. Keys are the German source texts; do not change them. */
+
+/* main.swift:108 */
+"Zuletzt, heute %@: %@" = "Latest – today %@: %@";
+
+/* main.swift:108 */
+"Zuletzt, gestern %@: %@" = "Latest – yesterday %@: %@";
+
+/* main.swift:108 */
+"Zuletzt, %@: %@" = "Latest – %@: %@";
+
+/* main.swift:259 */
+"Projekt nicht lesbar: %@" = "Project unreadable: %@";
+
+/* main.swift:260 */
+"Teile des Projekts sind nicht geladen" = "Parts of the project aren’t downloaded";
+
+/* main.swift:261 */
+"Projekt enthält Verknüpfungen, die ich nicht übernehme" = "Project contains links that I don’t carry over";
+
+/* main.swift:262, main.swift:1286 */
+"Zu wenig freier Speicher" = "Not enough free space";
+
+/* main.swift:271 */
+"Kopieren fehlgeschlagen: %@" = "Copy failed: %@";
+
+/* main.swift:275 */
+"Kopie nicht bereinigt: %@" = "Copy not cleaned up: %@";
+
+/* main.swift:278 */
+"Packen fehlgeschlagen: %@" = "Packing failed: %@";
+
+/* main.swift:280 */
+"Zip fehlerhaft: %@" = "Zip faulty: %@";
+
+/* main.swift:284 */
+"Probe-Entpacken fehlgeschlagen: %@" = "Test unpack failed: %@";
+
+/* main.swift:286 */
+"Zip weicht vom Projekt ab: %@" = "Zip differs from the project: %@";
+
+/* main.swift:287 */
+"Das Projekt hat sich beim Packen geändert" = "The project changed while packing";
+
+/* main.swift:290 */
+"Zip nicht lesbar" = "Zip unreadable";
+
+/* main.swift:341 */
+"Nicht lesbare Datei beiseitegelegt: %@" = "Unreadable file set aside: %@";
+
+/* main.swift:344 */
+"Nicht lesbare Datei ließ sich nicht beiseitelegen: %@" = "Unreadable file could not be set aside: %@";
+
+/* main.swift:368 */
+"Einstellungen nicht lesbar, es wird kein Ordner beobachtet" = "Settings unreadable, no folder is being watched";
+
+/* main.swift:531 */
+"Einstellungen nicht gespeichert: %@" = "Settings not saved: %@";
+
+/* main.swift:542 */
+"Die Einstellung ließ sich nicht speichern. Es bleibt alles, wie es war." = "The setting couldn’t be saved. Everything stays as it was.";
+
+/* main.swift:555 */
+"Beobachtet jetzt: %@" = "Now watching: %@";
+
+/* main.swift:555 */
+"nichts" = "nothing";
+
+/* main.swift:597 */
+"Sicherung nach %@ Tagen in den Papierkorb gelegt: %@/%@" = "Backup moved to the Trash after %@ days: %@/%@";
+
+/* main.swift:600 */
+"Sicherung nicht weggeräumt (%@/%@): %@" = "Backup not cleared away (%@/%@): %@";
+
+/* main.swift:624, main.swift:636 */
+"Die Auftragsliste ist nicht lesbar. Logic2Drive speichert nichts mehr, bis das geklärt ist." = "The job list is unreadable. Logic2Drive won’t save anything until this is sorted out.";
+
+/* main.swift:631 */
+"Auftragsliste nicht lesbar: %@" = "Job list unreadable: %@";
+
+/* main.swift:633 */
+"Die Auftragsliste war nicht lesbar und wurde beiseitegelegt. Prüfe bitte, ob in „In Arbeit“ noch Projekte liegen." = "The job list was unreadable and has been set aside. Please check whether any projects are still in “In Arbeit”.";
+
+/* main.swift:650 */
+"Logic2Drive kann seinen Stand nicht speichern. Ist die Platte voll?" = "Logic2Drive can’t save its progress. Is the disk full?";
+
+/* main.swift:661 */
+"Logic2Drive %@ gestartet. Beobachtet: %@" = "Logic2Drive %@ started. Watching: %@";
+
+/* main.swift:665 */
+"Die Einstellungen von Logic2Drive sind nicht lesbar. Bis einstellungen.json repariert ist, wird kein Ordner beobachtet." = "Logic2Drive’s settings are unreadable. No folder is watched until einstellungen.json is repaired.";
+
+/* main.swift:668 */
+"Der beobachtete Ordner „%@“ ist nicht da. Neue Projekte dort werden nicht eingepackt." = "The watched folder “%@” isn’t there. New projects in it won’t be packed.";
+
+/* main.swift:708 */
+"Internet ist wieder da, Drive bekommt Zeit zum Abgleichen" = "Internet is back, giving Drive time to sync";
+
+/* main.swift:726 */
+"Logic2Drive hängt seit über 30 Minuten an einem Schritt und wartet vielleicht auf Google Drive. Deine Arbeit bleibt lokal erhalten." = "Logic2Drive has been stuck on one step for over 30 minutes and may be waiting for Google Drive. Your work is safe on this Mac.";
+
+/* main.swift:742 */
+"Mac ist aufgewacht, Drive bekommt Zeit zum Abgleichen" = "Mac woke up, giving Drive time to sync";
+
+/* main.swift:753 */
+"Warte auf Internet" = "Waiting for internet";
+
+/* main.swift:755 */
+"Drive gleicht noch ab (noch %@ s)" = "Drive is still syncing (%@ s left)";
+
+/* main.swift:784 */
+"Ein Durchlauf über die beobachteten Ordner hat %@ Sekunden gedauert" = "One scan of the watched folders took %@ seconds";
+
+/* main.swift:854 */
+"Logic2Drive darf Logic nicht abfragen. Erlaube es unter Systemeinstellungen > Datenschutz & Sicherheit > Automation. Bis dahin wird nichts zurückgelegt, solange Logic läuft." = "Logic2Drive isn’t allowed to query Logic. Allow it under System Settings > Privacy & Security > Automation. Until then, nothing is put back while Logic is running.";
+
+/* main.swift:859 */
+"Logic2Drive bekommt seit über 5 Minuten keine Antwort von Logic. Bis dahin wird nichts zurückgelegt." = "Logic2Drive has had no response from Logic for over 5 minutes. Until then, nothing is put back.";
+
+/* main.swift:912 */
+"„%@“ enthält Verknüpfungen und kann nicht automatisch eingepackt werden." = "“%@” contains links and can’t be packed automatically.";
+
+/* main.swift:918 */
+"Neues Paket erkannt: %@" = "New project detected: %@";
+
+/* main.swift:928 */
+"%@ liegt schon in der Cloud und wird trotzdem eingepackt, weil hier daran gearbeitet wurde" = "%@ is already in the cloud but will be packed anyway, because it was worked on here";
+
+/* main.swift:965 */
+"Die bisherige Zip ließ sich nicht sichern: %@" = "The existing zip couldn’t be backed up: %@";
+
+/* main.swift:969 */
+"Die Sicherung der bisherigen Zip ist unvollständig" = "The backup of the existing zip is incomplete";
+
+/* main.swift:971 */
+"Bisherige Zip vor dem Ersetzen gesichert: %@" = "Existing zip backed up before replacing: %@";
+
+/* main.swift:980, main.swift:981 */
+"Drive-Datei nicht ersetzbar: %@" = "Drive file can’t be replaced: %@";
+
+/* main.swift:1030 */
+"Zip wird hochgeladen" = "Uploading zip";
+
+/* main.swift:1032 */
+"Eingepackt: %@ -> %@, %@ Byte" = "Packed: %@ -> %@, %@ bytes";
+
+/* main.swift:1035 */
+"Einpacken fehlgeschlagen (%@): %@" = "Packing failed (%@): %@";
+
+/* main.swift:1038 */
+"„%@“ ließ sich nicht einpacken: %@" = "“%@” couldn’t be packed: %@";
+
+/* main.swift:1050 */
+"Paket gerade nicht lesbar, neuer Versuch folgt" = "Project unreadable right now, will try again";
+
+/* main.swift:1056 */
+"Drive hat %@ umbenannt in %@, ich führe das Paket weiter" = "Drive renamed %@ to %@, I’m following the project";
+
+/* main.swift:1062 */
+"Paket %@ liegt nicht mehr im Drive-Ordner, die Zip bleibt" = "Project %@ is no longer in the Drive folder, the zip stays";
+
+/* main.swift:1068 */
+"Kann Logic gerade nicht abfragen, das Paket bleibt liegen" = "Can’t query Logic right now, the project stays where it is";
+
+/* main.swift:1072, main.swift:1126, main.swift:1684 */
+"Ist in Logic offen, wird nach dem Schließen aufgeräumt" = "Open in Logic, will be cleaned up after closing";
+
+/* main.swift:1077 */
+"Paket wurde gerade geändert, warte" = "Project was just changed, waiting";
+
+/* main.swift:1094 */
+"Paket aus dem Drive-Ordner genommen: %@, liegt in %@" = "Project taken out of the Drive folder: %@, now in %@";
+
+/* main.swift:1101 */
+"Wird aufgeräumt" = "Cleaning up";
+
+/* main.swift:1105 */
+"Aufräumen fehlgeschlagen: %@" = "Cleanup failed: %@";
+
+/* main.swift:1106 */
+"Aufräumen fehlgeschlagen (%@): %@" = "Cleanup failed (%@): %@";
+
+/* main.swift:1107 */
+"„%@“ liegt als Zip in Drive, das Paket ließ sich aber nicht wegräumen." = "“%@” is in Drive as a zip, but the project couldn’t be cleared away.";
+
+/* main.swift:1115 */
+"Zip gerade nicht lesbar, neuer Versuch folgt" = "Zip unreadable right now, will try again";
+
+/* main.swift:1119 */
+"Die Zip von %@ wurde inzwischen von jemand anderem geändert" = "The zip of %@ has been changed by someone else in the meantime";
+
+/* main.swift:1143 */
+"Neuer Stand wird hochgeladen" = "Uploading new version";
+
+/* main.swift:1145 */
+"Paket %@ hat sich noch geändert, Zip neu gepackt: %@ Byte" = "Project %@ changed again, zip packed anew: %@ bytes";
+
+/* main.swift:1147 */
+"Neu packen fehlgeschlagen (%@): %@" = "Repacking failed (%@): %@";
+
+/* main.swift:1148, main.swift:1189, main.swift:1601 */
+"Fehler, neuer Versuch folgt: %@" = "Error, will try again: %@";
+
+/* main.swift:1149 */
+"„%@“ ließ sich nicht neu einpacken: %@" = "“%@” couldn’t be repacked: %@";
+
+/* main.swift:1158 */
+"Drive-Ordner fehlt" = "Drive folder missing";
+
+/* main.swift:1158, main.swift:1574 */
+"Der Drive-Ordner existiert nicht mehr" = "The Drive folder no longer exists";
+
+/* main.swift:1159 */
+"Der Drive-Ordner von „%@“ existiert nicht mehr. Die lokale Kopie bleibt." = "The Drive folder of “%@” no longer exists. The local copy stays.";
+
+/* main.swift:1183, main.swift:1594 */
+"Konflikt: wird als eigene Fassung hochgeladen" = "Conflict: uploading as your own version";
+
+/* main.swift:1185 */
+"KONFLIKT: %@. Neue Fassung daneben: %@" = "CONFLICT: %@. New version placed alongside: %@";
+
+/* main.swift:1188 */
+"Eigene Fassung fehlgeschlagen (%@): %@" = "Own version failed (%@): %@";
+
+/* main.swift:1190 */
+"Der Stand von „%@“ ließ sich nicht als eigene Fassung ablegen: %@. Die lokale Kopie bleibt." = "The version of “%@” couldn’t be stored as your own version: %@. The local copy stays.";
+
+/* main.swift:1199 */
+"Leere Datei von Drive in den Papierkorb gelegt: %@" = "Empty file from Drive moved to the Trash: %@";
+
+/* main.swift:1201 */
+"Leere Datei nicht entfernt: %@" = "Empty file not removed: %@";
+
+/* main.swift:1206 */
+"Abgelegt: %@" = "Stored: %@";
+
+/* main.swift:1208, main.swift:1756 */
+"„%@“ wurde inzwischen geändert. Dein Stand liegt als eigene Fassung daneben." = "“%@” has been changed in the meantime. Your version is placed alongside as your own version.";
+
+/* main.swift:1210 */
+"„%@“ liegt jetzt als Zip in Google Drive." = "“%@” is now in Google Drive as a zip.";
+
+/* main.swift:1223 */
+"%@ ist schon ausgecheckt, öffne die Arbeitskopie" = "%@ is already checked out, opening the working copy";
+
+/* main.swift:1225 */
+"Du öffnest deinen eigenen Stand von „%@“. Die neuere Fassung in der Zip kannst du öffnen, sobald dein Stand hochgeladen ist." = "You’re opening your own version of “%@”. You can open the newer version in the zip as soon as your version has been uploaded.";
+
+/* main.swift:1236 */
+"Arbeitskopie von %@ fehlt, der alte Auftrag wird aufgegeben und die Zip neu geöffnet" = "Working copy of %@ is missing, the old job will be dropped and the zip opened again";
+
+/* main.swift:1242 */
+"%@ arbeitet seit %@ auf „%@“ an diesem Projekt. Wenn du es trotzdem öffnest, entstehen zwei Fassungen." = "%1$@ has been working on this project since %2$@ on “%3$@”. If you open it anyway, there will be two versions.";
+
+/* main.swift:1244, main.swift:1250 */
+"Nicht geöffnet, in Arbeit bei %@: %@" = "Not opened, being worked on by %@: %@";
+
+/* main.swift:1248 */
+"„%@“ ist gerade in Arbeit" = "“%@” is being worked on right now";
+
+/* main.swift:1261 */
+"„%@“ ließ sich nicht öffnen: %@" = "“%@” couldn’t be opened: %@";
+
+/* main.swift:1280 */
+"Laden fehlgeschlagen: %@" = "Download failed: %@";
+
+/* main.swift:1284 */
+"Die Zip kam nicht vollständig an" = "The zip didn’t arrive completely";
+
+/* main.swift:1288 */
+"Die Zip ist beschädigt: %@" = "The zip is damaged: %@";
+
+/* main.swift:1292 */
+"Entpacken fehlgeschlagen: %@" = "Unpacking failed: %@";
+
+/* main.swift:1294 */
+"In der Zip steckt kein Logic-Projekt" = "There’s no Logic project in the zip";
+
+/* main.swift:1295 */
+"Die Zip enthält Verknüpfungen, die ich nicht übernehme" = "The zip contains links that I don’t carry over";
+
+/* main.swift:1301, main.swift:1456 */
+"Arbeitskopie nicht lesbar" = "Working copy unreadable";
+
+/* main.swift:1317 */
+"Wird in Logic geöffnet" = "Opening in Logic";
+
+/* main.swift:1318 */
+"Ausgecheckt: %@ -> %@" = "Checked out: %@ -> %@";
+
+/* main.swift:1331 */
+"Die Sperre im Drive-Ordner ließ sich nicht anlegen (%@)" = "The lock in the Drive folder couldn’t be created (%@)";
+
+/* main.swift:1335 */
+"Die Sperre im Drive-Ordner ließ sich nicht anlegen" = "The lock in the Drive folder couldn’t be created";
+
+/* main.swift:1356 */
+"Logic ließ sich nicht öffnen: %@" = "Logic couldn’t be opened: %@";
+
+/* main.swift:1357 */
+"Logic ließ sich nicht öffnen. Die Arbeitskopie liegt im Arbeitsordner." = "Logic couldn’t be opened. The working copy is in the working folder.";
+
+/* main.swift:1364 */
+"Keine Logic-Zip, ans Archivprogramm weitergereicht: %@" = "Not a Logic zip, passed on to Archive Utility: %@";
+
+/* main.swift:1380, main.swift:1401 */
+"Arbeitskopie von %@ wurde umbenannt: %@" = "Working copy of %@ was renamed: %@";
+
+/* main.swift:1407 */
+"Anderes Paket am Platz der Arbeitskopie" = "Different project in place of the working copy";
+
+/* main.swift:1407, main.swift:1652, main.swift:1652 */
+"Arbeitskopie fehlt" = "Working copy missing";
+
+/* main.swift:1411 */
+"Unter dem Namen der Arbeitskopie von „%@“ liegt ein anderes Paket. Logic2Drive packt es nicht ein. Leg das ursprüngliche Paket zurück oder gib den Auftrag im Menü auf." = "A different project has the name of the working copy of “%@”. Logic2Drive won’t pack it. Put the original project back or give up the job in the menu.";
+
+/* main.swift:1412 */
+"Die Arbeitskopie von „%@“ ist nicht mehr im Arbeitsordner. Leg genau dieses Paket zurück, zum Beispiel aus dem Papierkorb, oder gib den Auftrag im Menü auf." = "The working copy of “%@” is no longer in the working folder. Put exactly this project back, for example from the Trash, or give up the job in the menu.";
+
+/* main.swift:1417 */
+"Arbeitskopie von %@ ist wieder da" = "Working copy of %@ is back";
+
+/* main.swift:1418, main.swift:1433, main.swift:1439 */
+"Geschlossen, wird gleich zurückgelegt" = "Closed, will be put back shortly";
+
+/* main.swift:1422, main.swift:1507, main.swift:1680 */
+"Kann Logic gerade nicht abfragen" = "Can’t query Logic right now";
+
+/* main.swift:1429 */
+"In Logic geöffnet: %@" = "Open in Logic: %@";
+
+/* main.swift:1430, main.swift:1448, main.swift:1511 */
+"In Logic geöffnet" = "Open in Logic";
+
+/* main.swift:1432 */
+"Geschlossen: %@, warte %@ Sekunden Ruhe" = "Closed: %@, waiting %@ seconds for things to settle";
+
+/* main.swift:1438 */
+"%@: Logic ist beendet, warte %@ Sekunden Ruhe" = "%@: Logic has quit, waiting %@ seconds for things to settle";
+
+/* main.swift:1441 */
+"Nicht als geöffnet erkannt" = "Not detected as open";
+
+/* main.swift:1442 */
+"„%@“ wurde nicht als geöffnet erkannt. Wenn du nicht daran arbeitest, wähle im Menü „Jetzt zurücklegen“." = "“%@” wasn’t detected as open. If you’re not working on it, choose “Put Back Now” in the menu.";
+
+/* main.swift:1447 */
+"Wieder geöffnet: %@" = "Opened again: %@";
+
+/* main.swift:1457 */
+"Die Arbeitskopie von „%@“ ist nicht lesbar und kann nicht zurückgelegt werden. Sie bleibt im Arbeitsordner." = "The working copy of “%@” is unreadable and can’t be put back. It stays in the working folder.";
+
+/* main.swift:1476 */
+"Die Arbeitskopie von „%@“ liegt nicht mehr an ihrem Platz." = "The working copy of “%@” is no longer in its place.";
+
+/* main.swift:1480 */
+"Ich kann Logic gerade nicht abfragen. Beende Logic ganz, dann lege ich „%@“ zurück." = "I can’t query Logic right now. Quit Logic completely, then I’ll put “%@” back.";
+
+/* main.swift:1484 */
+"„%@“ ist noch in Logic offen. Bitte zuerst schließen." = "“%@” is still open in Logic. Please close it first.";
+
+/* main.swift:1488 */
+"Die Arbeitskopie von „%@“ ist nicht lesbar." = "The working copy of “%@” is unreadable.";
+
+/* main.swift:1500 */
+"Auftrag aufgegeben: %@, eine vorhandene Arbeitskopie bleibt liegen" = "Job dropped: %@, an existing working copy stays where it is";
+
+/* main.swift:1517, main.swift:1594 */
+"Wird hochgeladen" = "Uploading";
+
+/* main.swift:1520 */
+"Unverändert: %@, nichts hochzuladen" = "Unchanged: %@, nothing to upload";
+
+/* main.swift:1522 */
+"„%@“ war unverändert. Die Zip in Drive bleibt, wie sie ist." = "“%@” was unchanged. The zip in Drive stays as it is.";
+
+/* main.swift:1526, main.swift:1562 */
+"%@, lege danach zurück" = "%@, will put back afterward";
+
+/* main.swift:1554 */
+"Logic lässt sich gerade nicht abfragen" = "Logic can’t be queried right now";
+
+/* main.swift:1556 */
+"Wieder geöffnet beim Packen: %@, Zurücklegen abgebrochen" = "Opened again while packing: %@, put back canceled";
+
+/* main.swift:1565 */
+"Die Zip in Drive ist gerade nicht lesbar" = "The zip in Drive is unreadable right now";
+
+/* main.swift:1596 */
+"KONFLIKT: %@ hat sich in Drive geändert, neue Fassung daneben: %@" = "CONFLICT: %@ changed in Drive, new version placed alongside: %@";
+
+/* main.swift:1597 */
+"Zurückgelegt: %@, %@ Byte, Upload läuft" = "Put back: %@, %@ bytes, upload in progress";
+
+/* main.swift:1600 */
+"Zurücklegen fehlgeschlagen (%@): %@" = "Put back failed (%@): %@";
+
+/* main.swift:1602 */
+"„%@“ ließ sich nicht zurücklegen: %@. Die lokale Kopie bleibt." = "“%@” couldn’t be put back: %@. The local copy stays.";
+
+/* main.swift:1624 */
+"Wieder in Logic geöffnet" = "Opened in Logic again";
+
+/* main.swift:1626 */
+"Wieder in Arbeit während des Uploads: %@, die Arbeitskopie bleibt" = "Being worked on again during upload: %@, the working copy stays";
+
+/* main.swift:1641 */
+"Zip weicht wiederholt ab" = "Zip keeps differing";
+
+/* main.swift:1641 */
+"Zip in Drive weicht wiederholt ab, bitte prüfen" = "Zip in Drive keeps differing, please check";
+
+/* main.swift:1642 */
+"Die Zip von „%@“ weicht in Drive wiederholt ab. Logic2Drive legt keine weitere Fassung an, die lokale Kopie bleibt." = "The zip of “%@” keeps differing in Drive. Logic2Drive won’t create another version, and the local copy stays.";
+
+/* main.swift:1653 */
+"Die Zip und die Arbeitskopie von „%@“ sind nicht mehr da. Gib den Auftrag im Menü auf." = "The zip and the working copy of “%@” are gone. Give up the job in the menu.";
+
+/* main.swift:1655 */
+"Die Zip und das Paket von „%@“ sind nicht mehr im Drive-Ordner." = "The zip and the project of “%@” are no longer in the Drive folder.";
+
+/* main.swift:1670, main.swift:1738 */
+"Kann Logic gerade nicht abfragen, die Kopie bleibt" = "Can’t query Logic right now, the copy stays";
+
+/* main.swift:1691 */
+"Die Zip liegt nicht mehr im Drive-Ordner" = "The zip is no longer in the Drive folder";
+
+/* main.swift:1696 */
+"Upload-Fehler: %@" = "Upload error: %@";
+
+/* main.swift:1697 */
+"„%@“ ließ sich nicht hochladen: %@. Die lokale Kopie bleibt." = "“%@” couldn’t be uploaded: %@. The local copy stays.";
+
+/* main.swift:1709 */
+"Drive meldet für %@ eine falsche Größe, der Inhalt stimmt" = "Drive reports a wrong size for %@, the content is correct";
+
+/* main.swift:1712 */
+"Die Zip in Drive hat sich geändert" = "The zip in Drive has changed";
+
+/* main.swift:1719 */
+"Upload dauert ungewöhnlich lange" = "Upload is taking unusually long";
+
+/* main.swift:1719 */
+"Seit über einer Stunde nicht in Drive angekommen" = "Hasn’t arrived in Drive for over an hour";
+
+/* main.swift:1720 */
+"„%@“ ist seit über einer Stunde nicht in Google Drive angekommen. Ist Drive pausiert oder das Konto voll? Die lokale Kopie bleibt." = "“%@” hasn’t arrived in Google Drive for over an hour. Is Drive paused or the account full? The local copy stays.";
+
+/* main.swift:1728 */
+"Prüfsumme der Zip in Drive weicht ab" = "Checksum of the zip in Drive differs";
+
+/* main.swift:1748 */
+"%@ wurde nach dem Packen noch geändert, die Arbeitskopie bleibt" = "%@ was changed after packing, the working copy stays";
+
+/* main.swift:1753 */
+"Upload bestätigt: %@" = "Upload confirmed: %@";
+
+/* main.swift:1758 */
+"„%@“ ist wieder in Google Drive." = "“%@” is back in Google Drive.";
+
+/* main.swift:1775 */
+"Arbeitskopie nicht in den Papierkorb gelegt: %@" = "Working copy not moved to the Trash: %@";
+
+/* main.swift:1808 */
+"WÜRDE EINPACKEN: %@" = "WOULD PACK: %@";
+
+/* main.swift:1813 */
+"Geladene Pakete: %@, davon normal in der Cloud: %@, würde einpacken: %@" = "Downloaded projects: %@, of which normally in the cloud: %@, would pack: %@";
+
+/* main.swift:1852, main.swift:1990 */
+"Abbrechen" = "Cancel";
+
+/* main.swift:1853 */
+"Trotzdem öffnen" = "Open Anyway";
+
+/* main.swift:1891 */
+"Logic2Drive meldet ein Problem" = "Logic2Drive Reports a Problem";
+
+/* main.swift:1897, main.swift:2128 */
+"Logic2Drive %@" = "Logic2Drive %@";
+
+/* main.swift:1916, willkommen.swift:68 */
+"Gerade nichts in Arbeit" = "Nothing in progress right now";
+
+/* main.swift:1925 */
+"   Auftrag aufgeben und Sperre lösen" = "   Give Up Job and Remove Lock";
+
+/* main.swift:1930 */
+"   Jetzt zurücklegen" = "   Put Back Now";
+
+/* main.swift:1943, willkommen.swift:152 */
+"Google Drive beobachten" = "Watch Google Drive";
+
+/* main.swift:1945, willkommen.swift:162 */
+"Beim Anmelden starten" = "Open at Login";
+
+/* main.swift:1946 */
+"Updates von selbst einspielen" = "Install Updates Automatically";
+
+/* main.swift:1955 */
+"Über Logic2Drive" = "About Logic2Drive";
+
+/* main.swift:1955 */
+"Einführung zeigen" = "Show Introduction";
+
+/* main.swift:1956 */
+"Nach Updates suchen" = "Check for Updates";
+
+/* main.swift:1957 */
+"Arbeitsordner öffnen" = "Open Working Folder";
+
+/* main.swift:1957 */
+"Sicherung öffnen" = "Open Backup Folder";
+
+/* main.swift:1958 */
+"Protokoll öffnen" = "Open Log";
+
+/* main.swift:1963, main.swift:2172 */
+"Beenden" = "Quit";
+
+/* main.swift:1974 */
+"Beobachtet keinen Ordner" = "Not watching any folder";
+
+/* main.swift:1975, willkommen.swift:66 */
+"Beobachtet dein Google Drive" = "Watching your Google Drive";
+
+/* main.swift:1976 */
+"Beobachtet: " = "Watching: ";
+
+/* main.swift:1997 */
+"Google Drive nicht mehr beobachten?" = "Stop watching Google Drive?";
+
+/* main.swift:1997 */
+"Neue Logic-Projekte in Google Drive werden dann nicht mehr automatisch eingepackt. Laufende Aufträge laufen zu Ende." = "New Logic projects in Google Drive will then no longer be packed automatically. Jobs in progress will finish.";
+
+/* main.swift:1997 */
+"Ausschalten" = "Turn Off";
+
+/* main.swift:2009 */
+"Kein Google Drive gefunden" = "Google Drive not found";
+
+/* main.swift:2009 */
+"Auf diesem Mac ist Google Drive nicht eingerichtet oder nicht angemeldet." = "Google Drive isn’t set up or signed in on this Mac.";
+
+/* main.swift:2013 */
+"Einstellungen nicht lesbar" = "Settings unreadable";
+
+/* main.swift:2013 */
+"Solange die Einstellungen nicht lesbar sind, lässt sich das Beobachten nicht einschalten." = "Watching can’t be turned on while the settings are unreadable.";
+
+/* main.swift:2019 */
+"Logic2Drive packt dann jedes Logic-Projekt als Zip ein, das an diesem Mac neu in Google Drive gespeichert oder dort geändert wird. Das passiert erst, wenn das Projekt in Logic geschlossen ist. Das Original bleibt %@ Tage im Sicherungsordner." = "Logic2Drive will then pack every Logic project as a zip that is newly saved to or changed in Google Drive on this Mac. This only happens once the project is closed in Logic. The original stays in the backup folder for %@ days.";
+
+/* main.swift:2021 */
+"\n\nIm Moment hängt kein Projekt im Upload." = "\n\nNo project is stuck uploading right now.";
+
+/* main.swift:2024 */
+"\n\n1 Projekt hängt gerade im Upload und wird gleich eingepackt:\n%@" = "\n\n1 project is stuck uploading and will be packed shortly:\n%@";
+
+/* main.swift:2025 */
+"\n\n%@ Projekte hängen gerade im Upload und werden gleich eingepackt:\n%@%@" = "\n\n%@ projects are stuck uploading and will be packed shortly:\n%@%@";
+
+/* main.swift:2027 */
+"Google Drive beobachten?" = "Watch Google Drive?";
+
+/* main.swift:2027, main.swift:2036 */
+"Einschalten" = "Turn On";
+
+/* main.swift:2036 */
+"Logic-Zips per Doppelklick öffnen?" = "Open Logic zips with a double-click?";
+
+/* main.swift:2036 */
+"macOS unterscheidet Zips nur an der Endung .zip. Logic2Drive wird deshalb das Standardprogramm für alle Zips. Eine Zip mit Logic-Projekt (Name.logicx.zip) öffnet sich in Logic, jede andere geht sofort an das Archivprogramm weiter." = "macOS tells zips apart only by the .zip extension. So Logic2Drive will become the default app for all zips. A zip containing a Logic project (Name.logicx.zip) opens in Logic, and every other one is immediately passed on to Archive Utility.";
+
+/* main.swift:2046 */
+"Das Standardprogramm ließ sich nicht ändern" = "The default app couldn’t be changed";
+
+/* main.swift:2060 */
+"Der Autostart ließ sich nicht ändern" = "Opening at login couldn’t be changed";
+
+/* main.swift:2074 */
+"Logic2Drive wurde auf Version %@ aktualisiert." = "Logic2Drive has been updated to version %@.";
+
+/* main.swift:2107 */
+"Update: %@" = "Update: %@";
+
+/* main.swift:2117 */
+"Version %@ wird eingespielt, sobald nichts in Arbeit ist" = "Version %@ will be installed as soon as nothing is in progress";
+
+/* main.swift:2118 */
+"Update auf %@ geladen und geprüft, wartet auf Ruhe" = "Update to %@ downloaded and checked, waiting for things to settle";
+
+/* main.swift:2122 */
+"Version %@ ist da – hier klicken" = "Version %@ is available – click here";
+
+/* main.swift:2124 */
+"Version %@ ist da" = "Version %@ is available";
+
+/* main.swift:2124 */
+"Sie ließ sich nicht von selbst einspielen: %@" = "It couldn’t be installed automatically: %@";
+
+/* main.swift:2125 */
+"Du findest sie über die Zeile oben im Menü." = "You’ll find it in the line at the top of the menu.";
+
+/* main.swift:2128 */
+"Du hast die neueste Version" = "You have the latest version";
+
+/* main.swift:2128 */
+"Die Suche hat nicht geklappt" = "The check didn’t work";
+
+/* main.swift:2143 */
+"Update auf %@ eingesetzt, Logic2Drive startet neu" = "Update to %@ installed, Logic2Drive is restarting";
+
+/* main.swift:2146 */
+"Update auf %@ nicht eingesetzt: %@" = "Update to %@ not installed: %@";
+
+/* main.swift:2150 */
+"Version %@ ließ sich nicht einspielen – hier klicken" = "Version %@ couldn’t be installed – click here";
+
+/* main.swift:2170 */
+"Ein Auftrag läuft noch. Solange Logic2Drive beendet ist, wird nichts nach Google Drive zurückgelegt. Deine Arbeit bleibt lokal erhalten." = "One job is still running. While Logic2Drive is quit, nothing is put back to Google Drive. Your work is safe on this Mac.";
+
+/* main.swift:2171 */
+"%@ Aufträge laufen noch. Solange Logic2Drive beendet ist, wird nichts nach Google Drive zurückgelegt. Deine Arbeit bleibt lokal erhalten." = "%@ jobs are still running. While Logic2Drive is quit, nothing is put back to Google Drive. Your work is safe on this Mac.";
+
+/* main.swift:2172 */
+"Logic2Drive beenden?" = "Quit Logic2Drive?";
+
+/* main.swift:2191 */
+"Quelltext auf GitHub" = "Source Code on GitHub";
+
+/* main.swift:2223 */
+"Aufruf: --willkommen-bild <Datei.png> [an|aus|ohne-drive] [1|2]" = "Usage: --willkommen-bild <Datei.png> [an|aus|ohne-drive] [1|2]";
+
+/* main.swift:2231 */
+"Aufruf: --zeichen-bild <Datei.png> <Pixel> [app]" = "Usage: --zeichen-bild <Datei.png> <Pixel> [app]";
+
+/* main.swift:2237 */
+"Aufruf: --app-symbol <Ordner.iconset>" = "Usage: --app-symbol <Ordner.iconset>";
+
+/* main.swift:2249 */
+"Aufruf: --oeffne <Zip> [--trotzdem]" = "Usage: --oeffne <Zip> [--trotzdem]";
+
+/* main.swift:2257 */
+"Logic2Drive läuft schon." = "Logic2Drive is already running.";
+
+/* willkommen.swift:98 */
+"So sieht es aus, wenn du auf das Zeichen klickst." = "This is what it looks like when you click the icon.";
+
+/* willkommen.swift:118 */
+"Willkommen bei Logic2Drive" = "Welcome to Logic2Drive";
+
+/* willkommen.swift:118 */
+"Drei Dinge einschalten" = "Turn On Three Things";
+
+/* willkommen.swift:121 */
+"Google Drive kommt mit Logic-Projekten nicht zurecht, mit Zips schon. Logic2Drive legt deine Projekte deshalb als Zip in Google Drive ab und öffnet sie per Doppelklick wieder in Logic." = "Google Drive can’t handle Logic projects reliably, but it can handle zips. That’s why Logic2Drive stores your projects in Google Drive as zips and opens them in Logic again with a double-click.";
+
+/* willkommen.swift:122 */
+"Danach läuft alles von selbst. Du kannst jeden Punkt später im Menü oben rechts ändern." = "After that, everything runs on its own. You can change each item later in the menu at the top right.";
+
+/* willkommen.swift:139 */
+"Du findest Logic2Drive oben rechts in der Menüleiste" = "You’ll find Logic2Drive at the top right of the menu bar";
+
+/* willkommen.swift:140 */
+"Logic2Drive hat kein Fenster und kein Symbol im Dock. Ein Klick auf das Zeichen zeigt dir, was gerade läuft." = "Logic2Drive has no window and no icon in the Dock. Click the icon to see what’s running.";
+
+/* willkommen.swift:153 */
+"Logic2Drive packt Logic-Projekte in deinem Google Drive als Zip ein. Nur so kommen sie vollständig bei den anderen an." = "Logic2Drive packs Logic projects in your Google Drive as zips. That’s the only way they reach everyone else completely.";
+
+/* willkommen.swift:154 */
+"Auf diesem Mac ist Google Drive noch nicht eingerichtet. Melde dich zuerst dort an." = "Google Drive isn’t set up on this Mac yet. Sign in there first.";
+
+/* willkommen.swift:158 */
+"Projekte per Doppelklick öffnen" = "Open Projects with a Double-Click";
+
+/* willkommen.swift:159 */
+"Ein Doppelklick auf eine Projekt-Zip öffnet das Projekt direkt in Logic. Alle anderen Zips öffnen sich wie gewohnt." = "Double-clicking a project zip opens the project directly in Logic. All other zips open as usual.";
+
+/* willkommen.swift:163 */
+"Logic2Drive startet von selbst, wenn du deinen Mac einschaltest." = "Logic2Drive starts on its own when you turn on your Mac.";
+
+/* willkommen.swift:166 */
+"Fragt dein Mac später, ob Logic2Drive Logic Pro steuern darf, klicke bitte auf „Erlauben“. Nur so lässt sich erkennen, wann ein Projekt geschlossen ist." = "If your Mac later asks whether Logic2Drive may control Logic Pro, please click “Allow”. That’s the only way to tell when a project is closed.";
+
+/* willkommen.swift:184 */
+"Schritt 1 von 2" = "Step 1 of 2";
+
+/* willkommen.swift:186 */
+"Weiter" = "Continue";
+
+/* willkommen.swift:190 */
+"Alles ist eingeschaltet." = "Everything is turned on.";
+
+/* willkommen.swift:190 */
+"Noch nicht alles eingeschaltet." = "Not everything is turned on yet.";
+
+/* willkommen.swift:192 */
+"Zurück" = "Back";
+
+/* willkommen.swift:193 */
+"Fertig" = "Done";
+
+/* willkommen.swift:193 */
+"Später fertig machen" = "Finish Later";
+
+/* update.swift:67 */
+"Die Update-Quelle antwortet nicht" = "The update source isn’t responding";
+
+/* update.swift:70 */
+"Die Antwort der Update-Quelle ist nicht lesbar" = "The response from the update source is unreadable";
+
+/* update.swift:76 */
+"Version %@ ist veröffentlicht, aber ohne %@" = "Version %@ has been published, but without %@";
+
+/* update.swift:80 */
+"Das Paket von Version %@ liegt an einer unerwarteten Adresse" = "The package for version %@ is at an unexpected address";
+
+/* update.swift:87 */
+"Das Paket enthält keine App" = "The package contains no app";
+
+/* update.swift:89 */
+"Das Paket enthält eine andere App" = "The package contains a different app";
+
+/* update.swift:91 */
+"Die App im Paket trägt nicht die angekündigte Version %@" = "The app in the package doesn’t have the announced version %@";
+
+/* update.swift:95 */
+"Die Signatur des Pakets ist nicht lesbar" = "The signature of the package is unreadable";
+
+/* update.swift:102 */
+"Die Signaturregel ließ sich nicht bilden" = "The signature rule couldn’t be built";
+
+/* update.swift:107 */
+"unbekannt" = "unknown";
+
+/* update.swift:108 */
+"Die Signatur des Pakets stimmt nicht (%@)" = "The signature of the package doesn’t match (%@)";
+
+/* update.swift:116 */
+"Das Paket ließ sich nicht laden" = "The package couldn’t be downloaded";
+
+/* update.swift:120 */
+"Das Paket ließ sich nicht entpacken" = "The package couldn’t be unpacked";
+
+/* update.swift:123 */
+"Das Paket enthält keine Logic2Drive.app" = "The package doesn’t contain Logic2Drive.app";
+
+/* update.swift:133 */
+"Die App liegt an einem Ort, an dem sie sich nicht selbst ersetzen kann" = "The app is in a place where it can’t replace itself";
+
+/* update.swift:149 */
+"Nach dem Einsetzen stimmte die Signatur nicht mehr, die bisherige Version ist zurück (%@)" = "After installing, the signature no longer matched, the previous version is back (%@)";
+
+/* update.swift:156 */
+"aktuell: %@" = "current: %@";
+
+/* update.swift:157 */
+"neu: %@" = "new: %@";
+
+/* update.swift:158 */
+"neu: %@, aber diese App ist nicht mit einer Developer ID signiert" = "new: %@, but this app isn’t signed with a Developer ID";
+
+/* update.swift:161 */
+"eingespielt: %@" = "installed: %@";
+
+/* update.swift:163 */
+"abgelehnt: %@" = "rejected: %@";
+
+/* einstellungen.swift */
+"Einstellungen …" = "Settings…";
+
+/* einstellungen.swift */
+"Die Sprache wechselt beim nächsten Start" = "The language changes at the next launch";
+
+/* einstellungen.swift */
+"Gerade läuft noch ein Auftrag. Logic2Drive startet deshalb nicht von selbst neu." = "A job is still running, so Logic2Drive won’t restart on its own.";
+
+/* einstellungen.swift */
+"Aufruf: --einstellungen-bild <Datei.png>" = "Usage: --einstellungen-bild <Datei.png>";
+
+/* einstellungen.swift */
+"Allgemein" = "General";
+
+/* einstellungen.swift */
+"Sprache" = "Language";
+
+/* einstellungen.swift */
+"Wie der Mac" = "Same as Mac";
+
+/* einstellungen.swift */
+"Nach einem Wechsel startet Logic2Drive neu." = "After a change, Logic2Drive restarts.";
+
+/* einstellungen.swift */
+"Updates" = "Updates";
+
+/* einstellungen.swift */
+"Version" = "Version";
+
+/* einstellungen.swift */
+"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist." = "Logic2Drive downloads new versions and installs them as soon as no project is in progress.";
+
+/* einstellungen.swift */
+"Was ist neu" = "What’s New";
+
+/* einstellungen.swift */
+"Version %@" = "Version %@";
+
+/* einstellungen.swift */
+"Google Drive kommt mit Logic-Projekten nicht zurecht, mit Zips schon. Logic2Drive legt Projekte deshalb als Zip in Google Drive ab und öffnet sie per Doppelklick wieder in Logic." = "Google Drive can’t handle Logic projects reliably, but it can handle zips. That’s why Logic2Drive stores projects in Google Drive as zips and opens them in Logic again with a double-click.";
+
+/* einstellungen.swift */
+"Gebaut von Joshua Nilles im Auftrag der bibletunes gGmbH." = "Built by Joshua Nilles on behalf of bibletunes gGmbH.";
+
+/* einstellungen.swift */
+"Logic2Drive – Einstellungen" = "Logic2Drive – Settings";

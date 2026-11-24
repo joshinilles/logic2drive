@@ -1,0 +1,2 @@
+/* Logic2Drive – العربية. النصوص التي يعرضها macOS نفسه. */
+"NSAppleEventsUsageDescription" = "يسأل Logic2Drive برنامج Logic Pro عن المشاريع المفتوحة، حتى لا يُعاد المشروع إلى Google Drive إلا بعد إغلاقه.";
