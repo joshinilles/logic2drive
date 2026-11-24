@@ -2232,8 +2232,9 @@ case "--willkommen-bild":
         : WillkommenStand(drive: false, zip: false, autostart: false, driveDa: true)
     exit(willkommenAlsBild(argumente[1], stand: stand, seite: argumente.count > 3 && argumente[3] == "2" ? 1 : 0) ? 0 : 1)
 case "--einstellungen-bild":
-    guard argumente.count >= 2 else { print(L("Aufruf: --einstellungen-bild <Datei.png>")); exit(2) }
-    exit(einstellungenAlsBild(argumente[1]) ? 0 : 1)
+    // Nur zum Prüfen der Gestaltung: --einstellungen-bild <Datei.png> [hell|dunkel]
+    guard argumente.count >= 2 else { print(L("Aufruf: --einstellungen-bild <Datei.png> [hell|dunkel]")); exit(2) }
+    exit(einstellungenAlsBild(argumente[1], dunkel: argumente.count > 2 ? argumente[2] == "dunkel" : nil) ? 0 : 1)
 case "--zeichen-bild":
     // Nur zum Prüfen der Gestaltung: --zeichen-bild <Datei.png> <Pixel> [app]
     guard argumente.count >= 3, let px = Int(argumente[2]) else { print(L("Aufruf: --zeichen-bild <Datei.png> <Pixel> [app]")); exit(2) }

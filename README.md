@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6). It has been tested on a single Mac with test
+**Status: early version (0.6.1). It has been tested on a single Mac with test
 projects and a handful of real ones. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -202,7 +202,6 @@ the code. Somebody has to be at the Mac for both:
   0.6 release on GitHub. The automatic path in the running menu bar app
   (waiting until no project is in progress, then restarting) has not yet
   happened for real.
-- Whether Logic2Drive starts after a reboot when "Start at login" is on.
 - The welcome window on a fresh Mac, and on a Mac without Google Drive.
 - The French, Arabic and Farsi translations have not been read by native
   speakers. Right-to-left layout has only been looked at as a rendered image.

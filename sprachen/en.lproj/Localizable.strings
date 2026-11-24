@@ -778,7 +778,7 @@
 "Gerade läuft noch ein Auftrag. Logic2Drive startet deshalb nicht von selbst neu." = "A job is still running, so Logic2Drive won’t restart on its own.";
 
 /* einstellungen.swift */
-"Aufruf: --einstellungen-bild <Datei.png>" = "Usage: --einstellungen-bild <Datei.png>";
+"Aufruf: --einstellungen-bild <Datei.png> [hell|dunkel]" = "Usage: --einstellungen-bild <Datei.png> [hell|dunkel]";
 
 /* einstellungen.swift */
 "Allgemein" = "General";

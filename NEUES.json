@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.6.1",
+    "datum": "2026-11-24",
+    "de": [
+      "Knöpfe und Auswahlfelder in den Einstellungen sind im dunklen Modus wieder gut lesbar."
+    ],
+    "en": [
+      "Buttons and pop-up menus in the settings window are easy to read again in Dark Mode."
+    ],
+    "fr": [
+      "Les boutons et les menus locaux de la fenêtre de réglages sont de nouveau bien lisibles en mode sombre."
+    ],
+    "ar": [
+      "أصبحت الأزرار والقوائم المنبثقة في نافذة الإعدادات واضحة من جديد في الوضع الداكن."
+    ],
+    "fa": [
+      "دکمه‌ها و منوهای بازشو در پنجره‌ی تنظیمات در حالت تیره دوباره خوانا هستند."
+    ]
+  },
+  {
     "version": "0.6",
     "datum": "2026-11-24",
     "de": [

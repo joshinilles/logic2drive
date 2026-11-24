@@ -41,6 +41,17 @@ final class EinstellungenModell: ObservableObject {
     }
 }
 
+/// Der Umschalter von macOS, in der Farbe der Marke. Die Farbe gilt bewusst nur für die Schalter: Auf dem
+/// ganzen Fenster färbt sie im aktiven Fenster auch Knöpfe und Auswahlfelder lila ein, und das ist auf
+/// dunklem Grund nicht lesbar.
+struct MarkenSchalter: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Toggle(isOn: configuration.$isOn) { configuration.label }
+            .toggleStyle(.switch)
+            .tint(Marke.deep)
+    }
+}
+
 struct EinstellungenAnsicht: View {
     @ObservedObject var schalter: WillkommenModell
     @ObservedObject var modell: EinstellungenModell
@@ -122,8 +133,7 @@ struct EinstellungenAnsicht: View {
             }
         }
         .formStyle(.grouped)
-        .toggleStyle(.switch)
-        .tint(Marke.deep)
+        .toggleStyle(MarkenSchalter())
         .frame(width: 540)
         .frame(maxHeight: .infinity)
         .environment(\.layoutDirection, vonRechts ? .rightToLeft : .leftToRight)
@@ -159,7 +169,8 @@ final class EinstellungenFenster: NSObject {
 }
 
 /// Zeichnet das Fenster in eine PNG-Datei, ohne es anzuzeigen. Nur zum Prüfen der Gestaltung.
-func einstellungenAlsBild(_ pfad: String) -> Bool {
+/// Gezeichnet wird es so, wie es als aktives Fenster aussieht: Erst dann färbt macOS Knöpfe und Schalter ein.
+func einstellungenAlsBild(_ pfad: String, dunkel: Bool? = nil) -> Bool {
     _ = NSApplication.shared
     let schalter = WillkommenModell()
     schalter.lies = { WillkommenStand(drive: true, zip: true, autostart: false, driveDa: true) }
@@ -167,9 +178,13 @@ func einstellungenAlsBild(_ pfad: String) -> Bool {
     let modell = EinstellungenModell()
     modell.lies = { (true, L("Version \("9.9") wird eingespielt, sobald nichts in Arbeit ist"), "auto") }
     modell.frisch()
-    let ansicht = NSHostingView(rootView: EinstellungenAnsicht(schalter: schalter, modell: modell))
+    let ansicht = NSHostingView(rootView: EinstellungenAnsicht(schalter: schalter, modell: modell).environment(\.controlActiveState, .key))
     let groesse = NSSize(width: 540, height: 900)
     let w = NSWindow(contentRect: NSRect(origin: .zero, size: groesse), styleMask: [.borderless], backing: .buffered, defer: false)
+    if let dunkel {
+        w.appearance = NSAppearance(named: dunkel ? .darkAqua : .aqua)
+        ansicht.appearance = w.appearance
+    }
     w.contentView = ansicht
     ansicht.frame = NSRect(origin: .zero, size: groesse)
     ansicht.layoutSubtreeIfNeeded()
