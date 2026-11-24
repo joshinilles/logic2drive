@@ -197,8 +197,11 @@ the code. Somebody has to be at the Mac for both:
   98 of 99, and the one failure was Logic sitting in its "audio interface not
   available" dialog (see Tests). The run before that, unattended, stopped at
   73 of 99 for the same reason.
-- Updates against GitHub itself. The updater is tested with a local stand-in
-  for the release (17 of 17).
+- Updates in day-to-day use. The updater is tested with a local stand-in for
+  the release (17 of 17), and one test build updated itself from the real
+  0.6 release on GitHub. The automatic path in the running menu bar app
+  (waiting until no project is in progress, then restarting) has not yet
+  happened for real.
 - Whether Logic2Drive starts after a reboot when "Start at login" is on.
 - The welcome window on a fresh Mac, and on a Mac without Google Drive.
 - The French, Arabic and Farsi translations have not been read by native
