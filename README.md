@@ -197,11 +197,11 @@ the code. Somebody has to be at the Mac for both:
   98 of 99, and the one failure was Logic sitting in its "audio interface not
   available" dialog (see Tests). The run before that, unattended, stopped at
   73 of 99 for the same reason.
-- Updates in day-to-day use. The updater is tested with a local stand-in for
-  the release (17 of 17), and one test build updated itself from the real
-  0.6 release on GitHub. The automatic path in the running menu bar app
-  (waiting until no project is in progress, then restarting) has not yet
-  happened for real.
+- Updates beyond one Mac. The updater is tested with a local stand-in for
+  the release (17 of 17), and the running menu bar app updated itself from
+  0.6 to 0.6.1 through "Check for Updates" and restarted. Not yet seen: the
+  daily check finding an update on its own, and an update that has to wait
+  because a project is in progress.
 - The welcome window on a fresh Mac, and on a Mac without Google Drive.
 - The French, Arabic and Farsi translations have not been read by native
   speakers. Right-to-left layout has only been looked at as a rendered image.
