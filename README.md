@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6.8). It has been tested on one Mac with test
+**Status: early version (0.7.0). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -70,11 +70,22 @@ cleaned up once the upload is confirmed and the project is not open in Logic.
 
 ## Install
 
-Download `Logic2Drive.zip` from the latest release, unpack it and move
-`Logic2Drive.app` to your Applications folder. If you open it straight from
-the Downloads folder instead, it offers to move itself there: macOS runs a
-freshly downloaded app from a read-only copy, where Open at Login and updates
-don't work. On first launch a welcome
+Download `Logic2Drive.dmg` from the latest release and open it. A window
+shows the app next to the Applications folder: drag the app onto the folder,
+then open Logic2Drive from Applications.
+
+If you open the app straight from that window instead, it offers to move
+itself to Applications: an app that runs from the installer file (or, for the
+zip, from a read-only copy that macOS makes of a freshly downloaded app)
+cannot open at login or update itself. Once Logic2Drive runs from
+Applications and its installer file is still mounted, it asks whether to move
+the installer file to the Trash; "Keep" is remembered for that file. macOS
+may ask once whether Logic2Drive may access the Downloads folder for that.
+
+`Logic2Drive.zip` is still attached to every release, because the built-in
+updater downloads it.
+
+On first launch a welcome
 window explains where the app lives and asks you to turn on three things:
 
 - **Watch Google Drive:** watches every Google Drive account on this Mac.
@@ -143,8 +154,20 @@ Developer ID (ad hoc signed) never installs updates on its own.
 
 ```bash
 zsh -f bauen.sh                      # builds build/Logic2Drive.app (arm64 + x86_64, macOS 13+)
-zsh -f bauen.sh --veroeffentlichen   # also notarizes it and creates build/Logic2Drive.zip
+zsh -f bauen.sh --dmg                # also creates build/Logic2Drive.dmg, not notarized (to look at the window)
+zsh -f bauen.sh --veroeffentlichen   # notarizes the app, creates build/Logic2Drive.zip and build/Logic2Drive.dmg
 ```
+
+The installer window is laid out in two steps. The Finder sets the icon
+positions and the background picture (a Finder window or tab opens for two
+seconds; the first time macOS asks whether the terminal may control the
+Finder). Size and look of the window are then written by `dmg-fenster.py`,
+because the Finder would store the state of whatever window it showed the
+volume in: with "Prefer tabs: Always" that is someone's large browser window
+with its sidebar. The checked `.DS_Store` is put back without the Finder
+seeing the volume, since the Finder was seen rewriting it on eject with the
+state of an earlier window. No volume called "Logic2Drive" may be mounted
+while building.
 
 No Xcode project is needed, only the command line tools. The version number
 lives in `VERSION`.
@@ -186,6 +209,7 @@ notifications, `LOGIC2DRIVE_SPRACHE=de|en|fr|ar|fa` forces a language.
 zsh -f test/update.sh <work folder>   # updater, about 3 minutes, needs a Developer ID
 python3 test/texte.py                 # translations complete?
 zsh -f test/namen.sh <work folder>    # naming rule, about 2 minutes, no Drive, no Logic
+zsh -f test/installation.sh <work folder>   # installer file, about 3 minutes, no Logic
 zsh -f test/starten.sh                # the full run, see below
 ```
 
@@ -243,6 +267,21 @@ the code. Somebody has to be at the Mac for both:
 
 ## Not yet tested
 
+- The installer window (0.7) on a Mac with default Finder settings, where it
+  opens as its own 600 by 400 window without a sidebar. It was only seen on a
+  Mac with "Prefer tabs: Always", where the Finder shows the volume as a tab
+  of an existing window: background, arrow and icon positions are right
+  there. The window size is written by `dmg-fenster.py` and read back, but
+  not seen.
+- Installing from a downloaded installer file. `test/installation.sh` passes
+  (16 of 16) with a test build under its own bundle identifier and a test
+  folder standing in for Applications: the app finds its mounted installer
+  file, ejects it and moves it to the Trash, remembers "Keep", and moves
+  itself to Applications when started from the installer window. In that
+  test the two questions are answered through `LOGIC2DRIVE_HINWEIS` and are
+  not shown. Not yet seen: the questions on screen, a quarantined download
+  (where macOS runs the app from a read-only copy), and the permission macOS
+  asks for before a file in Downloads can be moved to the Trash.
 - The naming rule (0.6.8) beyond the Mac. In the full run in a real Drive
   folder all its tests passed (T33 to T41): Drive's local folder keeps the
   composed umlaut, accepts a project with a trailing space, and a zip that is

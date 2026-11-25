@@ -923,3 +923,15 @@
 "Zip behält ihren Namen, Umbenennen fehlgeschlagen (%@): %@" = "Le zip garde son nom, le renommage a échoué (%@) : %@";
 "Der Name „%@“ kommt nicht überall an. Beim Zurücklegen heißt die Zip „%@“." = "Le nom « %@ » ne passe pas partout. Une fois le projet remis en place, le zip s’appellera « %@ ».";
 "Aufruf: --sicherer-name <Projektname>" = "Utilisation : --sicherer-name <Projektname>";
+
+/* 0.7.0: Installationsdatei (DMG) */
+"Logic2Drive läuft noch aus der Installationsdatei. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu." = "Logic2Drive s’exécute encore depuis le fichier d’installation. De là, l’ouverture à l’ouverture de session, les mises à jour et l’ouverture par double-clic ne fonctionnent pas.\n\nLogic2Drive va maintenant se placer dans le dossier Applications et redémarrer.";
+"Installationsdatei in den Papierkorb legen?" = "Mettre le fichier d’installation à la Corbeille ?";
+"Logic2Drive liegt jetzt im Ordner „Programme“ und läuft von dort. „%@“ wird nicht mehr gebraucht: Das Installationsfenster wird geschlossen, die Datei kommt in den Papierkorb." = "Logic2Drive se trouve maintenant dans le dossier Applications et s’exécute de là. « %@ » n’est plus nécessaire : la fenêtre d’installation sera fermée et le fichier mis à la Corbeille.";
+"In den Papierkorb legen" = "Mettre à la Corbeille";
+"Behalten" = "Conserver";
+"Installationsdatei in den Papierkorb gelegt: %@" = "Fichier d’installation mis à la Corbeille : %@";
+"Installationsdatei nicht weggeräumt (%@): %@" = "Fichier d’installation non supprimé (%@) : %@";
+"Die Installationsdatei ließ sich nicht wegräumen" = "Impossible de supprimer le fichier d’installation";
+"Wirf „Logic2Drive“ im Finder aus und leg „%@“ selbst in den Papierkorb." = "Éjecte « Logic2Drive » dans le Finder et mets toi-même « %@ » à la Corbeille.";
+"Aufruf: --dmg-bild <Ordner>" = "Utilisation : --dmg-bild <Ordner>";

@@ -230,6 +230,56 @@ func freierPfad(_ ordner: String, stamm: String, endung: String) -> String {
     return k
 }
 
+// MARK: - Installationsdatei
+
+struct EingehaengtesImage {
+    let datei: String       // die .dmg-Datei
+    let orte: [String]      // wo ihre Volumes eingehängt sind
+}
+
+/// Die eingehängten Disk-Images mit ihrer Datei. Leer, wenn hdiutil nichts Lesbares liefert.
+func eingehaengteImages() -> [EingehaengtesImage] {
+    let p = Process()
+    p.executableURL = URL(fileURLWithPath: "/usr/bin/hdiutil")
+    p.arguments = ["info", "-plist"]
+    let rohr = Pipe()
+    p.standardOutput = rohr
+    p.standardError = FileHandle.nullDevice     // Hinweise von hdiutil dürfen die Liste nicht verderben
+    p.standardInput = FileHandle.nullDevice
+    guard (try? p.run()) != nil else { return [] }
+    let abbruch = DispatchWorkItem { if p.isRunning { p.terminate() } }
+    DispatchQueue.global().asyncAfter(deadline: .now() + 15, execute: abbruch)
+    let daten = rohr.fileHandleForReading.readDataToEndOfFile()
+    p.waitUntilExit()
+    abbruch.cancel()
+    guard let liste = (try? PropertyListSerialization.propertyList(from: daten, format: nil)) as? [String: Any],
+          let images = liste["images"] as? [[String: Any]] else { return [] }
+    return images.compactMap { i in
+        guard let datei = i["image-path"] as? String else { return nil }
+        let orte = (i["system-entities"] as? [[String: Any]] ?? []).compactMap { $0["mount-point"] as? String }
+        return orte.isEmpty ? nil : EingehaengtesImage(datei: datei, orte: orte)
+    }
+}
+
+/// Liegt der Pfad auf einem eingehängten Disk-Image? Gefragt wird hdiutil nur für Pfade unter /Volumes.
+func liegtAufImage(_ pfad: String) -> Bool {
+    guard pfad.hasPrefix("/Volumes/") else { return false }
+    return eingehaengteImages().contains { $0.orte.contains { pfad.hasPrefix($0 + "/") } }
+}
+
+/// Installationsdateien: eingehängte .dmg, die diese App enthalten (gleiche Kennung), aber nicht die laufende.
+func installationsdateien() -> [(datei: String, ort: String)] {
+    let kennung = Bundle.main.bundleIdentifier
+    let selbst = Bundle.main.bundleURL.standardizedFileURL.path
+    var aus: [(String, String)] = []
+    for i in eingehaengteImages() where i.datei.lowercased().hasSuffix(".dmg") {
+        for o in i.orte where !selbst.hasPrefix(o + "/") {
+            if let b = Bundle(path: o + "/Logic2Drive.app"), b.bundleIdentifier == kennung { aus.append((i.datei, o)) }
+        }
+    }
+    return aus
+}
+
 // MARK: - Sichere Namen
 
 /// Höchstlänge eines Projektnamens in Byte (UTF-8). Damit bleibt auch die längste Zip des Helfers,
@@ -2033,6 +2083,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var updateGrund = ""            // zuletzt notierter Grund, damit er nur bei einem Wechsel im Protokoll landet
     var warteUhr: Timer?            // läuft, solange ein geladenes Update wartet
     var beendeOhneFrage = false
+    var installationGeprueft = false     // nach der Installationsdatei wird je Start höchstens einmal gesehen
     var updatesAutomatisch: Bool { UserDefaults.standard.object(forKey: "updatesAutomatisch") as? Bool ?? true }
 
     func applicationDidFinishLaunching(_ n: Notification) {
@@ -2073,9 +2124,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         willkommen.modell.zipSetzen = { [weak self] ein in self?.zipSetzen(ein) }
         willkommen.modell.autostartSetzen = { [weak self] ein in self?.autostartSetzen(ein) }
-        willkommen.geschlossen = { UserDefaults.standard.set(true, forKey: "willkommenGezeigt") }
+        willkommen.geschlossen = { [weak self] in
+            UserDefaults.standard.set(true, forKey: "willkommenGezeigt")
+            self?.raeumeInstallationsdatei()      // nach „Fertig“: Die App liegt in „Programme“, die Installationsdatei kann weg
+        }
         // Beim allerersten Start erklärt das Fenster, wo der Helfer steckt und was einzuschalten ist.
-        if !UserDefaults.standard.bool(forKey: "willkommenGezeigt") { willkommen.zeige() }
+        if !UserDefaults.standard.bool(forKey: "willkommenGezeigt") { willkommen.zeige() } else { raeumeInstallationsdatei() }
         einstellungen.modell.lies = { [weak self] in (self?.updatesAutomatisch ?? true, self?.updateText, self?.sprachWahl ?? "auto") }
         einstellungen.modell.setzeUpdatesVonSelbst = { UserDefaults.standard.set($0, forKey: "updatesAutomatisch") }
         einstellungen.modell.sucheUpdate = { [weak self] in self?.sucheUpdate(vonHand: true) }
@@ -2195,14 +2249,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         return Bundle(url: u)?.bundleIdentifier == Bundle.main.bundleIdentifier
     }
 
-    func hinweis(_ titel: String, _ text: String, knopf: String? = nil) -> Bool {
+    func hinweis(_ titel: String, _ text: String, knopf: String? = nil, nein: String? = nil) -> Bool {
+        // Nur für Tests: LOGIC2DRIVE_HINWEIS=ja|nein beantwortet Rückfragen ohne Fenster und schreibt sie ins Protokoll.
+        if let antwort = umgebung["LOGIC2DRIVE_HINWEIS"] {
+            protokoll("RÜCKFRAGE: \(titel) | \(knopf ?? "OK") / \(nein ?? "Abbrechen") -> \(antwort)")
+            return antwort == "ja"
+        }
         NSApp.activate(ignoringOtherApps: true)
         let alert = NSAlert()
         alert.messageText = titel
         alert.informativeText = text
         if let knopf {
             alert.addButton(withTitle: knopf)
-            alert.addButton(withTitle: L("Abbrechen"))
+            alert.addButton(withTitle: nein ?? L("Abbrechen"))
         }
         return alert.runModal() == .alertFirstButtonReturn
     }
@@ -2309,16 +2368,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     /// Liefert true, wenn die App nach „Programme“ umgezogen ist und gleich von dort neu startet.
     func nachProgrammeUmziehen() -> Bool {
+        // Zwei Fälle: macOS hat die frisch geladene App verlagert (auch dann, wenn sie im Installationsfenster
+        // doppelt angeklickt wurde), oder sie läuft unverlagert direkt aus der Installationsdatei.
         // Wurde die App über eine Datei gestartet, geht diese vor; gefragt wird beim nächsten Start.
-        guard Bundle.main.bundlePath.contains("/AppTranslocation/"), wartendeDateien.isEmpty else { return false }
+        let verlagert = Bundle.main.bundlePath.contains("/AppTranslocation/")
+        let hier = Bundle.main.bundleURL.standardizedFileURL
+        guard wartendeDateien.isEmpty, verlagert || liegtAufImage(hier.path) else { return false }
         let selbst = L("Beende Logic2Drive, zieh es im Finder in den Ordner „Programme“ und öffne es von dort.")
-        guard let herkunft = echterOrt()?.standardizedFileURL else {
+        guard let herkunft = verlagert ? echterOrt()?.standardizedFileURL : hier else {
             _ = hinweis(L("Logic2Drive liegt noch nicht im Ordner „Programme“"), selbst)
             return false
         }
-        guard hinweis(L("Logic2Drive in den Ordner „Programme“ legen?"),
-                      L("Logic2Drive läuft noch aus dem Ordner, in den es geladen wurde. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht zuverlässig.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu. Die geladene Kopie kommt in den Papierkorb."),
-                      knopf: L("In „Programme“ legen")) else { return false }
+        let vomImage = liegtAufImage(herkunft.path)
+        let grund = vomImage
+            ? L("Logic2Drive läuft noch aus der Installationsdatei. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu.")
+            : L("Logic2Drive läuft noch aus dem Ordner, in den es geladen wurde. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht zuverlässig.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu. Die geladene Kopie kommt in den Papierkorb.")
+        guard hinweis(L("Logic2Drive in den Ordner „Programme“ legen?"), grund, knopf: L("In „Programme“ legen")) else { return false }
         let fm = FileManager.default
         let programme = ProcessInfo.processInfo.environment["LOGIC2DRIVE_PROGRAMME"] ?? "/Applications"      // nur für Tests
         let ziel = URL(fileURLWithPath: programme).appendingPathComponent(herkunft.lastPathComponent).standardizedFileURL
@@ -2333,10 +2398,44 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         // Ohne diesen Schritt startet macOS auch die Kopie in „Programme“ wieder verlagert.
         lauf("/usr/bin/xattr", ["-dr", "com.apple.quarantine", ziel.path], frist: 30)
-        if herkunft != ziel { try? fm.trashItem(at: herkunft, resultingItemURL: nil) }
+        // Die Installationsdatei bleibt hier liegen: Nach ihr fragt die App, sobald sie aus „Programme“ läuft.
+        if herkunft != ziel, !vomImage { try? fm.trashItem(at: herkunft, resultingItemURL: nil) }
         protokoll(L("Nach „Programme“ umgezogen, vorher in \(herkunft.deletingLastPathComponent().path)"))
         neustart(ort: ziel.path)
         return true
+    }
+
+    /// Läuft die App aus „Programme“ und ist ihre Installationsdatei noch eingehängt, bietet Logic2Drive an,
+    /// sie wegzuräumen: Fenster schließen, .dmg in den Papierkorb. Gefragt wird je Datei nur einmal.
+    func raeumeInstallationsdatei() {
+        guard !installationGeprueft, !still || umgebung["LOGIC2DRIVE_HINWEIS"] != nil else { return }
+        let ort = Bundle.main.bundleURL.standardizedFileURL.path
+        let programme = URL(fileURLWithPath: umgebung["LOGIC2DRIVE_PROGRAMME"] ?? "/Applications").standardizedFileURL.path      // die Variable ist nur für Tests
+        guard ort.hasPrefix(programme + "/"), !ort.contains("/AppTranslocation/") else { return }
+        installationGeprueft = true
+        DispatchQueue.global(qos: .utility).async {
+            let d = UserDefaults.standard
+            let behalten = Set(d.stringArray(forKey: "installationsdateiBehalten") ?? [])
+            guard let fund = installationsdateien().first(where: { !behalten.contains($0.datei) }) else { return }
+            DispatchQueue.main.async {
+                let name = letzter(fund.datei)
+                guard self.hinweis(L("Installationsdatei in den Papierkorb legen?"),
+                                   L("Logic2Drive liegt jetzt im Ordner „Programme“ und läuft von dort. „\(name)“ wird nicht mehr gebraucht: Das Installationsfenster wird geschlossen, die Datei kommt in den Papierkorb."),
+                                   knopf: L("In den Papierkorb legen"), nein: L("Behalten")) else {
+                    d.set(Array(behalten.union([fund.datei])), forKey: "installationsdateiBehalten")
+                    return
+                }
+                do {
+                    try NSWorkspace.shared.unmountAndEjectDevice(at: URL(fileURLWithPath: fund.ort))
+                    try FileManager.default.trashItem(at: URL(fileURLWithPath: fund.datei), resultingItemURL: nil)
+                    helfer.q.async { protokoll(L("Installationsdatei in den Papierkorb gelegt: \(fund.datei)")) }
+                } catch {
+                    helfer.q.async { protokoll(L("Installationsdatei nicht weggeräumt (\(fund.datei)): \(error.localizedDescription)")) }
+                    _ = self.hinweis(L("Die Installationsdatei ließ sich nicht wegräumen"),
+                                     L("Wirf „Logic2Drive“ im Finder aus und leg „\(name)“ selbst in den Papierkorb.") + "\n\n" + error.localizedDescription)
+                }
+            }
+        }
     }
 
     func autostartNachziehen() {
@@ -2539,6 +2638,13 @@ case "--sicherer-name":
     // Nur zum Prüfen: gibt aus, welchen Namen ein Projekt in Drive bekäme.
     guard argumente.count >= 2 else { print(L("Aufruf: --sicherer-name <Projektname>")); exit(2) }
     print(sichererName(argumente[1]))
+case "--dmg-bild":
+    // Für bauen.sh: schreibt den Hintergrund des Installationsfensters als dmg-1x.png und dmg-2x.png.
+    guard argumente.count >= 2 else { print(L("Aufruf: --dmg-bild <Ordner>")); exit(2) }
+    exit(schreibeDmgHintergrund(argumente[1]) ? 0 : 1)
+case "--installationsdatei":
+    // Nur zum Prüfen: zeigt die eingehängten Installationsdateien dieser App.
+    for f in installationsdateien() { print("\(f.datei)\t\(f.ort)") }
 case "--trocken":
     trockenlauf(Array(argumente.dropFirst()))
 case "--willkommen-bild":

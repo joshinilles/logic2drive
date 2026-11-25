@@ -88,3 +88,61 @@ func schreibeAppSymbol(_ ordner: String) -> Bool {
     }
     return gut
 }
+
+// MARK: - Installationsfenster im DMG
+
+/// Maße des Installationsfensters in Punkten. bauen.sh und dmg-fenster.py verwenden dieselben Zahlen.
+let dmgBreite: CGFloat = 600, dmgHoehe: CGFloat = 400
+let dmgLinks: CGFloat = 165, dmgRechts: CGFloat = 435, dmgMitte: CGFloat = 205     // Mitte der Symbole, von oben gemessen
+
+/// Hintergrund des Installationsfensters: links liegt die App, rechts der Ordner „Programme“, dazwischen ein Pfeil.
+/// Der Text steht deutsch und englisch im Bild, weil ein Bild sich nicht nach der Sprache des Macs richtet.
+func zeichneDmgHintergrund() {
+    let (b, h) = (dmgBreite, dmgHoehe)
+    let lila = NSColor(srgbRed: 0x60 / 255, green: 0x21 / 255, blue: 0x84 / 255, alpha: 1)
+    NSGradient(starting: NSColor(srgbRed: 0.985, green: 0.98, blue: 0.99, alpha: 1), ending: NSColor(srgbRed: 0.93, green: 0.915, blue: 0.95, alpha: 1))?
+        .draw(in: NSRect(x: 0, y: 0, width: b, height: h), angle: -90)
+    func text(_ t: String, vonOben y: CGFloat, groesse: CGFloat, fett: Bool, grau: CGFloat) {
+        let stil = NSMutableParagraphStyle()
+        stil.alignment = .center
+        let a: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: groesse, weight: fett ? .semibold : .regular),
+                                                .foregroundColor: NSColor(white: grau, alpha: 1), .paragraphStyle: stil]
+        (t as NSString).draw(in: NSRect(x: 20, y: h - y - groesse * 1.4, width: b - 40, height: groesse * 1.5), withAttributes: a)
+    }
+    text("Zieh Logic2Drive in den Ordner „Programme“", vonOben: 34, groesse: 19, fett: true, grau: 0.1)
+    text("Drag Logic2Drive to the Applications folder", vonOben: 64, groesse: 13, fett: false, grau: 0.38)
+    let y = h - dmgMitte, anfang = dmgLinks + 82, ende = dmgRechts - 82
+    let pfeil = NSBezierPath()
+    pfeil.move(to: NSPoint(x: anfang, y: y))
+    pfeil.line(to: NSPoint(x: ende - 6, y: y))
+    pfeil.move(to: NSPoint(x: ende - 22, y: y + 17))
+    pfeil.line(to: NSPoint(x: ende, y: y))
+    pfeil.line(to: NSPoint(x: ende - 22, y: y - 17))
+    pfeil.lineWidth = 7
+    pfeil.lineCapStyle = .round
+    pfeil.lineJoinStyle = .round
+    lila.setStroke()
+    pfeil.stroke()
+    text("Danach Logic2Drive aus „Programme“ öffnen  ·  Then open Logic2Drive from Applications", vonOben: h - 40, groesse: 11, fett: false, grau: 0.42)
+}
+
+/// Schreibt den Hintergrund in einfacher und doppelter Auflösung; `tiffutil` macht daraus eine Datei für beide.
+func schreibeDmgHintergrund(_ ordner: String) -> Bool {
+    try? FileManager.default.createDirectory(atPath: ordner, withIntermediateDirectories: true)
+    var gut = true
+    for faktor in [1, 2] {
+        guard let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(dmgBreite) * faktor, pixelsHigh: Int(dmgHoehe) * faktor,
+                                         bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
+                                         colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0),
+              let ctx = NSGraphicsContext(bitmapImageRep: rep) else { return false }
+        NSGraphicsContext.saveGraphicsState()
+        NSGraphicsContext.current = ctx
+        ctx.cgContext.scaleBy(x: CGFloat(faktor), y: CGFloat(faktor))     // gezeichnet wird in Punkten, für beide Auflösungen gleich
+        zeichneDmgHintergrund()
+        NSGraphicsContext.restoreGraphicsState()
+        rep.size = NSSize(width: dmgBreite, height: dmgHoehe)       // 144 dpi in der doppelten Fassung, daran erkennt macOS sie
+        let png = rep.representation(using: .png, properties: [:])
+        gut = (try? png?.write(to: URL(fileURLWithPath: "\(ordner)/dmg-\(faktor)x.png"))) != nil && png != nil && gut
+    }
+    return gut
+}

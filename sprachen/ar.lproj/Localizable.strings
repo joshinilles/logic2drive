@@ -923,3 +923,15 @@
 "Zip behält ihren Namen, Umbenennen fehlgeschlagen (%@): %@" = "يحتفظ ملف Zip باسمه، تعذّرت إعادة التسمية (%@): %@";
 "Der Name „%@“ kommt nicht überall an. Beim Zurücklegen heißt die Zip „%@“." = "الاسم «%@» لا يعمل في كل مكان. عند الإرجاع سيُسمّى ملف Zip «%@».";
 "Aufruf: --sicherer-name <Projektname>" = "الاستخدام: --sicherer-name <Projektname>";
+
+/* 0.7.0: Installationsdatei (DMG) */
+"Logic2Drive läuft noch aus der Installationsdatei. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu." = "ما زال Logic2Drive يعمل من ملف التثبيت. من هناك لا يعمل التشغيل عند تسجيل الدخول ولا التحديثات ولا الفتح بالنقر المزدوج.\n\nسينتقل Logic2Drive الآن إلى مجلد التطبيقات ويُعاد تشغيله.";
+"Installationsdatei in den Papierkorb legen?" = "نقل ملف التثبيت إلى سلة المهملات؟";
+"Logic2Drive liegt jetzt im Ordner „Programme“ und läuft von dort. „%@“ wird nicht mehr gebraucht: Das Installationsfenster wird geschlossen, die Datei kommt in den Papierkorb." = "أصبح Logic2Drive الآن في مجلد التطبيقات ويعمل من هناك. لم تعد هناك حاجة إلى «%@»: ستُغلق نافذة التثبيت ويُنقل الملف إلى سلة المهملات.";
+"In den Papierkorb legen" = "نقل إلى سلة المهملات";
+"Behalten" = "الاحتفاظ به";
+"Installationsdatei in den Papierkorb gelegt: %@" = "نُقل ملف التثبيت إلى سلة المهملات: %@";
+"Installationsdatei nicht weggeräumt (%@): %@" = "لم يُحذف ملف التثبيت (%@): %@";
+"Die Installationsdatei ließ sich nicht wegräumen" = "تعذّرت إزالة ملف التثبيت";
+"Wirf „Logic2Drive“ im Finder aus und leg „%@“ selbst in den Papierkorb." = "أخرِج «Logic2Drive» في Finder وانقل «%@» إلى سلة المهملات بنفسك.";
+"Aufruf: --dmg-bild <Ordner>" = "الاستخدام: --dmg-bild <Ordner>";

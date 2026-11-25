@@ -923,3 +923,15 @@
 "Zip behält ihren Namen, Umbenennen fehlgeschlagen (%@): %@" = "The zip keeps its name, renaming failed (%@): %@";
 "Der Name „%@“ kommt nicht überall an. Beim Zurücklegen heißt die Zip „%@“." = "The name “%@” doesn’t work everywhere. When the project is put back, the zip will be called “%@”.";
 "Aufruf: --sicherer-name <Projektname>" = "Usage: --sicherer-name <Projektname>";
+
+/* 0.7.0: Installationsdatei (DMG) */
+"Logic2Drive läuft noch aus der Installationsdatei. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu." = "Logic2Drive is still running from the installer file. Open at Login, updates and opening by double-click don’t work from there.\n\nLogic2Drive will now move itself to the Applications folder and restart.";
+"Installationsdatei in den Papierkorb legen?" = "Move the installer file to the Trash?";
+"Logic2Drive liegt jetzt im Ordner „Programme“ und läuft von dort. „%@“ wird nicht mehr gebraucht: Das Installationsfenster wird geschlossen, die Datei kommt in den Papierkorb." = "Logic2Drive is now in the Applications folder and runs from there. “%@” is no longer needed: the installer window will be closed and the file goes to the Trash.";
+"In den Papierkorb legen" = "Move to Trash";
+"Behalten" = "Keep";
+"Installationsdatei in den Papierkorb gelegt: %@" = "Installer file moved to the Trash: %@";
+"Installationsdatei nicht weggeräumt (%@): %@" = "Installer file not removed (%@): %@";
+"Die Installationsdatei ließ sich nicht wegräumen" = "The installer file couldn’t be removed";
+"Wirf „Logic2Drive“ im Finder aus und leg „%@“ selbst in den Papierkorb." = "Eject “Logic2Drive” in the Finder and move “%@” to the Trash yourself.";
+"Aufruf: --dmg-bild <Ordner>" = "Usage: --dmg-bild <Ordner>";

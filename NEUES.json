@@ -1,24 +1,34 @@
 [
   {
-    "version": "0.6.8",
+    "version": "0.7.0",
     "datum": "2026-11-25",
     "de": [
+      "Installieren wie gewohnt: Logic2Drive kommt jetzt als Installationsdatei (Logic2Drive.dmg). Im Fenster ziehst du die App auf den Ordner „Programme“.",
+      "Läuft Logic2Drive aus „Programme“, bietet es an, die Installationsdatei in den Papierkorb zu legen. Wer die App direkt im Installationsfenster öffnet, kann sie von dort in „Programme“ legen lassen.",
       "Jede Zip bekommt einen Namen, der überall ankommt, auch auf der Synology: Aus „A / B“ wird „A - B“, Zeichen wie : \\ * ? \" < > | werden zu einem Bindestrich, Leerzeichen und Punkte am Rand fallen weg, sehr lange Namen werden gekürzt. Im Projekt selbst wird nichts umbenannt.",
       "Wurde ein Name angepasst, sagt Logic2Drive es einmal. Eine vorhandene Zip mit unpassendem Namen wird beim Zurücklegen umbenannt, überschrieben wird dabei nichts."
     ],
     "en": [
+      "Install the usual way: Logic2Drive now comes as an installer file (Logic2Drive.dmg). In its window you drag the app onto the Applications folder.",
+      "Once Logic2Drive runs from Applications, it offers to move the installer file to the Trash. If you open the app straight from the installer window, it can move itself to Applications.",
       "Every zip gets a name that works everywhere, including on the Synology: “A / B” becomes “A - B”, characters like : \\ * ? \" < > | turn into a hyphen, spaces and dots at the edges are dropped, very long names are shortened. Nothing inside the project is renamed.",
       "When a name was adjusted, Logic2Drive tells you once. An existing zip with an unsuitable name is renamed when the project is put back; nothing is overwritten."
     ],
     "fr": [
+      "Installation habituelle : Logic2Drive est maintenant fourni comme fichier d’installation (Logic2Drive.dmg). Dans sa fenêtre, tu fais glisser l’app sur le dossier Applications.",
+      "Quand Logic2Drive s’exécute depuis Applications, il propose de mettre le fichier d’installation à la Corbeille. Si tu ouvres l’app directement dans la fenêtre d’installation, elle peut se placer elle-même dans Applications.",
       "Chaque zip reçoit un nom qui passe partout, y compris sur le Synology : « A / B » devient « A - B », les caractères comme : \\ * ? \" < > | deviennent un trait d’union, les espaces et les points en bordure disparaissent, les noms très longs sont raccourcis. Rien n’est renommé à l’intérieur du projet.",
       "Quand un nom a été adapté, Logic2Drive le signale une fois. Un zip existant au nom inadapté est renommé lors de la remise en place ; rien n’est écrasé."
     ],
     "ar": [
+      "التثبيت بالطريقة المعتادة: يأتي Logic2Drive الآن كملف تثبيت (Logic2Drive.dmg). في نافذته تسحب التطبيق إلى مجلد التطبيقات.",
+      "عندما يعمل Logic2Drive من مجلد التطبيقات، يعرض نقل ملف التثبيت إلى سلة المهملات. وإذا فتحت التطبيق مباشرة من نافذة التثبيت، يمكنه أن ينتقل بنفسه إلى مجلد التطبيقات.",
       "كل ملف Zip يحصل على اسم يعمل في كل مكان، وعلى Synology أيضًا: «A / B» يصبح «A - B»، والرموز مثل : \\ * ? \" < > | تصبح شرطة، والمسافات والنقاط في الأطراف تُحذف، والأسماء الطويلة جدًا تُختصر. لا يُعاد تسمية أي شيء داخل المشروع.",
       "إذا عُدِّل اسم، يخبرك Logic2Drive مرة واحدة. ملف Zip الموجود باسم غير مناسب تُعاد تسميته عند الإرجاع، ولا يُستبدل أي شيء."
     ],
     "fa": [
+      "نصب به شیوه‌ی معمول: Logic2Drive اکنون به‌صورت فایل نصب (Logic2Drive.dmg) ارائه می‌شود. در پنجره‌ی آن، برنامه را روی پوشه‌ی «برنامه‌ها» می‌کشید.",
+      "وقتی Logic2Drive از پوشه‌ی «برنامه‌ها» اجرا می‌شود، پیشنهاد می‌کند فایل نصب را به سطل زباله ببرد. اگر برنامه را مستقیم از پنجره‌ی نصب باز کنید، می‌تواند خودش را به «برنامه‌ها» منتقل کند.",
       "هر فایل Zip نامی می‌گیرد که همه‌جا کار می‌کند، روی Synology هم: «A / B» به «A - B» تبدیل می‌شود، نویسه‌هایی مانند : \\ * ? \" < > | به خط تیره تبدیل می‌شوند، فاصله‌ها و نقطه‌های کناری حذف می‌شوند و نام‌های بسیار بلند کوتاه می‌شوند. درون پروژه هیچ چیز تغییر نام نمی‌دهد.",
       "اگر نامی اصلاح شود، Logic2Drive یک بار خبر می‌دهد. فایل Zip موجود با نام نامناسب هنگام بازگرداندن تغییر نام می‌دهد و چیزی بازنویسی نمی‌شود."
     ]

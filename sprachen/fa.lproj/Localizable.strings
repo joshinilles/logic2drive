@@ -923,3 +923,15 @@
 "Zip behält ihren Namen, Umbenennen fehlgeschlagen (%@): %@" = "فایل Zip نام خود را نگه می‌دارد، تغییر نام انجام نشد (%@): %@";
 "Der Name „%@“ kommt nicht überall an. Beim Zurücklegen heißt die Zip „%@“." = "نام «%@» همه‌جا کار نمی‌کند. هنگام بازگرداندن، نام فایل Zip «%@» خواهد بود.";
 "Aufruf: --sicherer-name <Projektname>" = "روش استفاده: --sicherer-name <Projektname>";
+
+/* 0.7.0: Installationsdatei (DMG) */
+"Logic2Drive läuft noch aus der Installationsdatei. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu." = "Logic2Drive هنوز از فایل نصب اجرا می‌شود. از آن‌جا اجرا هنگام ورود به سیستم، به‌روزرسانی‌ها و باز کردن با دوبار کلیک کار نمی‌کنند.\n\nLogic2Drive اکنون خودش را به پوشه‌ی «برنامه‌ها» منتقل می‌کند و دوباره اجرا می‌شود.";
+"Installationsdatei in den Papierkorb legen?" = "فایل نصب به سطل زباله منتقل شود؟";
+"Logic2Drive liegt jetzt im Ordner „Programme“ und läuft von dort. „%@“ wird nicht mehr gebraucht: Das Installationsfenster wird geschlossen, die Datei kommt in den Papierkorb." = "Logic2Drive اکنون در پوشه‌ی «برنامه‌ها» است و از همان‌جا اجرا می‌شود. «%@» دیگر لازم نیست: پنجره‌ی نصب بسته می‌شود و فایل به سطل زباله می‌رود.";
+"In den Papierkorb legen" = "انتقال به سطل زباله";
+"Behalten" = "نگه داشتن";
+"Installationsdatei in den Papierkorb gelegt: %@" = "فایل نصب به سطل زباله منتقل شد: %@";
+"Installationsdatei nicht weggeräumt (%@): %@" = "فایل نصب برداشته نشد (%@): %@";
+"Die Installationsdatei ließ sich nicht wegräumen" = "فایل نصب برداشته نشد";
+"Wirf „Logic2Drive“ im Finder aus und leg „%@“ selbst in den Papierkorb." = "«Logic2Drive» را در Finder بیرون بدهید و «%@» را خودتان به سطل زباله ببرید.";
+"Aufruf: --dmg-bild <Ordner>" = "روش استفاده: --dmg-bild <Ordner>";
