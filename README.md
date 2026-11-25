@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6.4). It has been tested on one Mac with test
+**Status: early version (0.6.5). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -97,7 +97,8 @@ language, so that Macs with different languages understand each other.
 
 Once a day Logic2Drive asks GitHub for the latest release. If there is a newer
 one, it downloads `Logic2Drive.zip` and installs it as soon as no project is
-in progress and none has been open in Logic for 15 minutes, then restarts
+in progress and none has been open in Logic for 5 minutes (it looks every 2
+minutes), then restarts
 itself. "Install updates automatically" in the settings window turns this
 off; the menu then only points to the new version.
 

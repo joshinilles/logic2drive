@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.6.5",
+    "datum": "2026-11-25",
+    "de": [
+      "Updates kommen schneller: Logic2Drive spielt sie ein, sobald fünf Minuten lang kein Projekt in Logic offen war, und sieht alle zwei Minuten nach. Vorher waren es 15 und zehn Minuten."
+    ],
+    "en": [
+      "Updates arrive sooner: Logic2Drive installs them once no project has been open in Logic for five minutes, and it looks every two minutes. Before, it was 15 and ten minutes."
+    ],
+    "fr": [
+      "Les mises à jour arrivent plus vite : Logic2Drive les installe dès qu’aucun projet n’a été ouvert dans Logic depuis cinq minutes, et vérifie toutes les deux minutes. Auparavant, c’était 15 et dix minutes."
+    ],
+    "ar": [
+      "تصل التحديثات أسرع: يثبّتها Logic2Drive بعد مرور خمس دقائق دون أي مشروع مفتوح في Logic، ويتحقق كل دقيقتين. في السابق كانت المدة 15 دقيقة و10 دقائق."
+    ],
+    "fa": [
+      "به‌روزرسانی‌ها زودتر می‌رسند: Logic2Drive آن‌ها را پس از پنج دقیقه که هیچ پروژه‌ای در Logic باز نبوده نصب می‌کند و هر دو دقیقه بررسی می‌کند. پیش‌تر ۱۵ و ده دقیقه بود."
+    ]
+  },
+  {
     "version": "0.6.4",
     "datum": "2026-11-25",
     "de": [

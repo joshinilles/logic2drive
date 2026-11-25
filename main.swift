@@ -2173,11 +2173,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             helfer.q.async { melde(L("Logic2Drive wurde auf Version \(helferVersion) aktualisiert.")) }
         }
         d.set(helferVersion, forKey: "letzteVersion")
-        Timer.scheduledTimer(withTimeInterval: 600, repeats: true) { [weak self] _ in self?.updateTakt() }
+        Timer.scheduledTimer(withTimeInterval: 120, repeats: true) { [weak self] _ in self?.updateTakt() }
         DispatchQueue.main.asyncAfter(deadline: .now() + 60) { [weak self] in self?.updateTakt() }
     }
 
-    /// Alle zehn Minuten: ein fertig geprüftes Update einsetzen, sobald Ruhe ist. Einmal am Tag neu suchen.
+    /// Alle zwei Minuten: ein fertig geprüftes Update einsetzen, sobald Ruhe ist. Einmal am Tag neu suchen.
     func updateTakt() {
         if wartendesUpdate != nil { versucheEinsetzen(); return }
         guard Date().timeIntervalSince1970 - UserDefaults.standard.double(forKey: "updateGeprueft") > 86400 else { return }
@@ -2228,12 +2228,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
 
-    /// Eingesetzt wird nur, wenn nichts läuft und in der letzten Viertelstunde kein Projekt in Logic offen war.
+    /// Eingesetzt wird nur, wenn nichts läuft und in den letzten fünf Minuten kein Projekt in Logic offen war.
+    /// Fünf Minuten sind die Frist, nach der ein gesichertes Projekt eingepackt wird: Wer eben noch gearbeitet hat,
+    /// hat bis dahin einen Auftrag oder ein wartendes Paket, und beides hält das Update ohnehin auf.
     func versucheEinsetzen() {
         guard let w = wartendesUpdate else { return }
         helfer.q.async {
             let t = jetzt()
-            guard helfer.auftraege.isEmpty, helfer.kandidaten.isEmpty, helfer.inLogic.values.allSatisfy({ t - $0.zuletzt > 900 }) else { return }
+            guard helfer.auftraege.isEmpty, helfer.kandidaten.isEmpty, helfer.inLogic.values.allSatisfy({ t - $0.zuletzt > 300 }) else { return }
             do {
                 try Update.setzeEin(w.app, version: w.version, team: w.team)
                 helfer.angehalten = true
