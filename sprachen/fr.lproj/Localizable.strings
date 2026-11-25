@@ -878,3 +878,12 @@
 
 /* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
 "Logic" = "Logic";
+
+/* 0.6.6: Varispeed-Wache mit Logic 12 */
+"Achtung: Varispeed ist noch an und ließ sich nicht ausschalten. Logic2Drive hat den Bounce-Dialog geschlossen. Schalte Varispeed in Logic aus und bounce dann noch einmal." = "Attention : Varispeed est encore activé et n’a pas pu être désactivé. Logic2Drive a fermé la fenêtre de bounce. Désactive Varispeed dans Logic, puis relance le bounce.";
+
+/* 0.6.6: Varispeed-Wache mit Logic 12 */
+"Varispeed war noch an. Logic2Drive hat es ausgeschaltet und den Bounce-Dialog neu geöffnet." = "Varispeed était encore activé. Logic2Drive l’a désactivé et a rouvert la fenêtre de bounce.";
+
+/* 0.6.6: Varispeed-Wache mit Logic 12 */
+"Varispeed war noch an und ist jetzt aus. Öffne den Bounce-Dialog bitte noch einmal." = "Varispeed était encore activé et est maintenant désactivé. Rouvre la fenêtre de bounce.";

@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.6.6",
+    "datum": "2026-11-25",
+    "de": [
+      "„Varispeed vor dem Bouncen ausschalten“ funktioniert jetzt auch mit Logic Pro 12. Dort schließt Logic2Drive den Bounce-Dialog kurz, schaltet Varispeed aus und öffnet den Dialog wieder."
+    ],
+    "en": [
+      "“Turn Off Varispeed Before Bouncing” now works with Logic Pro 12 as well. There, Logic2Drive briefly closes the Bounce dialog, turns Varispeed off and opens the dialog again."
+    ],
+    "fr": [
+      "« Désactiver Varispeed avant le bounce » fonctionne maintenant aussi avec Logic Pro 12. Logic2Drive y ferme brièvement la fenêtre de bounce, désactive Varispeed et rouvre la fenêtre."
+    ],
+    "ar": [
+      "«إيقاف Varispeed قبل الـ Bounce» يعمل الآن مع Logic Pro 12 أيضًا. هناك يغلق Logic2Drive نافذة الـ Bounce للحظة، ثم يوقف Varispeed ويعيد فتح النافذة."
+    ],
+    "fa": [
+      "«خاموش کردن Varispeed پیش از Bounce» اکنون با Logic Pro 12 هم کار می‌کند. در آن‌جا Logic2Drive پنجره‌ی Bounce را برای لحظه‌ای می‌بندد، Varispeed را خاموش می‌کند و پنجره را دوباره باز می‌کند."
+    ]
+  },
+  {
     "version": "0.6.5",
     "datum": "2026-11-25",
     "de": [

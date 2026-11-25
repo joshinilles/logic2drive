@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6.5). It has been tested on one Mac with test
+**Status: early version (0.6.6). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -77,7 +77,8 @@ Two more things live in the settings window:
 - **Turn off Varispeed before bouncing** (off by default): Logic bounces at
   the Varispeed rate if Varispeed is still on. When the Bounce dialog opens
   and the Varispeed button is lit, Logic2Drive presses it and posts a
-  notification. This reads Logic's user interface, so macOS wants the
+  notification (in Logic 12 it closes and reopens the dialog to do so). This
+  reads Logic's user interface, so macOS wants the
   Accessibility permission for Logic2Drive (System Settings > Privacy &
   Security > Accessibility). The Varispeed button must be visible in Logic's
   control bar.
@@ -218,12 +219,18 @@ the code. Somebody has to be at the Mac for both:
   for the release (17 of 17), the running menu bar app updated itself through
   "Check for Updates", and a second Mac went from 0.6.2 to 0.6.3 by itself.
   Not yet seen: an update that has to wait because a project is in progress.
-- The Varispeed guard inside the installed app. Its logic was run from the
-  command line against Logic Pro 13.0 with the German interface: Varispeed
-  was off 0.25 s after the Bounce dialog opened. Not tested: an actual bounce
-  afterwards, other Logic versions and languages, several open projects, and
-  the other bounce and export commands (only "Bounce Project or Section" is
-  watched).
+- The Varispeed guard inside the installed app, and an actual bounce after
+  it. Its logic was run through `--varispeed selbsttest`, which switches
+  Varispeed on, opens the Bounce dialog, lets the guard act and puts
+  everything back: against Logic Pro 13.0 on one Mac and Logic Pro 12.4 on
+  another, both with the German interface. In Logic 13 the button can be
+  pressed while the dialog is open (off after 0.25 s). Logic 12.4 has no
+  `controlBar/varispeedButton` identifier and ignores the button while the
+  dialog is open, so there the guard closes the dialog, turns Varispeed off
+  and opens the dialog again. Not tested: other languages, several open
+  projects, and the other bounce and export commands (only "Bounce Project or
+  Section" is watched). The guard writes what it sees to the log (lines
+  starting with "Varispeed-Wache").
 - The welcome window on a fresh Mac, and on a Mac without Google Drive.
 - The French, Arabic and Farsi translations have not been read by native
   speakers. Right-to-left layout has only been looked at as a rendered image.

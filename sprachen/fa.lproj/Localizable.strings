@@ -878,3 +878,12 @@
 
 /* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
 "Logic" = "Logic";
+
+/* 0.6.6: Varispeed-Wache mit Logic 12 */
+"Achtung: Varispeed ist noch an und ließ sich nicht ausschalten. Logic2Drive hat den Bounce-Dialog geschlossen. Schalte Varispeed in Logic aus und bounce dann noch einmal." = "هشدار: Varispeed هنوز روشن است و خاموش نشد. Logic2Drive پنجره‌ی Bounce را بست. Varispeed را در Logic خاموش کنید و دوباره Bounce بگیرید.";
+
+/* 0.6.6: Varispeed-Wache mit Logic 12 */
+"Varispeed war noch an. Logic2Drive hat es ausgeschaltet und den Bounce-Dialog neu geöffnet." = "Varispeed هنوز روشن بود. Logic2Drive آن را خاموش کرد و پنجره‌ی Bounce را دوباره باز کرد.";
+
+/* 0.6.6: Varispeed-Wache mit Logic 12 */
+"Varispeed war noch an und ist jetzt aus. Öffne den Bounce-Dialog bitte noch einmal." = "Varispeed هنوز روشن بود و اکنون خاموش است. لطفاً پنجره‌ی Bounce را دوباره باز کنید.";

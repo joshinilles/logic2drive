@@ -1899,6 +1899,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         einstellungen.modell.liesVarispeed = { [weak self] in (self?.varispeedEin ?? false, Varispeed.erlaubt()) }
         einstellungen.modell.setzeVarispeed = { [weak self] in self?.varispeedSetzen($0) }
         varispeedWache.melden = { text in helfer.q.async { melde(text) } }
+        varispeedWache.notieren = { text in helfer.q.async { protokoll(text) } }
         if varispeedEin { varispeedWache.start() }
         if UserDefaults.standard.bool(forKey: "einstellungenNachStart") {
             UserDefaults.standard.removeObject(forKey: "einstellungenNachStart")
@@ -2353,11 +2354,16 @@ case "--update-suchen", "--update-einspielen":
     print(r.text)
     exit(r.code)
 case "--varispeed":
-    // Nur zum Prüfen: --varispeed zeigt den Stand, --varispeed wache lässt die Wache im Vordergrund laufen.
+    // Nur zum Prüfen: --varispeed zeigt den Stand, --varispeed liste dazu die Varispeed-Elemente von Logic,
+    // --varispeed selbsttest öffnet in Logic kurz den Bounce-Dialog und prüft die Wache daran,
+    // --varispeed wache lässt die Wache im Vordergrund laufen.
     print(Varispeed.stand())
+    if argumente.count > 1, argumente[1] == "liste" { print(Varispeed.liste()) }
+    if argumente.count > 1, argumente[1] == "selbsttest" { print(Varispeed.selbsttest()) }
     if argumente.count > 1, argumente[1] == "wache" {
         let wache = VarispeedWache()
         wache.melden = { print($0); fflush(stdout) }
+        wache.notieren = { print($0); fflush(stdout) }
         wache.start()
         RunLoop.main.run()
     }
