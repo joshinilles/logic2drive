@@ -243,16 +243,23 @@ the code. Somebody has to be at the Mac for both:
 
 ## Not yet tested
 
-- The naming rule (0.6.8) in a real Drive folder. `test/namen.sh` passes on
-  its own in a local folder, 41 of 41: Finder slash, trailing space,
-  decomposed umlaut, very long name, a taken name, and an existing zip that
-  is renamed when put back. Not yet seen in Drive: whether Drive keeps the
-  composed form of an umlaut in the title, whether a renamed zip keeps its
-  file ID (the full run checks it through `com.google.drivefs.item-id#S`),
-  and the notice when an unsafe zip is opened (needs Logic). File names are
-  written with `rename(2)`, because Foundation stores umlauts decomposed
-  even when the text is composed (measured 25 Nov 2026).
-- The full test run without a failure. With 0.6 it ran in a shared drive:
+- The naming rule (0.6.8) beyond the Mac. In the full run in a real Drive
+  folder all its tests passed (T33 to T41): Drive's local folder keeps the
+  composed umlaut, accepts a project with a trailing space, and a zip that is
+  renamed when put back keeps its Drive file ID (read from
+  `com.google.drivefs.item-id#S`). Not checked: the title as Drive stores it
+  on the server, and the arrival of such a zip on a Synology. File names are
+  written with `rename(2)`, because Foundation stores umlauts decomposed even
+  when the text is composed (measured 25 Nov 2026).
+- The full test run without a failure. With 0.6.8 it ran in "My Drive":
+  144 of 147. Two failures were one test (T13, a second project "Name 7" next
+  to "Name"): Drive created the empty placeholder of the first project within
+  two seconds of the second one arriving, and since both test projects are
+  copies of the same template with the same date, the second was taken for a
+  renamed first. Run alone three times afterwards, T13 passed each time. The
+  third failure was a check in the new T41 that compared a whole project
+  while Logic had it open; the check was corrected and T41 then passed alone.
+  With 0.6 the full run was in a shared drive:
   98 of 99, and the one failure was Logic sitting in its "audio interface not
   available" dialog (see Tests). The run before that, unattended, stopped at
   73 of 99 for the same reason.

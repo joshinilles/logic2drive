@@ -36,6 +36,9 @@ heisst() { local f; for f in "$1"/*(DN:t); do [[ $f == "$2" ]] && return 0; done
 # Oberster Ordner in der Zip. `unzip -Z1` ersetzt Umlaute durch Fragezeichen, deshalb auspacken und nachsehen.
 wurzel() { rm -rf -- "$T/x/w"; mkdir -p "$T/x/w"; ditto -x -k "$1" "$T/x/w" 2>/dev/null; local a=("$T/x/w"/*.logicx(N:t)); print -r -- "$a[1]"; }
 gleich() { diff -rq -x .DS_Store "$1" "$2" >/dev/null 2>&1; }
+# Liegt jede Datei aus $1 unter demselben Namen auch in $2? Für ein Projekt, das gerade in Logic offen ist:
+# Logic legt beim Öffnen eigene Dateien dazu, deshalb taugt dort kein Vergleich des ganzen Inhalts.
+nichtsFehlt() { local f; (cd "$1" && find . -type f ! -name .DS_Store) | while read -r f; do [[ -e "$2/$f" ]] || return 1; done; }
 bytes() { print -rn -- "$1" | wc -c | tr -d ' '; }
 abgelegt() { [[ -n $LOKAL ]] || leer; }      # in Drive erst fertig, wenn der Upload bestätigt und das Paket weggeräumt ist
 # Lokal bestätigt niemand den Upload, Paket und Auftrag blieben liegen. Wegräumen, was in Drive der Helfer wegräumt.
@@ -170,7 +173,7 @@ if [[ -z $LOKAL ]]; then
   merke; "$B" --oeffne "$D/$R8.logicx.zip"; warte 'gesehen' 120
   pruefe "Hinweis beim Öffnen, genau einmal" '[[ $(tail -n +$(( zeile + 1 )) "$DATEN/protokoll.log" | grep -cF "MELDUNG: Der Name „$R8“ kommt nicht überall an") == 1 ]]'
   pruefe "Arbeitskopie trägt den sicheren Namen" 'heisst "$T/arbeit" "$S8.logicx"'
-  pruefe "im Projekt wurde nichts umbenannt" 'gleich "$T/x/alt/$R8.logicx" "$T/arbeit/$S8.logicx"'
+  pruefe "im Projekt wurde nichts umbenannt" 'nichtsFehlt "$T/x/alt/$R8.logicx" "$T/arbeit/$S8.logicx"'
   schliesse "Helfer-Test-N8"; warte 'leer' 90
   pruefe "ohne Änderung bleibt die Zip, wie sie ist" 'heisst "$D" "$R8.logicx.zip" && [[ $(md5 -q "$D/$R8.logicx.zip") == $m8 ]]'
   pruefe "Sperre ist weg" '[[ ! -e "$D/$R8.logicx.inarbeit" ]]'
