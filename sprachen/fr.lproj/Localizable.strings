@@ -842,3 +842,39 @@
 
 /* main.swift, Umzug nach Programme */
 "Nach „Programme“ umgezogen, vorher in %@" = "Déplacé dans Applications, auparavant dans %@";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Sicherungen bleiben jetzt %@ Tage" = "Les sauvegardes sont maintenant conservées %@ jours";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Sicherung" = "Sauvegarde";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Originale aufbewahren" = "Conserver les originaux";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"%@ Tage" = "%@ jours";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"So lange bleibt das Original eines eingepackten Projekts im Sicherungsordner auf diesem Mac. Danach legt Logic2Drive es in den Papierkorb." = "C’est la durée pendant laquelle l’original d’un projet compressé reste dans le dossier de sauvegarde sur ce Mac. Ensuite, Logic2Drive le met à la Corbeille.";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Varispeed vor dem Bouncen ausschalten" = "Désactiver Varispeed avant le bounce";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Ist Varispeed noch an, wenn du in Logic den Bounce-Dialog öffnest, schaltet Logic2Drive es aus und meldet das. Der Varispeed-Knopf muss dafür in der Steuerungsleiste von Logic zu sehen sein." = "Si Varispeed est encore activé quand tu ouvres la fenêtre de bounce dans Logic, Logic2Drive le désactive et te le signale. Le bouton Varispeed doit pour cela être visible dans la barre des commandes de Logic.";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Dafür braucht Logic2Drive die Freigabe „Bedienungshilfen“." = "Logic2Drive a besoin pour cela de l’autorisation « Accessibilité ».";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Systemeinstellungen öffnen" = "Ouvrir Réglages Système";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Varispeed war noch an. Logic2Drive hat es für den Bounce ausgeschaltet." = "Varispeed était encore activé. Logic2Drive l’a désactivé pour le bounce.";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Achtung: Varispeed ist noch an und ließ sich nicht ausschalten. Schalte es in Logic aus, bevor du bounct." = "Attention : Varispeed est encore activé et n’a pas pu être désactivé. Désactive-le dans Logic avant le bounce.";
+
+/* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
+"Logic" = "Logic";

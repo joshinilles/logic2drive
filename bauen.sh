@@ -13,7 +13,7 @@ mkdir -p -- "$A/Contents/MacOS" "$A/Contents/Resources"
 print -r -- "let helferVersion = \"$V\"" > "$B/version.swift"
 for arch in arm64 x86_64; do
   swiftc -O -swift-version 5 -target "$arch-apple-macos13.0" \
-    -sdk "$(xcrun --show-sdk-path)" -o "$B/bin-$arch" "$Q/main.swift" "$Q/willkommen.swift" "$Q/zeichen.swift" "$Q/update.swift" "$Q/texte.swift" "$Q/einstellungen.swift" "$B/version.swift"
+    -sdk "$(xcrun --show-sdk-path)" -o "$B/bin-$arch" "$Q/main.swift" "$Q/willkommen.swift" "$Q/zeichen.swift" "$Q/update.swift" "$Q/texte.swift" "$Q/einstellungen.swift" "$Q/varispeed.swift" "$B/version.swift"
 done
 lipo -create -output "$A/Contents/MacOS/Logic2Drive" "$B/bin-arm64" "$B/bin-x86_64"
 rm -f -- "$B/bin-arm64" "$B/bin-x86_64" "$B/version.swift"

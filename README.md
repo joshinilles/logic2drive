@@ -3,8 +3,8 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6.3). It has been tested on a single Mac with test
-projects and a handful of real ones. Read "Known limitations" and "Not yet
+**Status: early version (0.6.4). It has been tested on one Mac with test
+projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
 ## Why
@@ -69,6 +69,19 @@ did.
 The first time it needs to know which projects are open, macOS asks whether
 Logic2Drive may control Logic Pro. Click "Allow".
 
+Two more things live in the settings window:
+
+- **Keep originals:** how long the original of a packed project stays in the
+  local backup folder before it goes to the Trash, 30 to 180 days (default
+  90). The backup cannot be turned off.
+- **Turn off Varispeed before bouncing** (off by default): Logic bounces at
+  the Varispeed rate if Varispeed is still on. When the Bounce dialog opens
+  and the Varispeed button is lit, Logic2Drive presses it and posts a
+  notification. This reads Logic's user interface, so macOS wants the
+  Accessibility permission for Logic2Drive (System Settings > Privacy &
+  Security > Accessibility). The Varispeed button must be visible in Logic's
+  control bar.
+
 ## Languages
 
 German, English, French, Arabic and Farsi. Logic2Drive follows the language of
@@ -115,7 +128,7 @@ repository address in `update.swift` and `main.swift` and sign with your own
 Developer ID.
 
 Source files: `main.swift` (workflow and menu), `willkommen.swift` (welcome
-window), `einstellungen.swift` (settings window), `zeichen.swift` (menu bar
+window), `einstellungen.swift` (settings window), `varispeed.swift` (Varispeed guard), `zeichen.swift` (menu bar
 icon and app icon), `update.swift` (updates), `texte.swift` (languages). Identifiers and comments are in German.
 
 | Call | Effect |
@@ -200,11 +213,16 @@ the code. Somebody has to be at the Mac for both:
   98 of 99, and the one failure was Logic sitting in its "audio interface not
   available" dialog (see Tests). The run before that, unattended, stopped at
   73 of 99 for the same reason.
-- Updates beyond one Mac. The updater is tested with a local stand-in for
-  the release (17 of 17), and the running menu bar app updated itself from
-  0.6 to 0.6.1 through "Check for Updates" and restarted. Not yet seen: the
-  daily check finding an update on its own, and an update that has to wait
-  because a project is in progress.
+- Updates in every situation. The updater is tested with a local stand-in
+  for the release (17 of 17), the running menu bar app updated itself through
+  "Check for Updates", and a second Mac went from 0.6.2 to 0.6.3 by itself.
+  Not yet seen: an update that has to wait because a project is in progress.
+- The Varispeed guard inside the installed app. Its logic was run from the
+  command line against Logic Pro 13.0 with the German interface: Varispeed
+  was off 0.25 s after the Bounce dialog opened. Not tested: an actual bounce
+  afterwards, other Logic versions and languages, several open projects, and
+  the other bounce and export commands (only "Bounce Project or Section" is
+  watched).
 - The welcome window on a fresh Mac, and on a Mac without Google Drive.
 - The French, Arabic and Farsi translations have not been read by native
   speakers. Right-to-left layout has only been looked at as a rendered image.

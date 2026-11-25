@@ -31,6 +31,14 @@ final class EinstellungenModell: ObservableObject {
     var sucheUpdate: () -> Void = {}
     var setzeSprache: (String) -> Void = { _ in }
     var zeigeEinfuehrung: () -> Void = {}
+    @Published var aufbewahrung = 90.0
+    @Published var reglerInArbeit = false
+    @Published var varispeed = false
+    @Published var varispeedErlaubt = true
+    var liesAufbewahrung: () -> Int = { 90 }
+    var setzeAufbewahrung: (Int) -> Void = { _ in }
+    var liesVarispeed: () -> (ein: Bool, erlaubt: Bool) = { (false, true) }
+    var setzeVarispeed: (Bool) -> Void = { _ in }
     let neues = Array(ladeNeues().prefix(3))
 
     func frisch() {
@@ -38,6 +46,11 @@ final class EinstellungenModell: ObservableObject {
         if s.updatesVonSelbst != updatesVonSelbst { updatesVonSelbst = s.updatesVonSelbst }
         if s.updateText != updateText { updateText = s.updateText }
         if s.sprachWahl != sprachWahl { sprachWahl = s.sprachWahl }
+        let tage = Double(liesAufbewahrung())
+        if !reglerInArbeit, tage != aufbewahrung { aufbewahrung = tage }
+        let v = liesVarispeed()
+        if v.ein != varispeed { varispeed = v.ein }
+        if v.erlaubt != varispeedErlaubt { varispeedErlaubt = v.erlaubt }
     }
 }
 
@@ -74,6 +87,45 @@ struct EinstellungenAnsicht: View {
                 Toggle(isOn: schalter.schalter("autostart", schalter.autostartSetzen)) {
                     Text(L("Beim Anmelden starten"))
                     Text(L("Logic2Drive startet von selbst, wenn du deinen Mac einschaltest."))
+                }
+            }
+
+            Section(L("Sicherung")) {
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack {
+                        Text(L("Originale aufbewahren"))
+                        Spacer()
+                        Text(L("\(Int(modell.aufbewahrung)) Tage")).foregroundStyle(.secondary).monospacedDigit()
+                    }
+                    // Mindestens 30 Tage: Die Sicherung ist das Netz, falls in Drive etwas schiefgeht, und lässt sich nicht abschalten.
+                    Slider(value: $modell.aufbewahrung, in: 30...180, step: 15) {
+                        EmptyView()
+                    } minimumValueLabel: {
+                        Text(verbatim: "30").foregroundStyle(.secondary)
+                    } maximumValueLabel: {
+                        Text(verbatim: "180").foregroundStyle(.secondary)
+                    } onEditingChanged: { bewegt in
+                        modell.reglerInArbeit = bewegt
+                        if !bewegt { modell.setzeAufbewahrung(Int(modell.aufbewahrung)) }
+                    }
+                    .labelsHidden()
+                    .tint(Marke.deep)
+                    Text(L("So lange bleibt das Original eines eingepackten Projekts im Sicherungsordner auf diesem Mac. Danach legt Logic2Drive es in den Papierkorb."))
+                        .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            Section(L("Logic")) {
+                Toggle(isOn: Binding(get: { modell.varispeed }, set: { modell.varispeed = $0; modell.setzeVarispeed($0) })) {
+                    Text(L("Varispeed vor dem Bouncen ausschalten"))
+                    Text(L("Ist Varispeed noch an, wenn du in Logic den Bounce-Dialog öffnest, schaltet Logic2Drive es aus und meldet das. Der Varispeed-Knopf muss dafür in der Steuerungsleiste von Logic zu sehen sein."))
+                }
+                if modell.varispeed && !modell.varispeedErlaubt {
+                    HStack {
+                        Text(L("Dafür braucht Logic2Drive die Freigabe „Bedienungshilfen“.")).foregroundStyle(.secondary)
+                        Spacer()
+                        Button(L("Systemeinstellungen öffnen"), action: Varispeed.oeffneFreigabe)
+                    }
                 }
             }
 
@@ -177,9 +229,10 @@ func einstellungenAlsBild(_ pfad: String, dunkel: Bool? = nil) -> Bool {
     schalter.frisch()
     let modell = EinstellungenModell()
     modell.lies = { (true, L("Version \("9.9") wird eingespielt, sobald nichts in Arbeit ist"), "auto") }
+    modell.liesVarispeed = { (true, false) }
     modell.frisch()
     let ansicht = NSHostingView(rootView: EinstellungenAnsicht(schalter: schalter, modell: modell).environment(\.controlActiveState, .key))
-    let groesse = NSSize(width: 540, height: 900)
+    let groesse = NSSize(width: 540, height: 1180)
     let w = NSWindow(contentRect: NSRect(origin: .zero, size: groesse), styleMask: [.borderless], backing: .buffered, defer: false)
     if let dunkel {
         w.appearance = NSAppearance(named: dunkel ? .darkAqua : .aqua)

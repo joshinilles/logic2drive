@@ -1,5 +1,29 @@
 [
   {
+    "version": "0.6.4",
+    "datum": "2026-11-25",
+    "de": [
+      "Neu in den Einstellungen: „Varispeed vor dem Bouncen ausschalten“. Ist Varispeed noch an, wenn du in Logic den Bounce-Dialog öffnest, schaltet Logic2Drive es aus und meldet das.",
+      "Neu in den Einstellungen: Wie lange Originale im Sicherungsordner bleiben, stellst du jetzt selbst ein, von 30 bis 180 Tagen."
+    ],
+    "en": [
+      "New in Settings: “Turn Off Varispeed Before Bouncing”. If Varispeed is still on when you open the Bounce dialog in Logic, Logic2Drive turns it off and tells you.",
+      "New in Settings: you now choose how long originals stay in the backup folder, from 30 to 180 days."
+    ],
+    "fr": [
+      "Nouveau dans les réglages : « Désactiver Varispeed avant le bounce ». Si Varispeed est encore activé quand tu ouvres la fenêtre de bounce dans Logic, Logic2Drive le désactive et te le signale.",
+      "Nouveau dans les réglages : tu choisis maintenant combien de temps les originaux restent dans le dossier de sauvegarde, de 30 à 180 jours."
+    ],
+    "ar": [
+      "جديد في الإعدادات: «إيقاف Varispeed قبل الـ Bounce». إذا كان Varispeed ما زال مفعّلًا عند فتح نافذة الـ Bounce في Logic، يوقفه Logic2Drive ويخبرك بذلك.",
+      "جديد في الإعدادات: يمكنك الآن تحديد مدة بقاء الأصول في مجلد النسخ الاحتياطي، من 30 إلى 180 يومًا."
+    ],
+    "fa": [
+      "تازه در تنظیمات: «خاموش کردن Varispeed پیش از Bounce». اگر هنگام باز کردن پنجره‌ی Bounce در Logic هنوز Varispeed روشن باشد، Logic2Drive آن را خاموش می‌کند و خبر می‌دهد.",
+      "تازه در تنظیمات: اکنون خودتان تعیین می‌کنید نسخه‌های اصلی چه مدت در پوشه‌ی پشتیبان بمانند، از ۳۰ تا ۱۸۰ روز."
+    ]
+  },
+  {
     "version": "0.6.3",
     "datum": "2026-11-25",
     "de": [

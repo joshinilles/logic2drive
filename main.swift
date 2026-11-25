@@ -533,6 +533,20 @@ final class Helfer {
         }
     }
 
+    /// Stellt um, wie lange Originale im Sicherungsordner bleiben (Regler in den Einstellungen).
+    /// Geräumt wird nicht sofort, sondern bei der nächsten Pflege: Ein verrutschter Regler legt nichts in den Papierkorb.
+    func setzeAufbewahrung(_ tage: Int) {
+        let alt = e.aufbewahrungTage
+        guard tage != (alt ?? 90) else { return }
+        e.aufbewahrungTage = tage
+        guard sichereEinstellungen() else {
+            e.aufbewahrungTage = alt
+            melde(L("Die Einstellung ließ sich nicht speichern. Es bleibt alles, wie es war."))
+            return
+        }
+        protokoll(L("Sicherungen bleiben jetzt \(tage) Tage"))
+    }
+
     /// Stellt um, welche Ordner beobachtet werden (Menü „Google Drive beobachten“).
     func setzeOrdner(_ neu: [String]) {
         let alt = e.ordner
@@ -1825,6 +1839,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var wartendeDateien: [URL] = []     // macOS liefert „Öffnen“ beim Start VOR applicationDidFinishLaunching
     let willkommen = WillkommenFenster()
     let einstellungen = EinstellungenFenster()
+    let varispeedWache = VarispeedWache()
+    var varispeedEin: Bool { UserDefaults.standard.bool(forKey: "varispeedWache") }
     var updateText: String?         // Zeile im Menü, wenn eine neue Version bekannt ist
     var updateSeite: URL?           // gesetzt, wenn die neue Version nur von Hand zu holen ist
     var wartendesUpdate: (app: String, version: String, team: String)?
@@ -1878,6 +1894,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         einstellungen.modell.sucheUpdate = { [weak self] in self?.sucheUpdate(vonHand: true) }
         einstellungen.modell.setzeSprache = { [weak self] in self?.setzeSprache($0) }
         einstellungen.modell.zeigeEinfuehrung = { [weak self] in self?.willkommen.zeige() }
+        einstellungen.modell.liesAufbewahrung = { helfer.e.aufbewahrungTage ?? 90 }
+        einstellungen.modell.setzeAufbewahrung = { tage in helfer.q.async { helfer.setzeAufbewahrung(tage) } }
+        einstellungen.modell.liesVarispeed = { [weak self] in (self?.varispeedEin ?? false, Varispeed.erlaubt()) }
+        einstellungen.modell.setzeVarispeed = { [weak self] in self?.varispeedSetzen($0) }
+        varispeedWache.melden = { text in helfer.q.async { melde(text) } }
+        if varispeedEin { varispeedWache.start() }
         if UserDefaults.standard.bool(forKey: "einstellungenNachStart") {
             UserDefaults.standard.removeObject(forKey: "einstellungenNachStart")
             einstellungenZeigen()
@@ -2047,6 +2069,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         NSWorkspace.shared.setDefaultApplication(at: ein ? Bundle.main.bundleURL : archiv, toOpen: .zip) { fehler in
             guard let fehler else { return }
             DispatchQueue.main.async { _ = self.hinweis(L("Das Standardprogramm ließ sich nicht ändern"), fehler.localizedDescription) }
+        }
+    }
+
+    /// Die Wache braucht die Freigabe „Bedienungshilfen“. macOS zeigt dafür selbst den Hinweis mit dem Weg in die
+    /// Systemeinstellungen; bis die Freigabe da ist, läuft die Wache leer mit und greift dann von selbst.
+    func varispeedSetzen(_ ein: Bool) {
+        UserDefaults.standard.set(ein, forKey: "varispeedWache")
+        if ein {
+            _ = Varispeed.erlaubt(fragen: true)
+            varispeedWache.start()
+        } else {
+            varispeedWache.stopp()
         }
     }
 
@@ -2316,6 +2350,15 @@ case "--update-suchen", "--update-einspielen":
     let r = Update.durchgang(einsetzen: argumente.first == "--update-einspielen")
     print(r.text)
     exit(r.code)
+case "--varispeed":
+    // Nur zum Prüfen: --varispeed zeigt den Stand, --varispeed wache lässt die Wache im Vordergrund laufen.
+    print(Varispeed.stand())
+    if argumente.count > 1, argumente[1] == "wache" {
+        let wache = VarispeedWache()
+        wache.melden = { print($0); fflush(stdout) }
+        wache.start()
+        RunLoop.main.run()
+    }
 case "--zuletzt":
     print(letzteMeldung() ?? "")
 case "--status":
