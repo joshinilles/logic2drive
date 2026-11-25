@@ -230,6 +230,72 @@ func freierPfad(_ ordner: String, stamm: String, endung: String) -> String {
     return k
 }
 
+// MARK: - Sichere Namen
+
+/// Höchstlänge eines Projektnamens in Byte (UTF-8). Damit bleibt auch die längste Zip des Helfers,
+/// „Name – Stand Vorname dd.MM. HH.mm (99).logicx.zip“, unter 200 Byte: 120 + 11 + 39 + 1 + 12 + 5 + 11 = 199.
+/// Die Grenze hängt bewusst nicht vom Vornamen ab, sonst hieße dasselbe Projekt je nach Mac anders.
+let namensGrenze = 120
+/// Höchstlänge für den Namen einer Zip, die schon in Drive liegt (ohne `.logicx.zip`): Die eigenen Fassungen
+/// des Helfers reichen bis hierher und dürfen beim Öffnen nicht als „unsicher“ gelten.
+let zipNamensGrenze = 188
+let vornameGrenze = 39
+
+/// Macht aus einem Projektnamen einen, der in Google Drive, über Cloud Sync auf der Synology und über SMB ankommt.
+/// Anlass (25.11.2026): Ein Projekt mit Finder-Schrägstrich (gespeichert als „:“) lag sechs Wochen in Drive und
+/// kam nie auf der Synology an. Alles, was hier nicht genannt ist, bleibt: Umlaute, Emoji, Gedankenstriche,
+/// doppelte Leerzeichen, # + ( ) , & @ ' ! [ ] = ~ $.
+func sichererName(_ roh: String, grenze: Int = namensGrenze) -> String {
+    var skalare = String.UnicodeScalarView()
+    for s in roh.precomposedStringWithCanonicalMapping.unicodeScalars {      // NFC
+        switch s {
+        case ":", "/", "\\", "*", "\"", "<", ">", "?", "|":
+            skalare.append("-")         // „A / B“ wird so zu „A - B“, „A:B“ zu „A-B“
+        default:
+            let art = s.properties.generalCategory
+            if art == .control || art == .lineSeparator || art == .paragraphSeparator { continue }
+            if (0xF000...0xF8FF).contains(s.value) { continue }     // Ersatzzeichen aus alten SMB-Kopien
+            skalare.append(s)
+        }
+    }
+    var n = Substring(String(skalare))
+    func stutze() {
+        while let l = n.last, l == "." || l.isWhitespace { n.removeLast() }
+        while let f = n.first, f == "." || f.isWhitespace { n.removeFirst() }
+    }
+    stutze()
+    while n.utf8.count > grenze { n.removeLast() }      // ganze Zeichen, nie mitten in einem Umlaut oder Emoji
+    stutze()
+    return n.isEmpty ? "Ohne Namen" : String(n)
+}
+
+/// Unterscheiden sich zwei Namen in ihren Zeichen? `==` genügt nicht: Für Swift sind „ö“ und „o + Trema“ gleich.
+func andererName(_ a: String, _ b: String) -> Bool { !a.unicodeScalars.elementsEqual(b.unicodeScalars) }
+
+/// Stamm einer eigenen Fassung: „Name – Stand Vorname dd.MM. HH.mm“.
+func standStamm(_ name: String) -> String {
+    var v = Substring(sichererName(vorname()))
+    while v.utf8.count > vornameGrenze { v.removeLast() }
+    return "\(sichererName(name)) – Stand \(v) \(zeitText())"
+}
+
+/// Verschiebt mit rename(2), damit der Name Byte für Byte so ankommt wie übergeben. Foundation zerlegt Umlaute
+/// in Pfaden (NFD), auch wenn der Text zusammengesetzt ist (gemessen 25.11.2026). Überschreibt nie etwas:
+/// Am Ziel darf höchstens dieselbe Datei in anderer Schreibweise liegen.
+func verschiebe(_ von: String, nach: String) throws {
+    if renamex_np(von, nach, UInt32(RENAME_EXCL)) == 0 { return }
+    var fehler = errno
+    if fehler == EXDEV {    // anderes Laufwerk: erst hinüberkopieren, dann am Ziel benennen
+        let zwischen = (nach as NSString).deletingLastPathComponent + "/.logic2drive-" + UUID().uuidString
+        try fm.moveItem(atPath: von, toPath: zwischen)
+        if renamex_np(zwischen, nach, UInt32(RENAME_EXCL)) == 0 { return }
+        fehler = errno
+        try? fm.moveItem(atPath: zwischen, toPath: von)
+    }
+    if fehler == EEXIST { throw HelferFehler(L("Am Ziel liegt schon etwas: \(letzter(nach))")) }
+    throw HelferFehler(L("Verschieben fehlgeschlagen: \(String(cString: strerror(fehler)))"))
+}
+
 /// Namensteil der Zips, die der Helfer vor dem Ersetzen in die Sicherung kopiert.
 let ersetztMarke = " – ersetzt "
 
@@ -264,12 +330,16 @@ func packen(_ quelle: String, wurzel: String) throws -> Gepackt {
     try fm.createDirectory(atPath: w, withIntermediateDirectories: true)
     var fertig = false
     defer { if !fertig { try? fm.removeItem(atPath: w) } }
-    let kopie = w + "/" + wurzel
-    if lauf("/bin/cp", ["-cpR", quelle, kopie]).code != 0 {
-        try? fm.removeItem(atPath: kopie)
-        let r = lauf("/usr/bin/ditto", [quelle, kopie])
+    // Erst unter neutralem Namen kopieren, dann mit rename(2) benennen: Als Argument an cp käme ein Umlaut
+    // zerlegt an. ditto nimmt den Namen für die Zip von der Platte (gemessen 25.11.2026).
+    let roh = w + "/kopie"
+    if lauf("/bin/cp", ["-cpR", quelle, roh]).code != 0 {
+        try? fm.removeItem(atPath: roh)
+        let r = lauf("/usr/bin/ditto", [quelle, roh])
         if r.code != 0 { throw HelferFehler(L("Kopieren fehlgeschlagen: \(r.text.prefix(160))")) }
     }
+    let kopie = w + "/" + wurzel
+    try verschiebe(roh, nach: kopie)
     // AppleDouble-Reste (`._name`, von exFAT oder Netzlaufwerken) überstehen keine Zip. Nur in der Kopie entfernen.
     let reste = lauf("/usr/bin/find", [kopie, "-type", "f", "-name", "._*", "-delete"])
     if reste.code != 0 { throw HelferFehler(L("Kopie nicht bereinigt: \(reste.text.prefix(160))")) }
@@ -463,6 +533,15 @@ extension Auftrag {
         pauseBis = try c.decodeIfPresent(Double.self, forKey: .pauseBis)
         lesefehlerSeit = try c.decodeIfPresent(Double.self, forKey: .lesefehlerSeit)
         konflikt = try c.decodeIfPresent(Bool.self, forKey: .konflikt) ?? false
+    }
+}
+
+extension Auftrag {
+    /// Oberster Ordner in der Zip dieses Auftrags, immer mit sicherem Namen. Wird jedes Mal neu bestimmt, damit
+    /// auch Aufträge aus älteren Versionen (mit dem alten Namen im Auftrag) sicher zurückgelegt werden.
+    var zipWurzel: String {
+        if art == "ablage" { return sichererName(name) + ".logicx" }
+        return sichererName(dokName(wurzelName ?? name), grenze: zipNamensGrenze) + ".logicx"
     }
 }
 
@@ -1029,6 +1108,55 @@ final class Helfer {
         protokoll(L("Bisherige Zip vor dem Ersetzen gesichert: \(ziel)"))
     }
 
+    /// Sagt einmal Bescheid, wenn ein Name angepasst wurde. Ändert sich nur die Schreibweise eines Umlauts,
+    /// sähen alter und neuer Name gleich aus: Das steht dann nur im Protokoll.
+    func meldeNamen(_ alt: String, _ neu: String) {
+        if alt != neu {
+            melde(L("Name angepasst: \(alt) -> \(neu)"))
+        } else if andererName(alt, neu) {
+            protokoll(L("Name angepasst, nur die Schreibweise der Umlaute: \(neu)"))
+        }
+    }
+
+    /// Gibt einer Zip mit unsicherem Namen vor dem Ersetzen den sicheren. Umbenannt wird die Datei selbst, damit
+    /// sie in Drive dieselbe bleibt (Datei-ID, Freigaben, Links). Liegt unter dem sicheren Namen schon eine andere
+    /// Zip, wird nichts überschrieben: Dann kommt ein Zähler dazu. Geht das Umbenennen nicht, bleibt der alte Name.
+    func benenneSicher(_ a: Auftrag, _ zip: String) -> String {
+        let name = letzter(zip)
+        guard name.lowercased().hasSuffix(".logicx.zip") else { return zip }
+        let alt = String(name.dropLast(".logicx.zip".count))
+        let sicher = sichererName(alt, grenze: zipNamensGrenze)
+        guard andererName(alt, sicher) else { return zip }
+        let ordner = (zip as NSString).deletingLastPathComponent
+        var neu = "\(ordner)/\(sicher).logicx.zip"
+        if let dort = info(neu), let hier = info(zip), dort.st_ino != hier.st_ino {
+            neu = freierPfad(ordner, stamm: sicher, endung: ".logicx.zip")
+        }
+        do { try verschiebe(zip, nach: neu) } catch {
+            protokoll(L("Zip behält ihren Namen, Umbenennen fehlgeschlagen (\(alt)): \(error)"))
+            return zip
+        }
+        // Die eigene Sperre zieht mit: Wer die Zip unter dem neuen Namen öffnet, soll sie weiter sehen.
+        var marker = a.markerPfad
+        if let m = a.markerPfad, !sperreFremd(a), info(m) != nil {
+            let mit = String(neu.dropLast(4)) + ".inarbeit"
+            if (try? verschiebe(m, nach: mit)) != nil { marker = mit }
+        }
+        aendere(a.id) {
+            $0.quelleZip = neu
+            if $0.originalZip == zip { $0.originalZip = neu }
+            $0.markerPfad = marker
+        }
+        let neuerName = String(letzter(neu).dropLast(".logicx.zip".count))
+        if alt != neuerName {
+            protokoll(L("Name angepasst: \(alt) -> \(neuerName)"))
+        } else {
+            protokoll(L("Name angepasst, nur die Schreibweise der Umlaute: \(neuerName)"))
+        }
+        sichere()
+        return neu
+    }
+
     func ersetzeInDrive(_ ziel: String, mit neu: String) throws {
         var fehler: NSError?
         var problem: String?
@@ -1067,17 +1195,19 @@ final class Helfer {
     func uebernimm(_ p: String, abdruck a: Abdruck, basis: String, stub: String?, inode: UInt64?) {
         let ordner = (p as NSString).deletingLastPathComponent
         do {
-            let z = try packen(p, wurzel: basis + ".logicx")
+            // Zip und oberster Ordner darin tragen den sicheren Namen. Der Auftrag behält den ursprünglichen:
+            // Daran und an der Datei-ID erkennt der Helfer das Paket wieder, wenn Drive es umbenennt.
+            let sicher = sichererName(basis)
+            let z = try packen(p, wurzel: sicher + ".logicx")
             defer { try? fm.removeItem(atPath: z.ordner) }
-            var ziel = "\(ordner)/\(basis).logicx.zip"
-            if info(ziel) != nil {
-                ziel = freierPfad(ordner, stamm: "\(basis) – Stand \(vorname()) \(zeitText())", endung: ".logicx.zip")
-            }
-            try fm.moveItem(atPath: z.pfad, toPath: ziel)
+            var ziel = "\(ordner)/\(sicher).logicx.zip"
+            let belegt = info(ziel) != nil      // auch die Zip eines anderen Projekts, das auf denselben Namen kommt
+            if belegt { ziel = freierPfad(ordner, stamm: standStamm(sicher), endung: ".logicx.zip") }
+            try verschiebe(z.pfad, nach: ziel)
             var auftrag = Auftrag(art: "ablage", name: basis, phase: "hochladen")
             auftrag.paket = p
             auftrag.paketInode = inode      // von vor dem Packen: Danach kann unter dem Pfad schon Drives leere Datei liegen
-            auftrag.konflikt = letzter(ziel) != basis + ".logicx.zip"
+            auftrag.konflikt = belegt
             auftrag.stub = stub
             auftrag.paketAbdruck = z.abdruck
             auftrag.gepacktAbdruck = z.abdruck
@@ -1088,6 +1218,7 @@ final class Helfer {
             auftrag.meldung = L("Zip wird hochgeladen")
             auftraege.append(auftrag)
             protokoll(L("Eingepackt: \(basis) -> \(letzter(ziel)), \(z.groesse) Byte"))
+            meldeNamen(basis, sicher)
             sichere()
         } catch {
             protokoll(L("Einpacken fehlgeschlagen (\(basis)): \(error)"))
@@ -1178,7 +1309,7 @@ final class Helfer {
             return
         }
         do {
-            let z = try packen(paket, wurzel: a.name + ".logicx")
+            let z = try packen(paket, wurzel: a.zipWurzel)
             defer { try? fm.removeItem(atPath: z.ordner) }
             guard let offen = offeneDokumente(frisch: true), !offenIn(offen, letzter(paket), a.name) else {
                 aendere(a.id) { $0.stabil = 0; $0.meldung = L("Ist in Logic offen, wird nach dem Schließen aufgeräumt") }
@@ -1218,10 +1349,10 @@ final class Helfer {
             return
         }
         do {
-            let z = try packen(pfad, wurzel: a.wurzelName ?? a.name + ".logicx")
+            let z = try packen(pfad, wurzel: a.zipWurzel)
             defer { try? fm.removeItem(atPath: z.ordner) }
-            let ziel = freierPfad(ordner, stamm: "\(a.name) – Stand \(vorname()) \(zeitText())", endung: ".logicx.zip")
-            try fm.moveItem(atPath: z.pfad, toPath: ziel)
+            let ziel = freierPfad(ordner, stamm: standStamm(a.name), endung: ".logicx.zip")
+            try verschiebe(z.pfad, nach: ziel)
             aendere(id) {
                 $0.phase = "hochladen"
                 $0.zielZip = ziel
@@ -1314,6 +1445,10 @@ final class Helfer {
             let a = try auschecken(zip, marker: marker)
             auftraege.append(a)
             sichere()
+            let bisher = String(name.dropLast(".logicx.zip".count))
+            if bisher != a.name {       // nur sichtbare Unterschiede, nicht die bloße Schreibweise eines Umlauts
+                melde(L("Der Name „\(bisher)“ kommt nicht überall an. Beim Zurücklegen heißt die Zip „\(a.name)“."))
+            }
             zeigeInLogic(a.arbeitsPfad!)
         } catch {
             melde(L("„\(name)“ ließ sich nicht öffnen: \(error)"))
@@ -1352,20 +1487,23 @@ final class Helfer {
         guard let projekt = findeProjekt(aus) else { throw HelferFehler(L("In der Zip steckt kein Logic-Projekt")) }
         guard let p = abdruck(projekt), !p.hatLink else { throw HelferFehler(L("Die Zip enthält Verknüpfungen, die ich nicht übernehme")) }
         try fm.createDirectory(atPath: e.arbeitsordner, withIntermediateDirectories: true)
-        let ziel = freierPfad(e.arbeitsordner, stamm: stamm, endung: ".logicx")
-        try fm.moveItem(atPath: projekt, toPath: ziel)
+        // Die Arbeitskopie heißt schon so, wie die Zip nach dem Zurücklegen heißen wird. Im Projekt selbst wird
+        // nichts umbenannt: Logic findet seine Audiodateien über die Namen.
+        let sicher = sichererName(stamm, grenze: zipNamensGrenze)
+        let ziel = freierPfad(e.arbeitsordner, stamm: sicher, endung: ".logicx")
+        try verschiebe(projekt, nach: ziel)
         guard let nachher = abdruck(ziel) else {
             try? fm.trashItem(at: URL(fileURLWithPath: ziel), resultingItemURL: nil)
             throw HelferFehler(L("Arbeitskopie nicht lesbar"))
         }
         ausgecheckt = true
 
-        var a = Auftrag(art: "arbeit", name: stamm, phase: "offen")
+        var a = Auftrag(art: "arbeit", name: sicher, phase: "offen")
         a.quelleZip = zip
         a.originalZip = zip
         a.arbeitsPfad = ziel
         a.arbeitsInode = info(ziel).map { UInt64($0.st_ino) }
-        a.wurzelName = stamm + ".logicx"
+        a.wurzelName = sicher + ".logicx"
         a.basisGroesse = Int64(k.st_size)
         a.basisDatum = aenderungszeit(vorher ?? s)
         a.basisMD5 = summe
@@ -1604,9 +1742,9 @@ final class Helfer {
     }
 
     func zuruecklegen(_ a: Auftrag) {
-        guard let w = a.arbeitsPfad, let wurzel = a.wurzelName, let quelle = a.quelleZip else { return }
+        guard let w = a.arbeitsPfad, a.wurzelName != nil, let quelle = a.quelleZip else { return }
         do {
-            let z = try packen(w, wurzel: wurzel)
+            let z = try packen(w, wurzel: a.zipWurzel)
             defer { try? fm.removeItem(atPath: z.ordner) }
             // Packen dauert bei großen Projekten Minuten: Wurde es inzwischen wieder geöffnet, abbrechen.
             guard let offen = offeneDokumente(frisch: true) else { throw HelferFehler(L("Logic lässt sich gerade nicht abfragen")) }
@@ -1625,13 +1763,14 @@ final class Helfer {
             var konflikt = false
             if unveraendert && !sperreFremd(a) {
                 try sichereAlteZip(quelle, name: a.name, erwartet: a.basisMD5)
-                try ersetzeInDrive(quelle, mit: z.pfad)
+                ziel = benenneSicher(a, quelle)
+                try ersetzeInDrive(ziel, mit: z.pfad)
             } else {
                 konflikt = true
                 let ordner = (quelle as NSString).deletingLastPathComponent
                 guard info(ordner) != nil else { throw HelferFehler(L("Der Drive-Ordner existiert nicht mehr")) }
-                ziel = freierPfad(ordner, stamm: "\(a.name) – Stand \(vorname()) \(zeitText())", endung: ".logicx.zip")
-                try fm.moveItem(atPath: z.pfad, toPath: ziel)
+                ziel = freierPfad(ordner, stamm: standStamm(a.name), endung: ".logicx.zip")
+                try verschiebe(z.pfad, nach: ziel)
             }
             aendere(a.id) {
                 $0.phase = "hochladen"
@@ -2396,6 +2535,10 @@ let argumente = Array(CommandLine.arguments.dropFirst())
 switch argumente.first {
 case "--version":
     print(helferVersion)
+case "--sicherer-name":
+    // Nur zum Prüfen: gibt aus, welchen Namen ein Projekt in Drive bekäme.
+    guard argumente.count >= 2 else { print(L("Aufruf: --sicherer-name <Projektname>")); exit(2) }
+    print(sichererName(argumente[1]))
 case "--trocken":
     trockenlauf(Array(argumente.dropFirst()))
 case "--willkommen-bild":

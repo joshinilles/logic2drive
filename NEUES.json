@@ -1,5 +1,29 @@
 [
   {
+    "version": "0.6.8",
+    "datum": "2026-11-25",
+    "de": [
+      "Jede Zip bekommt einen Namen, der überall ankommt, auch auf der Synology: Aus „A / B“ wird „A - B“, Zeichen wie : \\ * ? \" < > | werden zu einem Bindestrich, Leerzeichen und Punkte am Rand fallen weg, sehr lange Namen werden gekürzt. Im Projekt selbst wird nichts umbenannt.",
+      "Wurde ein Name angepasst, sagt Logic2Drive es einmal. Eine vorhandene Zip mit unpassendem Namen wird beim Zurücklegen umbenannt, überschrieben wird dabei nichts."
+    ],
+    "en": [
+      "Every zip gets a name that works everywhere, including on the Synology: “A / B” becomes “A - B”, characters like : \\ * ? \" < > | turn into a hyphen, spaces and dots at the edges are dropped, very long names are shortened. Nothing inside the project is renamed.",
+      "When a name was adjusted, Logic2Drive tells you once. An existing zip with an unsuitable name is renamed when the project is put back; nothing is overwritten."
+    ],
+    "fr": [
+      "Chaque zip reçoit un nom qui passe partout, y compris sur le Synology : « A / B » devient « A - B », les caractères comme : \\ * ? \" < > | deviennent un trait d’union, les espaces et les points en bordure disparaissent, les noms très longs sont raccourcis. Rien n’est renommé à l’intérieur du projet.",
+      "Quand un nom a été adapté, Logic2Drive le signale une fois. Un zip existant au nom inadapté est renommé lors de la remise en place ; rien n’est écrasé."
+    ],
+    "ar": [
+      "كل ملف Zip يحصل على اسم يعمل في كل مكان، وعلى Synology أيضًا: «A / B» يصبح «A - B»، والرموز مثل : \\ * ? \" < > | تصبح شرطة، والمسافات والنقاط في الأطراف تُحذف، والأسماء الطويلة جدًا تُختصر. لا يُعاد تسمية أي شيء داخل المشروع.",
+      "إذا عُدِّل اسم، يخبرك Logic2Drive مرة واحدة. ملف Zip الموجود باسم غير مناسب تُعاد تسميته عند الإرجاع، ولا يُستبدل أي شيء."
+    ],
+    "fa": [
+      "هر فایل Zip نامی می‌گیرد که همه‌جا کار می‌کند، روی Synology هم: «A / B» به «A - B» تبدیل می‌شود، نویسه‌هایی مانند : \\ * ? \" < > | به خط تیره تبدیل می‌شوند، فاصله‌ها و نقطه‌های کناری حذف می‌شوند و نام‌های بسیار بلند کوتاه می‌شوند. درون پروژه هیچ چیز تغییر نام نمی‌دهد.",
+      "اگر نامی اصلاح شود، Logic2Drive یک بار خبر می‌دهد. فایل Zip موجود با نام نامناسب هنگام بازگرداندن تغییر نام می‌دهد و چیزی بازنویسی نمی‌شود."
+    ]
+  },
+  {
     "version": "0.6.7",
     "datum": "2026-11-25",
     "de": [

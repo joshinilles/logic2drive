@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6.7). It has been tested on one Mac with test
+**Status: early version (0.6.8). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -25,6 +25,29 @@ packing and unpacking so that nobody has to think about it.
   After the upload is confirmed, the original moves to a local backup folder
   and Drive's empty placeholder goes to the Trash. The original stays in the
   backup folder for 90 days and then goes to the Trash.
+- **Names:** every zip gets a name that also arrives on a Synology through
+  Cloud Sync and over SMB. A project called `A / B` in the Finder is stored
+  as `A : B`; Drive keeps the colon, and Cloud Sync never transfers such a
+  file (seen 25 Nov 2026: one project sat in Drive for six weeks and never
+  reached the NAS). So `:` and `/` become `-` (`A / B` turns into `A - B`),
+  as do `\ * " < > ? |`. Control characters, line breaks and the private-use
+  characters left behind by old SMB copies (U+F000 to U+F8FF) are removed,
+  as are spaces at both ends, dots at the end and a dot at the start.
+  Accented letters are stored composed (NFC). Names are cut to 120 bytes, so
+  that even a "Stand" zip stays below 200 bytes. An empty result becomes
+  `Ohne Namen`. Everything else stays, including umlauts, emoji, dashes and
+  double spaces. The zip and the top folder inside it carry the same safe
+  name; nothing inside the project is ever renamed. When a name was adjusted,
+  Logic2Drive says so once (`Name angepasst: old -> new`). If the safe name
+  is already taken by another zip, nothing is overwritten and the usual
+  "Stand" version is placed next to it.
+- **Existing zips with an unsafe name:** opening one shows a notice, and the
+  working copy already has the safe name. When the project is put back, the
+  zip itself is renamed (so that it stays the same file in Drive) and then
+  replaced. If another zip already has that name, the renamed one gets a
+  counter, `Name (2).logicx.zip`. A project that is closed unchanged keeps
+  its zip as it is. The lock file is named after the zip as it is in Drive
+  and moves with it, so that Macs on older versions keep seeing it.
 - **Which projects:** every project whose upload hangs, and every project
   that was worked on at this Mac (its upload was seen here, or it was seen
   open in Logic and saved since). Projects that are already in the cloud and
@@ -162,6 +185,7 @@ notifications, `LOGIC2DRIVE_SPRACHE=de|en|fr|ar|fa` forces a language.
 ```bash
 zsh -f test/update.sh <work folder>   # updater, about 3 minutes, needs a Developer ID
 python3 test/texte.py                 # translations complete?
+zsh -f test/namen.sh <work folder>    # naming rule, about 2 minutes, no Drive, no Logic
 zsh -f test/starten.sh                # the full run, see below
 ```
 
@@ -219,6 +243,15 @@ the code. Somebody has to be at the Mac for both:
 
 ## Not yet tested
 
+- The naming rule (0.6.8) in a real Drive folder. `test/namen.sh` passes on
+  its own in a local folder, 41 of 41: Finder slash, trailing space,
+  decomposed umlaut, very long name, a taken name, and an existing zip that
+  is renamed when put back. Not yet seen in Drive: whether Drive keeps the
+  composed form of an umlaut in the title, whether a renamed zip keeps its
+  file ID (the full run checks it through `com.google.drivefs.item-id#S`),
+  and the notice when an unsafe zip is opened (needs Logic). File names are
+  written with `rename(2)`, because Foundation stores umlauts decomposed
+  even when the text is composed (measured 25 Nov 2026).
 - The full test run without a failure. With 0.6 it ran in a shared drive:
   98 of 99, and the one failure was Logic sitting in its "audio interface not
   available" dialog (see Tests). The run before that, unattended, stopped at

@@ -279,3 +279,6 @@ pruefe "ältere Meldung mit Datum" '[[ $(zuletzt) == "Zuletzt, 02.01. 08:00: alt
 print -r -- "$(date +%Y-%m-%d) 09:05:00  MELDUNG: „A“ liegt jetzt als Zip in Google Drive." >> "$ZD/protokoll.log"
 print -r -- "$(date +%Y-%m-%d) 09:06:00  Abgelegt: B" >> "$ZD/protokoll.log"
 pruefe "letzte Meldung von heute, andere Zeilen zählen nicht" '[[ $(zuletzt) == "Zuletzt, heute 09:05: „A“ liegt jetzt als Zip in Google Drive." ]]'
+
+# Namensregel (0.6.8): eigene Datei, weil sie auch allein läuft, lokal und ohne Drive und Logic.
+source "${0:A:h}/namen.sh"

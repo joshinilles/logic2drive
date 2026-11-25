@@ -914,3 +914,12 @@
 
 /* 0.6.7: Update von Hand, Grund und Restzeit */
 "Update auf %@ wartet: %@" = "Update to %@ is waiting: %@";
+
+/* 0.6.8: Namensregel */
+"Am Ziel liegt schon etwas: %@" = "Something is already there: %@";
+"Verschieben fehlgeschlagen: %@" = "Moving failed: %@";
+"Name angepasst: %@ -> %@" = "Name adjusted: %@ -> %@";
+"Name angepasst, nur die Schreibweise der Umlaute: %@" = "Name adjusted, only the way accented letters are stored: %@";
+"Zip behält ihren Namen, Umbenennen fehlgeschlagen (%@): %@" = "The zip keeps its name, renaming failed (%@): %@";
+"Der Name „%@“ kommt nicht überall an. Beim Zurücklegen heißt die Zip „%@“." = "The name “%@” doesn’t work everywhere. When the project is put back, the zip will be called “%@”.";
+"Aufruf: --sicherer-name <Projektname>" = "Usage: --sicherer-name <Projektname>";

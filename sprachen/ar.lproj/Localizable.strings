@@ -914,3 +914,12 @@
 
 /* 0.6.7: Update von Hand, Grund und Restzeit */
 "Update auf %@ wartet: %@" = "التحديث إلى %@ ينتظر: %@";
+
+/* 0.6.8: Namensregel */
+"Am Ziel liegt schon etwas: %@" = "يوجد شيء في الوجهة بالفعل: %@";
+"Verschieben fehlgeschlagen: %@" = "تعذّر النقل: %@";
+"Name angepasst: %@ -> %@" = "تم تعديل الاسم: %@ -> %@";
+"Name angepasst, nur die Schreibweise der Umlaute: %@" = "تم تعديل الاسم، تغيّرت طريقة كتابة الحروف المشكّلة فقط: %@";
+"Zip behält ihren Namen, Umbenennen fehlgeschlagen (%@): %@" = "يحتفظ ملف Zip باسمه، تعذّرت إعادة التسمية (%@): %@";
+"Der Name „%@“ kommt nicht überall an. Beim Zurücklegen heißt die Zip „%@“." = "الاسم «%@» لا يعمل في كل مكان. عند الإرجاع سيُسمّى ملف Zip «%@».";
+"Aufruf: --sicherer-name <Projektname>" = "الاستخدام: --sicherer-name <Projektname>";
