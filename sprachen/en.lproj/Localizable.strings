@@ -821,3 +821,24 @@
 
 /* main.swift, Autostart nach Umzug */
 "Der Autostart ließ sich nach dem Umzug der App nicht neu anmelden. Schalte „Beim Anmelden starten“ in den Einstellungen einmal aus und wieder ein." = "Open at Login couldn’t be registered again after the app was moved. Turn “Open at Login” off and on again in Settings.";
+
+/* main.swift, Umzug nach Programme */
+"Beende Logic2Drive, zieh es im Finder in den Ordner „Programme“ und öffne es von dort." = "Quit Logic2Drive, drag it to the Applications folder in the Finder and open it from there.";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive liegt noch nicht im Ordner „Programme“" = "Logic2Drive isn’t in the Applications folder yet";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive in den Ordner „Programme“ legen?" = "Move Logic2Drive to the Applications folder?";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive läuft noch aus dem Ordner, in den es geladen wurde. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht zuverlässig.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu. Die geladene Kopie kommt in den Papierkorb." = "Logic2Drive is still running from the folder it was downloaded to. Open at Login, updates and opening by double-click don’t work reliably from there.\n\nLogic2Drive will now move itself to the Applications folder and restart. The downloaded copy goes to the Trash.";
+
+/* main.swift, Umzug nach Programme */
+"In „Programme“ legen" = "Move to Applications";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive ließ sich nicht in den Ordner „Programme“ legen" = "Logic2Drive couldn’t be moved to the Applications folder";
+
+/* main.swift, Umzug nach Programme */
+"Nach „Programme“ umgezogen, vorher in %@" = "Moved to Applications, previously in %@";

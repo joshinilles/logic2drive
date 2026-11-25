@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.6.3",
+    "datum": "2026-11-25",
+    "de": [
+      "Liegt Logic2Drive beim Start noch im Ordner „Downloads“, bietet es an, sich selbst in den Ordner „Programme“ zu legen. Vorher blieb dort der Schalter „Projekte per Doppelklick öffnen“ aus."
+    ],
+    "en": [
+      "If Logic2Drive is still in the Downloads folder when it starts, it offers to move itself to the Applications folder. Before, the “Open Projects with a Double-Click” switch stayed off there."
+    ],
+    "fr": [
+      "Si Logic2Drive se trouve encore dans le dossier Téléchargements au démarrage, il propose de se placer lui-même dans le dossier Applications. Auparavant, le réglage « Ouvrir les projets par double-clic » y restait désactivé."
+    ],
+    "ar": [
+      "إذا كان Logic2Drive ما زال في مجلد التنزيلات عند تشغيله، فسيعرض أن ينتقل بنفسه إلى مجلد التطبيقات. في السابق كان مفتاح «فتح المشاريع بنقرة مزدوجة» يبقى هناك متوقفًا."
+    ],
+    "fa": [
+      "اگر Logic2Drive هنگام اجرا هنوز در پوشه‌ی «بارگیری‌ها» باشد، پیشنهاد می‌کند خودش را به پوشه‌ی «برنامه‌ها» منتقل کند. پیش‌تر کلید «باز کردن پروژه‌ها با دوبار کلیک» در آن‌جا خاموش می‌ماند."
+    ]
+  },
+  {
     "version": "0.6.2",
     "datum": "2026-11-24",
     "de": [

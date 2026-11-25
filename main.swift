@@ -1855,6 +1855,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 antwort(alert.runModal() == .alertSecondButtonReturn)
             }
         }
+        if nachProgrammeUmziehen() { return }
         beobachtet = helfer.e.ordner
         helfer.ordnerGeaendert = { [weak self] o in DispatchQueue.main.async { self?.beobachtet = o } }
         helfer.start()      // lädt zuerst die Aufträge, die Warteschlange hält die Reihenfolge
@@ -1976,8 +1977,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         return L("Beobachtet: ") + beobachtet.map { ($0 as NSString).lastPathComponent }.joined(separator: ", ")
     }
 
+    /// An der Kennung gemessen, nicht am Pfad: Läuft die App aus einer verlagerten Kopie, stimmt der Pfad nie überein.
     var istZipStandard: Bool {
-        NSWorkspace.shared.urlForApplication(toOpen: .zip)?.standardizedFileURL == Bundle.main.bundleURL.standardizedFileURL
+        guard let u = NSWorkspace.shared.urlForApplication(toOpen: .zip) else { return false }
+        return Bundle(url: u)?.bundleIdentifier == Bundle.main.bundleIdentifier
     }
 
     func hinweis(_ titel: String, _ text: String, knopf: String? = nil) -> Bool {
@@ -2070,6 +2073,48 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// und sie danach verschiebt (aus „Downloads“ nach „Programme“), hätte sonst einen Autostart, der ins Leere
     /// zeigt, ohne es zu merken. Beim ersten Start mit dieser Fassung ist der frühere Ort unbekannt, deshalb
     /// wird dann einmal neu angemeldet.
+    /// Eine frisch geladene App, die noch im Download-Ordner liegt, startet macOS aus einer schreibgeschützten Kopie
+    /// mit Zufallspfad („App Translocation“). Dort lässt sich weder der Autostart anmelden noch ein Update einspielen.
+    /// Den echten Ort kennt nur Security; die Funktion ist nicht öffentlich, deshalb über dlsym und ohne sie kein Umzug.
+    func echterOrt() -> URL? {
+        typealias Frage = @convention(c) (CFURL, UnsafeMutablePointer<Unmanaged<CFError>?>?) -> Unmanaged<CFURL>?
+        guard let h = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_LAZY),
+              let z = dlsym(h, "SecTranslocateCreateOriginalPathForURL") else { return nil }
+        return unsafeBitCast(z, to: Frage.self)(Bundle.main.bundleURL as CFURL, nil)?.takeRetainedValue() as URL?
+    }
+
+    /// Liefert true, wenn die App nach „Programme“ umgezogen ist und gleich von dort neu startet.
+    func nachProgrammeUmziehen() -> Bool {
+        // Wurde die App über eine Datei gestartet, geht diese vor; gefragt wird beim nächsten Start.
+        guard Bundle.main.bundlePath.contains("/AppTranslocation/"), wartendeDateien.isEmpty else { return false }
+        let selbst = L("Beende Logic2Drive, zieh es im Finder in den Ordner „Programme“ und öffne es von dort.")
+        guard let herkunft = echterOrt()?.standardizedFileURL else {
+            _ = hinweis(L("Logic2Drive liegt noch nicht im Ordner „Programme“"), selbst)
+            return false
+        }
+        guard hinweis(L("Logic2Drive in den Ordner „Programme“ legen?"),
+                      L("Logic2Drive läuft noch aus dem Ordner, in den es geladen wurde. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht zuverlässig.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu. Die geladene Kopie kommt in den Papierkorb."),
+                      knopf: L("In „Programme“ legen")) else { return false }
+        let fm = FileManager.default
+        let programme = ProcessInfo.processInfo.environment["LOGIC2DRIVE_PROGRAMME"] ?? "/Applications"      // nur für Tests
+        let ziel = URL(fileURLWithPath: programme).appendingPathComponent(herkunft.lastPathComponent).standardizedFileURL
+        if herkunft != ziel {
+            do {
+                if fm.fileExists(atPath: ziel.path) { try fm.trashItem(at: ziel, resultingItemURL: nil) }
+                try fm.copyItem(at: herkunft, to: ziel)
+            } catch {
+                _ = hinweis(L("Logic2Drive ließ sich nicht in den Ordner „Programme“ legen"), selbst + "\n\n" + error.localizedDescription)
+                return false
+            }
+        }
+        // Ohne diesen Schritt startet macOS auch die Kopie in „Programme“ wieder verlagert.
+        lauf("/usr/bin/xattr", ["-dr", "com.apple.quarantine", ziel.path], frist: 30)
+        if herkunft != ziel { try? fm.trashItem(at: herkunft, resultingItemURL: nil) }
+        protokoll(L("Nach „Programme“ umgezogen, vorher in \(herkunft.deletingLastPathComponent().path)"))
+        neustart(ort: ziel.path)
+        return true
+    }
+
     func autostartNachziehen() {
         let ort = Bundle.main.bundleURL.standardizedFileURL.path
         guard !ort.contains("/AppTranslocation/") else { return }      // dort liegt die App nur zum Schein
@@ -2171,13 +2216,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
 
-    func neustart() {
+    func neustart(ort: String = Bundle.main.bundlePath) {
         beendeOhneFrage = true
         // Erst starten, wenn dieser Prozess beendet ist: Sonst scheitert die neue App an der Sperre der alten.
         let p = Process()
         p.executableURL = URL(fileURLWithPath: "/bin/sh")
         p.arguments = ["-c", "while kill -0 \"$1\" 2>/dev/null; do sleep 0.2; done; /usr/bin/open -n \"$0\"",
-                       Bundle.main.bundlePath, String(ProcessInfo.processInfo.processIdentifier)]
+                       ort, String(ProcessInfo.processInfo.processIdentifier)]
         try? p.run()
         NSApp.terminate(nil)
     }

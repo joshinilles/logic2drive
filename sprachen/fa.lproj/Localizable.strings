@@ -821,3 +821,24 @@
 
 /* main.swift, Autostart nach Umzug */
 "Der Autostart ließ sich nach dem Umzug der App nicht neu anmelden. Schalte „Beim Anmelden starten“ in den Einstellungen einmal aus und wieder ein." = "پس از جابه‌جایی برنامه، اجرا هنگام ورود به سیستم دوباره ثبت نشد. در تنظیمات «اجرا هنگام ورود به سیستم» را یک بار خاموش و دوباره روشن کنید.";
+
+/* main.swift, Umzug nach Programme */
+"Beende Logic2Drive, zieh es im Finder in den Ordner „Programme“ und öffne es von dort." = "Logic2Drive را ببندید، در Finder آن را به پوشه‌ی «برنامه‌ها» بکشید و از همان‌جا باز کنید.";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive liegt noch nicht im Ordner „Programme“" = "Logic2Drive هنوز در پوشه‌ی «برنامه‌ها» نیست";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive in den Ordner „Programme“ legen?" = "Logic2Drive به پوشه‌ی «برنامه‌ها» منتقل شود؟";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive läuft noch aus dem Ordner, in den es geladen wurde. Dort funktionieren der Start beim Anmelden, Updates und das Öffnen per Doppelklick nicht zuverlässig.\n\nLogic2Drive legt sich jetzt in den Ordner „Programme“ und startet neu. Die geladene Kopie kommt in den Papierkorb." = "Logic2Drive هنوز از پوشه‌ای اجرا می‌شود که در آن بارگیری شده است. از آن‌جا اجرا هنگام ورود به سیستم، به‌روزرسانی‌ها و باز کردن با دوبار کلیک به‌طور مطمئن کار نمی‌کنند.\n\nLogic2Drive اکنون خودش را به پوشه‌ی «برنامه‌ها» منتقل می‌کند و دوباره اجرا می‌شود. نسخه‌ی بارگیری‌شده به سطل زباله می‌رود.";
+
+/* main.swift, Umzug nach Programme */
+"In „Programme“ legen" = "انتقال به «برنامه‌ها»";
+
+/* main.swift, Umzug nach Programme */
+"Logic2Drive ließ sich nicht in den Ordner „Programme“ legen" = "انتقال Logic2Drive به پوشه‌ی «برنامه‌ها» ممکن نشد";
+
+/* main.swift, Umzug nach Programme */
+"Nach „Programme“ umgezogen, vorher in %@" = "به «برنامه‌ها» منتقل شد، پیش‌تر در %@ بود";
