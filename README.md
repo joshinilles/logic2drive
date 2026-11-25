@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.6.6). It has been tested on one Mac with test
+**Status: early version (0.6.7). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -98,10 +98,18 @@ language, so that Macs with different languages understand each other.
 
 Once a day Logic2Drive asks GitHub for the latest release. If there is a newer
 one, it downloads `Logic2Drive.zip` and installs it as soon as no project is
-in progress and none has been open in Logic for 5 minutes (it looks every 2
-minutes), then restarts
-itself. "Install updates automatically" in the settings window turns this
-off; the menu then only points to the new version.
+in progress and none has been open in Logic for 5 minutes, then restarts
+itself. While an update waits, the menu and the settings window say what it
+is waiting for and count down.
+
+An update you ask for yourself ("Check for Updates", or "Install Now" once
+one is downloaded) only waits for a job that is running. A project that is
+merely open in Logic does not hold it back: the list of projects seen in
+Logic is carried over the restart, so the app still knows which Drive
+projects were worked on at this Mac.
+
+"Install updates automatically" in the settings window turns the automatic
+part off; the menu then only points to the new version.
 
 An update is only installed if its code signature is valid **and** comes from
 the same Developer ID team as the running app. Someone who merely takes over
@@ -218,7 +226,11 @@ the code. Somebody has to be at the Mac for both:
 - Updates in every situation. The updater is tested with a local stand-in
   for the release (17 of 17), the running menu bar app updated itself through
   "Check for Updates", and a second Mac went from 0.6.2 to 0.6.3 by itself.
-  Not yet seen: an update that has to wait because a project is in progress.
+  With a test copy under its own bundle identifier (0.6.7): an automatic
+  update waits and names the open Logic project, a manual one installs at
+  once and carries the Logic sightings over. Not yet seen: the countdown
+  after Logic is closed, an update that waits for a running job, and the
+  "Install Now" button being clicked (only rendered).
 - The Varispeed guard inside the installed app, and an actual bounce after
   it. Its logic was run through `--varispeed selbsttest`, which switches
   Varispeed on, opens the Bounce dialog, lets the guard act and puts

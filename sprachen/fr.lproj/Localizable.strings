@@ -585,9 +585,6 @@
 /* main.swift:2107 */
 "Update: %@" = "Mise à jour : %@";
 
-/* main.swift:2117 */
-"Version %@ wird eingespielt, sobald nichts in Arbeit ist" = "La version %@ sera installée dès que rien n’est en cours de travail";
-
 /* main.swift:2118 */
 "Update auf %@ geladen und geprüft, wartet auf Ruhe" = "Mise à jour vers %@ téléchargée et vérifiée, en attente d’un moment calme";
 
@@ -799,9 +796,6 @@
 "Version" = "Version";
 
 /* einstellungen.swift */
-"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist." = "Logic2Drive télécharge les nouvelles versions et les installe dès qu’aucun projet n’est en cours de travail.";
-
-/* einstellungen.swift */
 "Was ist neu" = "Nouveautés";
 
 /* einstellungen.swift */
@@ -887,3 +881,36 @@
 
 /* 0.6.6: Varispeed-Wache mit Logic 12 */
 "Varispeed war noch an und ist jetzt aus. Öffne den Bounce-Dialog bitte noch einmal." = "Varispeed était encore activé et est maintenant désactivé. Rouvre la fenêtre de bounce.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"In Logic ist „%@“ offen. Das Update kommt fünf Minuten, nachdem das Projekt geschlossen ist, oder sofort mit „Jetzt einspielen“." = "« %@ » est ouvert dans Logic. La mise à jour est installée cinq minutes après la fermeture du projet, ou tout de suite avec « Installer maintenant ».";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Nach dem Update übernommen: %@ in Logic gesehene Projekte" = "Repris après la mise à jour : %@ projets vus dans Logic";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Version %@ ist geladen." = "La version %@ est téléchargée.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Wird in %@ Sekunden eingespielt." = "Sera installée dans %@ secondes.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Wird in etwa %@ Minuten eingespielt." = "Sera installée dans environ %@ minutes.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ ist noch in Arbeit. Danach wird das Update eingespielt." = "« %@ » est encore en cours. La mise à jour sera installée ensuite.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ ist noch in Arbeit: %@. Danach wird das Update eingespielt." = "« %@ » est encore en cours : %@. La mise à jour sera installée ensuite.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ wartet darauf, eingepackt zu werden. Danach wird das Update eingespielt." = "« %@ » attend d’être compressé. La mise à jour sera installée ensuite.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Jetzt einspielen" = "Installer maintenant";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist und Logic fünf Minuten kein Projekt offen hatte." = "Logic2Drive télécharge les nouvelles versions et les installe dès qu’aucun projet n’est en cours et que Logic n’a eu aucun projet ouvert depuis cinq minutes.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Update auf %@ wartet: %@" = "La mise à jour vers %@ attend : %@";

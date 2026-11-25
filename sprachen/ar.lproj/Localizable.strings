@@ -585,9 +585,6 @@
 /* main.swift:2107 */
 "Update: %@" = "التحديث: %@";
 
-/* main.swift:2117 */
-"Version %@ wird eingespielt, sobald nichts in Arbeit ist" = "سيتم تثبيت الإصدار %@ بمجرد ألا يكون هناك شيء قيد العمل";
-
 /* main.swift:2118 */
 "Update auf %@ geladen und geprüft, wartet auf Ruhe" = "تم تنزيل التحديث إلى %@ والتحقق منه، في انتظار السكون";
 
@@ -799,9 +796,6 @@
 "Version" = "الإصدار";
 
 /* einstellungen.swift */
-"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist." = "ينزّل Logic2Drive الإصدارات الجديدة ويثبّتها بمجرد ألا يكون أي مشروع قيد العمل.";
-
-/* einstellungen.swift */
 "Was ist neu" = "ما الجديد";
 
 /* einstellungen.swift */
@@ -887,3 +881,36 @@
 
 /* 0.6.6: Varispeed-Wache mit Logic 12 */
 "Varispeed war noch an und ist jetzt aus. Öffne den Bounce-Dialog bitte noch einmal." = "كان Varispeed ما زال مفعّلًا وهو متوقف الآن. افتح نافذة الـ Bounce من جديد.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"In Logic ist „%@“ offen. Das Update kommt fünf Minuten, nachdem das Projekt geschlossen ist, oder sofort mit „Jetzt einspielen“." = "«%@» مفتوح في Logic. يُثبَّت التحديث بعد خمس دقائق من إغلاق المشروع، أو فورًا عبر «التثبيت الآن».";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Nach dem Update übernommen: %@ in Logic gesehene Projekte" = "تم الاحتفاظ بعد التحديث بـ %@ من المشاريع التي شوهدت في Logic";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Version %@ ist geladen." = "تم تنزيل الإصدار %@.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Wird in %@ Sekunden eingespielt." = "سيُثبَّت خلال %@ ثانية.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Wird in etwa %@ Minuten eingespielt." = "سيُثبَّت خلال نحو %@ دقائق.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ ist noch in Arbeit. Danach wird das Update eingespielt." = "«%@» ما زال قيد العمل. يُثبَّت التحديث بعد ذلك.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ ist noch in Arbeit: %@. Danach wird das Update eingespielt." = "«%@» ما زال قيد العمل: %@. يُثبَّت التحديث بعد ذلك.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ wartet darauf, eingepackt zu werden. Danach wird das Update eingespielt." = "«%@» ينتظر الضغط. يُثبَّت التحديث بعد ذلك.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Jetzt einspielen" = "التثبيت الآن";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist und Logic fünf Minuten kein Projekt offen hatte." = "ينزّل Logic2Drive الإصدارات الجديدة ويثبّتها عندما لا يكون أي مشروع قيد العمل ولم يكن في Logic أي مشروع مفتوح منذ خمس دقائق.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Update auf %@ wartet: %@" = "التحديث إلى %@ ينتظر: %@";

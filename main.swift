@@ -533,6 +533,49 @@ final class Helfer {
         }
     }
 
+    /// Was ein geladenes Update gerade aufhält, als Satz für Menü und Einstellungen. nil heißt: frei.
+    /// Von selbst wartet ein Update auf völlige Ruhe. Von Hand hält es nur ein laufender Auftrag auf: Wartende
+    /// Pakete und in Logic offene Projekte übersteht der Neustart, weil die Sichtungen mitgenommen werden.
+    func updateHindernis(vonHand: Bool) -> String? {
+        if let a = auftraege.first {
+            return a.meldung.isEmpty ? L("„\(a.name)“ ist noch in Arbeit. Danach wird das Update eingespielt.")
+                                     : L("„\(a.name)“ ist noch in Arbeit: \(a.meldung). Danach wird das Update eingespielt.")
+        }
+        if vonHand { return nil }
+        if let p = kandidaten.keys.sorted().first {
+            return L("„\((letzter(p) as NSString).deletingPathExtension)“ wartet darauf, eingepackt zu werden. Danach wird das Update eingespielt.")
+        }
+        let t = jetzt()
+        guard let (name, sicht) = inLogic.max(by: { $0.value.zuletzt < $1.value.zuletzt }), t - sicht.zuletzt <= updateRuhe else { return nil }
+        let alter = t - sicht.zuletzt
+        if alter < 25 { return L("In Logic ist „\(name)“ offen. Das Update kommt fünf Minuten, nachdem das Projekt geschlossen ist, oder sofort mit „Jetzt einspielen“.") }
+        let rest = updateRuhe - alter
+        return rest > 90 ? L("Wird in etwa \(Int((rest / 60).rounded(.up))) Minuten eingespielt.") : L("Wird in \(max(1, Int(rest))) Sekunden eingespielt.")
+    }
+
+    /// So lange muss das letzte in Logic offene Projekt zu sein, bevor ein Update von selbst eingespielt wird.
+    /// Fünf Minuten sind die Frist, nach der ein gesichertes Projekt eingepackt wird.
+    let updateRuhe = 300.0
+    var sichtPfad: String { datenOrdner + "/logic-sicht.json" }
+
+    /// Vor dem Neustart durch ein Update: merken, welche Projekte hier in Logic offen gesehen wurden. Daran erkennt
+    /// der Helfer nach dem Neustart weiter, an welchen Projekten in Drive an diesem Mac gearbeitet wurde.
+    func sichereSicht() {
+        let liste = inLogic.map { ["name": $0.key, "erst": $0.value.erst, "zuletzt": $0.value.zuletzt] as [String: Any] }
+        if let d = try? JSONSerialization.data(withJSONObject: liste) { try? d.write(to: URL(fileURLWithPath: sichtPfad), options: .atomic) }
+    }
+
+    func ladeSicht() {
+        defer { try? fm.removeItem(atPath: sichtPfad) }
+        guard let d = fm.contents(atPath: sichtPfad), let liste = try? JSONSerialization.jsonObject(with: d) as? [[String: Any]] else { return }
+        let t = jetzt()
+        for e in liste {
+            guard let n = e["name"] as? String, let erst = e["erst"] as? Double, let zuletzt = e["zuletzt"] as? Double, t - zuletzt < 3600 else { continue }
+            inLogic[n] = (erst, zuletzt)
+        }
+        if !inLogic.isEmpty { protokoll(L("Nach dem Update übernommen: \(inLogic.count) in Logic gesehene Projekte")) }
+    }
+
     /// Stellt um, wie lange Originale im Sicherungsordner bleiben (Regler in den Einstellungen).
     /// Geräumt wird nicht sofort, sondern bei der nächsten Pflege: Ein verrutschter Regler legt nichts in den Papierkorb.
     func setzeAufbewahrung(_ tage: Int) {
@@ -669,6 +712,7 @@ final class Helfer {
     func start() {
         q.async { [self] in
             lade()
+            ladeSicht()
             try? fm.removeItem(atPath: datenOrdner + "/tmp")
             try? fm.createDirectory(atPath: datenOrdner + "/eingang", withIntermediateDirectories: true)
             try? fm.createDirectory(atPath: e.arbeitsordner, withIntermediateDirectories: true)
@@ -1845,6 +1889,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var updateSeite: URL?           // gesetzt, wenn die neue Version nur von Hand zu holen ist
     var wartendesUpdate: (app: String, version: String, team: String)?
     var updateLaeuft = false
+    // Jemand hat nach dem Update gefragt: so schnell wie möglich einspielen. Die Umgebungsvariable ist für Tests.
+    var updateVonHand = umgebung["LOGIC2DRIVE_UPDATE_VON_HAND"] == "1"
+    var updateGrund = ""            // zuletzt notierter Grund, damit er nur bei einem Wechsel im Protokoll landet
+    var warteUhr: Timer?            // läuft, solange ein geladenes Update wartet
     var beendeOhneFrage = false
     var updatesAutomatisch: Bool { UserDefaults.standard.object(forKey: "updatesAutomatisch") as? Bool ?? true }
 
@@ -1892,6 +1940,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         einstellungen.modell.lies = { [weak self] in (self?.updatesAutomatisch ?? true, self?.updateText, self?.sprachWahl ?? "auto") }
         einstellungen.modell.setzeUpdatesVonSelbst = { UserDefaults.standard.set($0, forKey: "updatesAutomatisch") }
         einstellungen.modell.sucheUpdate = { [weak self] in self?.sucheUpdate(vonHand: true) }
+        einstellungen.modell.liesUpdateWartet = { [weak self] in self?.wartendesUpdate != nil }
+        einstellungen.modell.spieleUpdateEin = { [weak self] in self?.updateVonHand = true; self?.versucheEinsetzen() }
         einstellungen.modell.setzeSprache = { [weak self] in self?.setzeSprache($0) }
         einstellungen.modell.zeigeEinfuehrung = { [weak self] in self?.willkommen.zeige() }
         einstellungen.modell.liesAufbewahrung = { helfer.e.aufbewahrungTage ?? 90 }
@@ -2188,6 +2238,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func updateSeiteOeffnen() { if let u = updateSeite { NSWorkspace.shared.open(u) } }
 
     func sucheUpdate(vonHand: Bool) {
+        if vonHand { updateVonHand = true }
         guard !updateLaeuft else { return }
         updateLaeuft = true
         let automatisch = updatesAutomatisch
@@ -2212,8 +2263,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 if let b = bereit {
                     self.wartendesUpdate = b
                     self.updateSeite = nil
-                    self.updateText = L("Version \(b.version) wird eingespielt, sobald nichts in Arbeit ist")
+                    self.updateText = L("Version \(b.version) ist geladen.")
                     protokoll(L("Update auf \(b.version) geladen und geprüft, wartet auf Ruhe"))
+                    // Alle drei Sekunden nachsehen: So stimmt die Anzeige, und das Update kommt, sobald es darf.
+                    if self.warteUhr == nil {
+                        self.warteUhr = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in self?.versucheEinsetzen() }
+                    }
                     self.versucheEinsetzen()
                 } else if let a = angebot {
                     self.updateSeite = a.seite ?? URL(string: projektSeite + "/releases/latest")
@@ -2229,16 +2284,33 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
 
-    /// Eingesetzt wird nur, wenn nichts läuft und in den letzten fünf Minuten kein Projekt in Logic offen war.
-    /// Fünf Minuten sind die Frist, nach der ein gesichertes Projekt eingepackt wird: Wer eben noch gearbeitet hat,
-    /// hat bis dahin einen Auftrag oder ein wartendes Paket, und beides hält das Update ohnehin auf.
+    /// Von selbst wird nur eingesetzt, wenn nichts läuft und in den letzten fünf Minuten kein Projekt in Logic
+    /// offen war. Hat jemand von Hand danach gefragt, hält nur ein laufender Auftrag das Update auf.
+    /// Was aufhält, steht im Menü und in den Einstellungen (Helfer.updateHindernis).
     func versucheEinsetzen() {
-        guard let w = wartendesUpdate else { return }
+        guard let w = wartendesUpdate else {
+            warteUhr?.invalidate()
+            warteUhr = nil
+            return
+        }
+        let vonHand = updateVonHand
         helfer.q.async {
-            let t = jetzt()
-            guard helfer.auftraege.isEmpty, helfer.kandidaten.isEmpty, helfer.inLogic.values.allSatisfy({ t - $0.zuletzt > 300 }) else { return }
+            if helfer.angehalten { return }     // schon eingesetzt, der Neustart läuft
+            if let grund = helfer.updateHindernis(vonHand: vonHand) {
+                DispatchQueue.main.async {
+                    if self.wartendesUpdate?.version == w.version { self.updateText = L("Version \(w.version) ist geladen.") + " " + grund }
+                    // Ins Protokoll nur, wenn sich der Grund ändert, nicht bei jedem Schritt des Herunterzählens.
+                    let art = grund.filter { !$0.isNumber }
+                    if art != self.updateGrund {
+                        self.updateGrund = art
+                        helfer.q.async { protokoll(L("Update auf \(w.version) wartet: \(grund)")) }
+                    }
+                }
+                return
+            }
             do {
                 try Update.setzeEin(w.app, version: w.version, team: w.team)
+                helfer.sichereSicht()
                 helfer.angehalten = true
                 protokoll(L("Update auf \(w.version) eingesetzt, Logic2Drive startet neu"))
                 DispatchQueue.main.async { self.neustart() }

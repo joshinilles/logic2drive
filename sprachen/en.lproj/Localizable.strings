@@ -585,9 +585,6 @@
 /* main.swift:2107 */
 "Update: %@" = "Update: %@";
 
-/* main.swift:2117 */
-"Version %@ wird eingespielt, sobald nichts in Arbeit ist" = "Version %@ will be installed as soon as nothing is in progress";
-
 /* main.swift:2118 */
 "Update auf %@ geladen und geprüft, wartet auf Ruhe" = "Update to %@ downloaded and checked, waiting for things to settle";
 
@@ -799,9 +796,6 @@
 "Version" = "Version";
 
 /* einstellungen.swift */
-"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist." = "Logic2Drive downloads new versions and installs them as soon as no project is in progress.";
-
-/* einstellungen.swift */
 "Was ist neu" = "What’s New";
 
 /* einstellungen.swift */
@@ -887,3 +881,36 @@
 
 /* 0.6.6: Varispeed-Wache mit Logic 12 */
 "Varispeed war noch an und ist jetzt aus. Öffne den Bounce-Dialog bitte noch einmal." = "Varispeed was still on and is off now. Please open the Bounce dialog again.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"In Logic ist „%@“ offen. Das Update kommt fünf Minuten, nachdem das Projekt geschlossen ist, oder sofort mit „Jetzt einspielen“." = "“%@” is open in Logic. The update is installed five minutes after the project is closed, or right away with “Install Now”.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Nach dem Update übernommen: %@ in Logic gesehene Projekte" = "Carried over after the update: %@ projects seen in Logic";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Version %@ ist geladen." = "Version %@ is downloaded.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Wird in %@ Sekunden eingespielt." = "Will be installed in %@ seconds.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Wird in etwa %@ Minuten eingespielt." = "Will be installed in about %@ minutes.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ ist noch in Arbeit. Danach wird das Update eingespielt." = "“%@” is still in progress. The update is installed after that.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ ist noch in Arbeit: %@. Danach wird das Update eingespielt." = "“%@” is still in progress: %@. The update is installed after that.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"„%@“ wartet darauf, eingepackt zu werden. Danach wird das Update eingespielt." = "“%@” is waiting to be packed. The update is installed after that.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Jetzt einspielen" = "Install Now";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist und Logic fünf Minuten kein Projekt offen hatte." = "Logic2Drive downloads new versions and installs them once no project is in progress and Logic has had no project open for five minutes.";
+
+/* 0.6.7: Update von Hand, Grund und Restzeit */
+"Update auf %@ wartet: %@" = "Update to %@ is waiting: %@";

@@ -31,6 +31,9 @@ final class EinstellungenModell: ObservableObject {
     var sucheUpdate: () -> Void = {}
     var setzeSprache: (String) -> Void = { _ in }
     var zeigeEinfuehrung: () -> Void = {}
+    @Published var updateWartet = false
+    var liesUpdateWartet: () -> Bool = { false }
+    var spieleUpdateEin: () -> Void = {}
     @Published var aufbewahrung = 90.0
     @Published var reglerInArbeit = false
     @Published var varispeed = false
@@ -46,6 +49,8 @@ final class EinstellungenModell: ObservableObject {
         if s.updatesVonSelbst != updatesVonSelbst { updatesVonSelbst = s.updatesVonSelbst }
         if s.updateText != updateText { updateText = s.updateText }
         if s.sprachWahl != sprachWahl { sprachWahl = s.sprachWahl }
+        let wartet = liesUpdateWartet()
+        if wartet != updateWartet { updateWartet = wartet }
         let tage = Double(liesAufbewahrung())
         if !reglerInArbeit, tage != aufbewahrung { aufbewahrung = tage }
         let v = liesVarispeed()
@@ -149,12 +154,17 @@ struct EinstellungenAnsicht: View {
                 LabeledContent(L("Version"), value: helferVersion)
                 Toggle(isOn: Binding(get: { modell.updatesVonSelbst }, set: { modell.updatesVonSelbst = $0; modell.setzeUpdatesVonSelbst($0) })) {
                     Text(L("Updates von selbst einspielen"))
-                    Text(L("Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist."))
+                    Text(L("Logic2Drive lädt neue Versionen und spielt sie ein, sobald kein Projekt in Arbeit ist und Logic fünf Minuten kein Projekt offen hatte."))
                 }
                 HStack {
-                    if let u = modell.updateText { Text(u).foregroundStyle(.secondary) }
+                    if let u = modell.updateText { Text(u).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
                     Spacer()
-                    Button(L("Nach Updates suchen"), action: modell.sucheUpdate)
+                    // Liegt ein Update bereit, heißt der Knopf, was er dann tut: nicht mehr warten.
+                    if modell.updateWartet {
+                        Button(L("Jetzt einspielen"), action: modell.spieleUpdateEin)
+                    } else {
+                        Button(L("Nach Updates suchen"), action: modell.sucheUpdate)
+                    }
                 }
             }
 
@@ -228,7 +238,8 @@ func einstellungenAlsBild(_ pfad: String, dunkel: Bool? = nil) -> Bool {
     schalter.lies = { WillkommenStand(drive: true, zip: true, autostart: false, driveDa: true) }
     schalter.frisch()
     let modell = EinstellungenModell()
-    modell.lies = { (true, L("Version \("9.9") wird eingespielt, sobald nichts in Arbeit ist"), "auto") }
+    modell.lies = { (true, L("Version \("9.9") ist geladen.") + " " + L("Wird in etwa \(4) Minuten eingespielt."), "auto") }
+    modell.liesUpdateWartet = { true }
     modell.liesVarispeed = { (true, false) }
     modell.frisch()
     let ansicht = NSHostingView(rootView: EinstellungenAnsicht(schalter: schalter, modell: modell).environment(\.controlActiveState, .key))

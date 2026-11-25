@@ -7,6 +7,9 @@ Q="${0:A:h}"
 # Sie bauen eine andere Version in einen anderen Ordner, ohne build/ anzufassen.
 V="${LOGIC2DRIVE_VERSION:-$(<"$Q/VERSION")}"
 B="${LOGIC2DRIVE_BUILD:-$Q/build}"
+# LOGIC2DRIVE_KENNUNG ist nur für Tests der Oberfläche da: Eine Testversion mit der echten Kennung teilt sich
+# Einstellungen und Autostart mit der installierten App.
+K="${LOGIC2DRIVE_KENNUNG:-de.bibletunes.logic2drive}"
 A="$B/Logic2Drive.app"
 rm -rf -- "$B"
 mkdir -p -- "$A/Contents/MacOS" "$A/Contents/Resources"
@@ -33,7 +36,7 @@ cat > "$A/Contents/Info.plist" <<EOF
 <dict>
 	<key>CFBundleExecutable</key><string>Logic2Drive</string>
 	<key>CFBundleIconFile</key><string>AppIcon</string>
-	<key>CFBundleIdentifier</key><string>de.bibletunes.logic2drive</string>
+	<key>CFBundleIdentifier</key><string>$K</string>
 	<key>CFBundleName</key><string>Logic2Drive</string>
 	<key>CFBundleDisplayName</key><string>Logic2Drive</string>
 	<key>CFBundlePackageType</key><string>APPL</string>

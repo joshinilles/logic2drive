@@ -1,5 +1,29 @@
 [
   {
+    "version": "0.6.7",
+    "datum": "2026-11-25",
+    "de": [
+      "Updates von Hand kommen sofort: „Nach Updates suchen“ und der neue Knopf „Jetzt einspielen“ warten nur noch, wenn gerade ein Projekt eingepackt oder zurückgelegt wird. Ein in Logic offenes Projekt hält sie nicht mehr auf.",
+      "Wartet ein Update, steht in den Einstellungen und im Menü, worauf es wartet und wie lange noch."
+    ],
+    "en": [
+      "Manual updates are installed right away: “Check for Updates” and the new “Install Now” button only wait while a project is being packed or put back. A project that is open in Logic no longer holds them back.",
+      "While an update is waiting, Settings and the menu say what it is waiting for and how long it will take."
+    ],
+    "fr": [
+      "Les mises à jour manuelles s’installent tout de suite : « Rechercher des mises à jour » et le nouveau bouton « Installer maintenant » n’attendent plus que si un projet est en cours de compression ou de remise en place. Un projet ouvert dans Logic ne les retient plus.",
+      "Quand une mise à jour attend, les réglages et le menu indiquent ce qu’elle attend et pour combien de temps."
+    ],
+    "ar": [
+      "التحديثات اليدوية تُثبَّت فورًا: «البحث عن تحديثات» والزر الجديد «التثبيت الآن» لا ينتظران إلا إذا كان مشروع قيد الضغط أو الإرجاع. المشروع المفتوح في Logic لم يعد يؤخرهما.",
+      "عندما ينتظر تحديث، تبيّن الإعدادات والقائمة ما الذي ينتظره وكم بقي من الوقت."
+    ],
+    "fa": [
+      "به‌روزرسانی دستی بی‌درنگ نصب می‌شود: «جستجوی به‌روزرسانی» و دکمه‌ی تازه‌ی «اکنون نصب شود» فقط وقتی منتظر می‌مانند که پروژه‌ای در حال فشرده‌سازی یا بازگرداندن باشد. پروژه‌ی باز در Logic دیگر مانع آن‌ها نمی‌شود.",
+      "وقتی به‌روزرسانی منتظر است، تنظیمات و منو نشان می‌دهند منتظر چیست و چقدر مانده است."
+    ]
+  },
+  {
     "version": "0.6.6",
     "datum": "2026-11-25",
     "de": [
