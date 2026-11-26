@@ -3,19 +3,19 @@
     "version": "0.8.0",
     "datum": "2026-11-26",
     "de": [
-      "Neu: Logic2Drive prüft Bounces. Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, misst Logic2Drive sie durch und meldet, wenn eine Strecke viel lauter oder leiser ist als der Rest (typisch ein zu lauter Jingle), wenn eine Pause von mehr als vier Sekunden drin ist oder wenn es übersteuert, knackt oder aussetzt. Ist alles in Ordnung, kommt keine Mitteilung. Abschalten lässt es sich in den Einstellungen unter „Logic“."
+      "Neu: Logic2Drive prüft Bounces. Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, misst Logic2Drive sie durch und meldet, wenn eine Strecke viel lauter oder leiser ist als der Rest (typisch ein zu lauter Jingle), wenn eine Pause von mehr als vier Sekunden drin ist oder wenn der Ton übersteuert oder aussetzt. Ist alles in Ordnung, kommt keine Mitteilung. Abschalten lässt es sich in den Einstellungen unter „Logic“."
     ],
     "en": [
-      "New: Logic2Drive checks bounces. When a new audio file appears in your Drive folder after a bounce, Logic2Drive measures it and tells you if a stretch is much louder or quieter than the rest (typically a jingle that is too loud), if there is a pause of more than four seconds, or if it clips, clicks or drops out. If everything is fine, there is no notification. You can turn it off in Settings under “Logic”."
+      "New: Logic2Drive checks bounces. When a new audio file appears in your Drive folder after a bounce, Logic2Drive measures it and tells you if a stretch is much louder or quieter than the rest (typically a jingle that is too loud), if there is a pause of more than four seconds, or if the sound clips or drops out. If everything is fine, there is no notification. You can turn it off in Settings under “Logic”."
     ],
     "fr": [
-      "Nouveau : Logic2Drive vérifie les bounces. Quand un nouveau fichier audio apparaît dans ton dossier Drive après un bounce, Logic2Drive le mesure et te prévient si un passage est beaucoup plus fort ou plus faible que le reste (typiquement un jingle trop fort), s’il y a une pause de plus de quatre secondes, ou si le son sature, claque ou se coupe. Si tout va bien, il n’y a pas de notification. Tu peux le désactiver dans les réglages, sous « Logic »."
+      "Nouveau : Logic2Drive vérifie les bounces. Quand un nouveau fichier audio apparaît dans ton dossier Drive après un bounce, Logic2Drive le mesure et te prévient si un passage est beaucoup plus fort ou plus faible que le reste (typiquement un jingle trop fort), s’il y a une pause de plus de quatre secondes, ou si le son sature ou se coupe. Si tout va bien, il n’y a pas de notification. Tu peux le désactiver dans les réglages, sous « Logic »."
     ],
     "ar": [
-      "جديد: Logic2Drive يفحص ملفات الـ Bounce. عندما يظهر ملف صوتي جديد في مجلد Drive بعد الـ Bounce، يقيسه Logic2Drive وينبّهك إذا كان مقطع منه أعلى أو أخفض كثيرًا من الباقي (غالبًا شارة موسيقية عالية جدًا)، أو إذا وُجد توقّف لأكثر من أربع ثوانٍ، أو إذا كان في الصوت تشبّع أو طقطقة أو انقطاع. إذا كان كل شيء سليمًا فلا يظهر أي إشعار. يمكن إيقاف ذلك من الإعدادات تحت «Logic»."
+      "جديد: Logic2Drive يفحص ملفات الـ Bounce. عندما يظهر ملف صوتي جديد في مجلد Drive بعد الـ Bounce، يقيسه Logic2Drive وينبّهك إذا كان مقطع منه أعلى أو أخفض كثيرًا من الباقي (غالبًا شارة موسيقية عالية جدًا)، أو إذا وُجد توقّف لأكثر من أربع ثوانٍ، أو إذا كان في الصوت تشبّع أو انقطاع. إذا كان كل شيء سليمًا فلا يظهر أي إشعار. يمكن إيقاف ذلك من الإعدادات تحت «Logic»."
     ],
     "fa": [
-      "تازه: Logic2Drive فایل‌های Bounce را بررسی می‌کند. وقتی پس از Bounce فایل صوتی تازه‌ای در پوشه‌ی Drive تو قرار می‌گیرد، Logic2Drive آن را اندازه می‌گیرد و خبر می‌دهد اگر بخشی از آن خیلی بلندتر یا آرام‌تر از بقیه باشد (معمولاً جینگلی که زیادی بلند است)، اگر مکثی بیش از چهار ثانیه در آن باشد، یا اگر صدا اشباع شود، تق‌تق کند یا قطع شود. اگر همه‌چیز درست باشد، اعلانی نمی‌آید. در تنظیمات، زیر «Logic»، می‌توانی آن را خاموش کنی."
+      "تازه: Logic2Drive فایل‌های Bounce را بررسی می‌کند. وقتی پس از Bounce فایل صوتی تازه‌ای در پوشه‌ی Drive تو قرار می‌گیرد، Logic2Drive آن را اندازه می‌گیرد و خبر می‌دهد اگر بخشی از آن خیلی بلندتر یا آرام‌تر از بقیه باشد (معمولاً جینگلی که زیادی بلند است)، اگر مکثی بیش از چهار ثانیه در آن باشد، یا اگر صدا اشباع یا قطع شود. اگر همه‌چیز درست باشد، اعلانی نمی‌آید. در تنظیمات، زیر «Logic»، می‌توانی آن را خاموش کنی."
     ]
   },
   {

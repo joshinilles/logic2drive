@@ -942,10 +942,9 @@
 "%@–%@ ist %@ LU leiser als der Rest" = "%@–%@ به اندازه‌ی %@ LU آرام‌تر از بقیه است";
 "Pause von %@ s ab %@" = "مکث %@ ثانیه‌ای از %@";
 "übersteuert bei %@" = "اشباع صدا در %@";
-"mögliche Knackser bei %@" = "احتمال تق‌تق در %@";
 "%@ weitere Stellen im Protokoll" = "%@ مورد دیگر در گزارش";
 "Aussetzer bei %@" = "قطعی صدا در %@";
 "„%@“ geprüft: %@." = "«%@» بررسی شد: %@.";
 "„%@“ geprüft: jetzt ohne Auffälligkeiten." = "«%@» بررسی شد: اکنون مورد خاصی ندارد.";
 "Bounces nach dem Export prüfen" = "بررسی Bounceها پس از خروجی گرفتن";
-"Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, prüft Logic2Drive sie und meldet, wenn der Jingle viel lauter oder leiser ist als der Rest, wenn eine Pause von mehr als vier Sekunden drin ist oder wenn es übersteuert, knackt oder aussetzt." = "وقتی پس از Bounce فایل صوتی تازه‌ای در پوشه‌ی Drive تو قرار می‌گیرد، Logic2Drive آن را بررسی می‌کند و خبر می‌دهد اگر جینگل خیلی بلندتر یا آرام‌تر از بقیه باشد، اگر مکثی بیش از چهار ثانیه در آن باشد، یا اگر صدا اشباع شود، تق‌تق کند یا قطع شود.";
+"Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, prüft Logic2Drive sie und meldet, wenn der Jingle viel lauter oder leiser ist als der Rest, wenn eine Pause von mehr als vier Sekunden drin ist oder wenn der Ton übersteuert oder aussetzt." = "وقتی پس از Bounce فایل صوتی تازه‌ای در پوشه‌ی Drive تو قرار می‌گیرد، Logic2Drive آن را بررسی می‌کند و خبر می‌دهد اگر جینگل خیلی بلندتر یا آرام‌تر از بقیه باشد، اگر مکثی بیش از چهار ثانیه در آن باشد، یا اگر صدا اشباع یا قطع شود.";

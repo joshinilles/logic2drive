@@ -127,8 +127,9 @@ Three more things live in the settings window:
   running, Logic2Drive reads it and posts a notification if something stands
   out: a stretch of at least 2 seconds that is 6 LU or more louder than the
   rest (typically the jingle), a stretch of at least 5 seconds that is 8 LU
-  or more quieter, a pause of more than 4 seconds, clipped peaks, clicks and
-  dropouts (the sound breaks off for up to 4 seconds and comes back). A clean file gives no notification; every check is written to
+  or more quieter, a pause of more than 4 seconds, clipped peaks and
+  dropouts (the sound breaks off for up to 4 seconds and comes back). It
+  also looks for clicks, but only writes them to the log (see below). A clean file gives no notification; every check is written to
   the log (lines starting with "Bounce-Prüfung"). If you bounce again after
   a warning and the file is clean now, it says so. The check only reads. It
   cannot change the balance between jingle and voice; that has to be fixed
@@ -364,10 +365,12 @@ the code. Somebody has to be at the Mac for both:
   re-bounce after a warning says so, nothing happens while Logic is not
   running). Not seen: Logic itself writing the file, Drive placeholders
   being skipped (the rule is in the code, no placeholder was at hand), and
-  the notification on screen. Clicks: a first version reported 13 "possible
-  clicks" in 104 real files, and none of them was audible. The search now
-  only takes impulses one millisecond wide and skips hard word onsets after
-  a pause. With that, 115 clean files report no click at all; of clicks put
+  the notification on screen. Clicks are not in the notification: a first
+  version reported 13 "possible clicks" in 104 clean files, and a stricter
+  one (impulses one millisecond wide, no hard word onsets after a pause)
+  reported none in 115 clean files but 10 in the faulty exports described
+  below. Someone listened to all 23 places and heard no click in any of
+  them. The search still runs and writes what it finds to the log; of clicks put
   into real speech on purpose it finds 85 % in WAV and 54 % in MP3. Dropouts
   were tuned on real faults: WAV exports of one season in which the sound
   breaks off for 1.0 or 1.9 seconds on a 16-second grid. The check reports

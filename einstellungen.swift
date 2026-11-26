@@ -128,7 +128,7 @@ struct EinstellungenAnsicht: View {
             Section(L("Logic")) {
                 Toggle(isOn: Binding(get: { modell.bouncePruefung }, set: { modell.bouncePruefung = $0; modell.setzeBouncePruefung($0) })) {
                     Text(L("Bounces nach dem Export prüfen"))
-                    Text(L("Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, prüft Logic2Drive sie und meldet, wenn der Jingle viel lauter oder leiser ist als der Rest, wenn eine Pause von mehr als vier Sekunden drin ist oder wenn es übersteuert, knackt oder aussetzt."))
+                    Text(L("Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, prüft Logic2Drive sie und meldet, wenn der Jingle viel lauter oder leiser ist als der Rest, wenn eine Pause von mehr als vier Sekunden drin ist oder wenn der Ton übersteuert oder aussetzt."))
                 }
                 Toggle(isOn: Binding(get: { modell.varispeed }, set: { modell.varispeed = $0; modell.setzeVarispeed($0) })) {
                     Text(L("Varispeed vor dem Bouncen ausschalten"))

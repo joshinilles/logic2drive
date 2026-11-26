@@ -1,7 +1,7 @@
 // Logic2Drive – Bounce-Prüfung. Ein Bounce ist schnell gemacht und selten noch einmal ganz angehört. Die Wache
 // sieht nach, sobald in einem beobachteten Drive-Ordner eine neue Audiodatei liegt, während Logic läuft, und meldet,
 // was beim Durchhören auffallen würde: eine Strecke, die viel lauter oder leiser ist als der Rest (typisch der
-// Jingle), eine Pause von mehr als vier Sekunden, übersteuerte Spitzen, Knackser und Aussetzer. Die Messung selbst
+// Jingle), eine Pause von mehr als vier Sekunden, übersteuerte Spitzen und Aussetzer. Die Messung selbst
 // steht in pruefung.swift.
 //
 // Was als Bounce gilt, lässt sich von außen nicht sicher sagen: Logic verrät weder Ziel noch Zeitpunkt. Deshalb
@@ -15,6 +15,12 @@ import AppKit
 let audioEndungen: Set<String> = ["mp3", "wav", "aif", "aiff", "m4a"]
 
 enum BounceText {
+    /// Was in die Mitteilung kommt. Knackser nicht: Joshua hat am 26.11.2026 zweimal gegengehört, 13 gemeldete
+    /// Stellen in fehlerfreien Dateien und 10 in den fehlerhaften ERF-Exporten, und keine war zu hören (die beiden
+    /// Aussetzer daneben schon). Die Suche läuft weiter mit und steht im Protokoll, damit sich zeigt, ob sie je
+    /// etwas Hörbares findet.
+    static func meldbar(_ b: PruefBefund) -> [PruefStelle] { b.stellen.filter { $0.art != .knackser } }
+
     static func zeit(_ s: Double) -> String {
         let t = max(0, Int(s.rounded(.down)))
         return "\(t / 60):" + (t % 60 < 10 ? "0" : "") + "\(t % 60)"
@@ -41,9 +47,6 @@ enum BounceText {
             aus.append(L("Pause von \(Int((s.bis - s.von).rounded())) s ab \(zeit(s.von))"))
         }
         if !von(.uebersteuert).isEmpty { aus.append(L("übersteuert bei \(zeiten(von(.uebersteuert)))")) }
-        // „möglich“: Gemessen wird ein kurzer Impuls, der nicht zum Klang ringsum passt. Das kann ein Schnitt ohne
-        // Fade sein, aber auch ein Schmatzer der Stimme. Ob es stört, entscheidet das Ohr.
-        if !von(.knackser).isEmpty { aus.append(L("mögliche Knackser bei \(zeiten(von(.knackser)))")) }
         if !von(.aussetzer).isEmpty { aus.append(L("Aussetzer bei \(zeiten(von(.aussetzer)))")) }
         if mehr > 0 { aus.append(L("\(mehr) weitere Stellen im Protokoll")) }
         return aus
@@ -56,7 +59,7 @@ enum BounceText {
     /// Woran die Wache denselben Befund wiedererkennt: Art und Sekunde jeder Stelle. Eine Fassung derselben Datei,
     /// die nur insgesamt lauter oder leiser ist (die Lautstärke-Angleichung auf dem Server), hat dieselbe Kennung.
     static func kennung(_ b: PruefBefund) -> String {
-        b.stellen.map { "\($0.art.rawValue)\(Int($0.von.rounded()))" }.joined(separator: " ")
+        meldbar(b).map { "\($0.art.rawValue)\(Int($0.von.rounded()))" }.joined(separator: " ")
     }
 }
 
@@ -160,7 +163,7 @@ final class BounceWache {
         geprueft[pfad] = (st, kennung, t)
         notieren("Bounce-Prüfung: „\(name)“ – " + befund.bericht().split(separator: "\n").joined(separator: "; "))
         let stamm = (pfad as NSString).deletingPathExtension
-        if befund.stellen.isEmpty {
+        if BounceText.meldbar(befund).isEmpty {
             // Wer nach einer Warnung neu bounct, soll sehen, dass es jetzt stimmt.
             if let vorher, !vorher.kennung.isEmpty { melden(L("„\(name)“ geprüft: jetzt ohne Auffälligkeiten.")) }
             return

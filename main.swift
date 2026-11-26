@@ -2756,7 +2756,7 @@ case "--pruefe", "--pruefe-text":
         let befund = try BouncePruefung.pruefe(argumente[1])
         if argumente[0] == "--pruefe" {
             print(befund.bericht())
-        } else if !befund.stellen.isEmpty {
+        } else if !BounceText.meldbar(befund).isEmpty {
             print(BounceText.mitteilung(name: (argumente[1] as NSString).lastPathComponent, befund))
         }
     } catch {
