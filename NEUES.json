@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.7.1",
+    "datum": "2026-11-26",
+    "de": [
+      "Logic2Drive öffnet jetzt auch eine Zip, in der das Projekt als einzelne Datei steckt (Drives eigenes Paket-Archiv, etwa wenn jemand die Datei im Finder komprimiert hat). Bisher kam „In der Zip steckt kein Logic-Projekt“. Beim Schließen wird die Zip richtig neu gepackt."
+    ],
+    "en": [
+      "Logic2Drive now also opens a zip that holds the project as a single file (Drive's own package archive, for example when someone compressed that file in Finder). Until now it said “There’s no Logic project in the zip”. When you close the project, the zip is repacked properly."
+    ],
+    "fr": [
+      "Logic2Drive ouvre maintenant aussi un zip dans lequel le projet se trouve sous forme d’un seul fichier (l’archive de paquet propre à Drive, par exemple quand quelqu’un a compressé ce fichier dans le Finder). Jusqu’ici, le message était « Le zip ne contient pas de projet Logic ». À la fermeture du projet, le zip est refait correctement."
+    ],
+    "ar": [
+      "يفتح Logic2Drive الآن أيضًا ملف Zip يوجد المشروع بداخله كملف واحد (أرشيف الحزمة الخاص بـ Drive، مثلًا عندما يضغط أحدهم هذا الملف في Finder). حتى الآن كانت تظهر رسالة بأن ملف Zip لا يحتوي على مشروع Logic. عند إغلاق المشروع يُعاد ضغط الملف بالشكل الصحيح."
+    ],
+    "fa": [
+      "Logic2Drive حالا فایل Zip‌ای را هم باز می‌کند که پروژه در آن به‌صورت یک فایل تکی قرار دارد (بایگانی بسته‌ی خود Drive، مثلاً وقتی کسی آن فایل را در Finder فشرده کرده باشد). تا حالا پیام می‌داد که در فایل Zip پروژه‌ی Logic نیست. هنگام بستن پروژه، فایل Zip درست از نو ساخته می‌شود."
+    ]
+  },
+  {
     "version": "0.7.0",
     "datum": "2026-11-25",
     "de": [

@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.7.0). It has been tested on one Mac with test
+**Status: early version (0.7.1). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -48,6 +48,12 @@ packing and unpacking so that nobody has to think about it.
   counter, `Name (2).logicx.zip`. A project that is closed unchanged keeps
   its zip as it is. The lock file is named after the zip as it is in Drive
   and moves with it, so that Macs on older versions keep seeing it.
+- **Zips that hold Drive's package archive:** Drive stores a package that was
+  uploaded unpacked as a tar file (`Name.logicx.pkgf`). On other Macs this
+  shows up as a single file `Name.logicx`, and compressing that file in
+  Finder gives a zip without a project folder. Logic2Drive unpacks the tar
+  from such a zip and opens the project. When the project is closed, the zip
+  is repacked with a proper project folder, even if nothing was changed.
 - **Which projects:** every project whose upload hangs, and every project
   that was worked on at this Mac (its upload was seen here, or it was seen
   open in Logic and saved since). Projects that are already in the cloud and
@@ -282,6 +288,10 @@ the code. Somebody has to be at the Mac for both:
   not shown. Not yet seen: the questions on screen, a quarantined download
   (where macOS runs the app from a read-only copy), and the permission macOS
   asks for before a file in Downloads can be moved to the Trash.
+- Opening a zip that holds Drive's package archive (0.7.1) in a real Drive
+  folder. Checked with a copy of the zip it was reported for and with test
+  T42, both in a local folder with Logic; T42 has not yet been part of a
+  full run in Drive.
 - The naming rule (0.6.8) beyond the Mac. In the full run in a real Drive
   folder all its tests passed (T33 to T41): Drive's local folder keeps the
   composed umlaut, accepts a project with a trailing space, and a zip that is

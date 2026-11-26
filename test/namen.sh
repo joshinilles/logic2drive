@@ -177,6 +177,20 @@ if [[ -z $LOKAL ]]; then
   schliesse "Helfer-Test-N8"; warte 'leer' 90
   pruefe "ohne Änderung bleibt die Zip, wie sie ist" 'heisst "$D" "$R8.logicx.zip" && [[ $(md5 -q "$D/$R8.logicx.zip") == $m8 ]]'
   pruefe "Sperre ist weg" '[[ ! -e "$D/$R8.logicx.inarbeit" ]]'
+
+  # Drive speichert ein ungepackt hochgeladenes Paket als tar. Auf anderen Macs ist das eine einzelne Datei
+  # „Name.logicx“; im Finder komprimiert, wird daraus eine Zip ohne Projektordner (26.11.2026, Claudia/Sören).
+  print -r -- "T42 Zip, in der das Projekt als Drive-Archiv (tar) steckt: öffnen und heilen (0.7.1)"
+  R9="Helfer-Test-N9"; rm -rf -- "$T/x/pk"; mkdir -p "$T/x/pk/110105343" "$T/x/pk/zip"
+  ditto "$V" "$T/x/pk/110105343"; print -r -- n9 > "$T/x/pk/110105343/Resources/merkmal-n9.txt"
+  tar -cf "$T/x/pk/zip/$R9.logicx" -C "$T/x/pk" 110105343
+  ditto -c -k --sequesterRsrc --keepParent "$T/x/pk/zip/$R9.logicx" "$D/$R9.logicx.zip"
+  merke; "$B" --oeffne "$D/$R9.logicx.zip"; warte 'gesehen' 120
+  pruefe "geöffnet, das Protokoll nennt das Drive-Archiv" 'seit "als Drive-Archiv, ausgepackt: $R9" && ! seit "kein Logic-Projekt"'
+  pruefe "die Arbeitskopie ist das ganze Projekt" 'nichtsFehlt "$T/x/pk/110105343" "$T/arbeit/$R9.logicx"'
+  schliesse "$R9"; warte 'seit "Zurückgelegt: " && leer' 180
+  pruefe "auch ohne Änderung neu gepackt: in der Zip liegt jetzt der Projektordner" 'drin "$D/$R9.logicx.zip" "$R9.logicx/Resources/merkmal-n9.txt"'
+  pruefe "Sperre ist weg" '[[ ! -e "$D/$R9.logicx.inarbeit" ]]'
 else
   stopp
   print -r -- "=== Ergebnis (lokal, ohne Drive und Logic): $ok bestanden, $schlecht fehlgeschlagen"

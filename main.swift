@@ -427,6 +427,33 @@ func findeProjekt(_ wurzel: String) -> String? {
     return nil
 }
 
+/// Drive speichert ein ungepackt hochgeladenes Paket als tar („Name.logicx.pkgf“). Auf anderen Macs kommt es als
+/// einzelne Datei „Name.logicx“ an. Wer die im Finder komprimiert, legt eine Zip ohne Projektordner ab
+/// (26.11.2026, „Tagesgeschichten Weihnachten_Teil 2“). Liefert die tar-Datei, wenn in `wurzel` genau eine steckt.
+func findeTar(_ wurzel: String) -> String? {
+    var treffer: [String] = []
+    for a in (try? fm.contentsOfDirectory(atPath: wurzel)) ?? [] where a != "__MACOSX" {
+        let p = wurzel + "/" + a
+        guard let s = info(p) else { continue }
+        if istDatei(s) { if istTar(p) { treffer.append(p) } }
+        else if istOrdner(s) {
+            for b in (try? fm.contentsOfDirectory(atPath: p)) ?? [] {
+                let q = p + "/" + b
+                if let t = info(q), istDatei(t), istTar(q) { treffer.append(q) }
+            }
+        }
+    }
+    return treffer.count == 1 ? treffer[0] : nil
+}
+
+/// tar trägt ab Byte 257 die Kennung „ustar“ (POSIX wie GNU).
+func istTar(_ p: String) -> Bool {
+    guard let h = FileHandle(forReadingAtPath: p) else { return false }
+    defer { try? h.close() }
+    guard (try? h.seek(toOffset: 257)) != nil, let d = try? h.read(upToCount: 5) else { return false }
+    return d == Data("ustar".utf8)
+}
+
 // MARK: - Einstellungen und Zustand
 
 struct Einstellungen: Codable {
@@ -1534,7 +1561,20 @@ final class Helfer {
         r = lauf("/usr/bin/ditto", ["-x", "-k", kopie, aus])
         if r.code != 0 { throw HelferFehler(L("Entpacken fehlgeschlagen: \(r.text.prefix(160))")) }
         try? fm.removeItem(atPath: aus + "/__MACOSX")
-        guard let projekt = findeProjekt(aus) else { throw HelferFehler(L("In der Zip steckt kein Logic-Projekt")) }
+        var gefunden = findeProjekt(aus)
+        var ausArchiv = false
+        if gefunden == nil, let tar = findeTar(aus) {
+            // Kein Projektordner, aber Drives Paket-Archiv als einzelne Datei: daraus auspacken. Verknüpfungen
+            // fängt die Prüfung unten ab, Pfade nach außen lehnt tar von sich aus ab.
+            let roh = w + "/tar"
+            try fm.createDirectory(atPath: roh, withIntermediateDirectories: false)
+            r = lauf("/usr/bin/tar", ["-xf", tar, "-C", roh])
+            if r.code != 0 { throw HelferFehler(L("Entpacken fehlgeschlagen: \(r.text.prefix(160))")) }
+            gefunden = findeProjekt(roh)
+            ausArchiv = gefunden != nil
+            if ausArchiv { protokoll(L("In der Zip lag das Projekt als Drive-Archiv, ausgepackt: \(name)")) }
+        }
+        guard let projekt = gefunden else { throw HelferFehler(L("In der Zip steckt kein Logic-Projekt")) }
         guard let p = abdruck(projekt), !p.hatLink else { throw HelferFehler(L("Die Zip enthält Verknüpfungen, die ich nicht übernehme")) }
         try fm.createDirectory(atPath: e.arbeitsordner, withIntermediateDirectories: true)
         // Die Arbeitskopie heißt schon so, wie die Zip nach dem Zurücklegen heißen wird. Im Projekt selbst wird
@@ -1557,7 +1597,9 @@ final class Helfer {
         a.basisGroesse = Int64(k.st_size)
         a.basisDatum = aenderungszeit(vorher ?? s)
         a.basisMD5 = summe
-        a.abdruckBeimOeffnen = nachher.hash
+        // Aus dem Drive-Archiv geholt: Beim Schließen wird auch ohne Änderung neu gepackt, damit in Drive danach
+        // eine Zip mit Projektordner liegt, die jeder Mac und der Packer auf der Synology lesen können.
+        a.abdruckBeimOeffnen = ausArchiv ? nil : nachher.hash
         a.geoeffnetAm = jetzt()
         a.markerPfad = marker
         a.meldung = L("Wird in Logic geöffnet")
