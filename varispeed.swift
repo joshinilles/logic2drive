@@ -3,13 +3,16 @@
 // nach, sobald der Bounce-Dialog aufgeht, schaltet Varispeed aus und meldet das.
 //
 // Gemessen mit Logic Pro 13.0 (25.11.2026): Der Knopf in der Steuerungsleiste trägt die Kennung
-// „controlBar/varispeedButton“, sein Wert ist 0 oder 1, und er lässt sich auch bei offenem Bounce-Dialog drücken.
-// Ist der Knopf in der Steuerungsleiste ausgeblendet, sieht die Wache nichts.
+// „controlBar/varispeedButton“, sein Wert ist 0 oder 1. Ist der Knopf in der Steuerungsleiste ausgeblendet,
+// sieht die Wache nichts.
 //
 // Logic Pro 12.4 (gemessen am 25.11.2026 auf einem zweiten Mac, über --varispeed selbsttest): Der Knopf hat keine
-// Kennung, er ist ein AXButton mit der Beschreibung „Varispeed“ und dem Wert 0 oder 1. Er lässt sich drücken,
-// aber nicht, solange der Bounce-Dialog offen ist: Logic meldet Erfolg und tut nichts. Dort schließt die Wache
-// den Dialog deshalb, schaltet Varispeed aus und öffnet den Dialog über das Menü wieder.
+// Kennung, er ist ein AXButton mit der Beschreibung „Varispeed“ und dem Wert 0 oder 1.
+//
+// Solange der Bounce-Dialog offen ist, zählt ein Druck auf den Knopf nicht: Mal tut Logic nichts, mal zeigt der
+// Knopf danach „aus“ und Logic bounct trotzdem in der geänderten Geschwindigkeit (26.11.2026, Logic 12.4:
+// Knopf nach dem Druck auf 0, die Datei war trotzdem um ein Viertel zu kurz). Die Wache schließt den Dialog
+// deshalb immer, schaltet Varispeed dann aus und öffnet den Dialog über das Menü wieder.
 // Was die Wache beim Öffnen eines Dialogs sieht, schreibt sie ins Protokoll.
 
 import AppKit
@@ -87,8 +90,7 @@ enum Varispeed {
         return text(e, "AXDescription").lowercased() == "varispeed" || text(e, "AXTitle").lowercased() == "varispeed"
     }
 
-    /// Nur für Tests: verhält sich wie mit Logic 12.4 – keine Kennung am Knopf, und bei offenem Bounce-Dialog
-    /// wird der Knopf gar nicht erst gedrückt.
+    /// Nur für Tests: sucht den Knopf wie in Logic 12.4 an seiner Beschreibung statt an der Kennung.
     static let ohneKennung = ProcessInfo.processInfo.environment["LOGIC2DRIVE_VARISPEED_WIE_12"] != nil
 
     /// Der Menüpunkt mit dem Kürzel ⌘B ohne weitere Tasten („Projekt oder Abschnitt bouncen“), unabhängig von
@@ -360,17 +362,14 @@ final class VarispeedWache {
         notieren("Varispeed-Wache: Bounce-Dialog offen, Varispeed ist \(an.isEmpty ? "aus" : "an") (Wert \(alle.map { Varispeed.text($0, "AXValue") }.joined(separator: ", ")))")
         guard !an.isEmpty else { return }
         // Zu welchem Projekt der Dialog gehört, verrät Logic nicht. Bei mehreren offenen Projekten gilt das Hauptfenster.
-        if !Varispeed.ohneKennung, Varispeed.schalteAus(an[0], zehntel: 5) {
-            melden(L("Varispeed war noch an. Logic2Drive hat es für den Bounce ausgeschaltet."))
-            return
-        }
-        // Logic 12 nimmt den Knopf bei offenem Dialog nicht an: Dialog schließen, ausschalten, Dialog wieder öffnen.
-        // Der Dialog ist in diesem Moment gerade erst aufgegangen, es geht also keine Eingabe verloren.
+        // Bei offenem Dialog ist auf den Knopf kein Verlass, auch wenn er danach „aus“ zeigt: Dialog schließen,
+        // ausschalten, Dialog wieder öffnen. Er ist in diesem Moment gerade erst aufgegangen, es geht also keine
+        // Eingabe verloren.
         guard let dialog = Varispeed.bounceDialog(app), Varispeed.brichAb(dialog, in: app) else {
             melden(L("Achtung: Varispeed ist noch an und ließ sich nicht ausschalten. Schalte es in Logic aus, bevor du bounct."))
             return
         }
-        notieren("Varispeed-Wache: Knopf reagiert bei offenem Dialog nicht, Dialog geschlossen")
+        notieren("Varispeed-Wache: Dialog geschlossen, um Varispeed auszuschalten")
         // Gleich nach dem Schließen nimmt Logic 12 den Knopf noch nicht an (gemessen: eine Sekunde reicht nicht immer).
         // Deshalb mehrere Anläufe, und vor jedem neu nachsehen: Ein verspätet angekommener Druck soll nicht durch
         // den nächsten wieder aufgehoben werden.

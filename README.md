@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.7.1). It has been tested on one Mac with test
+**Status: early version (0.7.2). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -116,8 +116,8 @@ Two more things live in the settings window:
   90). The backup cannot be turned off.
 - **Turn off Varispeed before bouncing** (off by default): Logic bounces at
   the Varispeed rate if Varispeed is still on. When the Bounce dialog opens
-  and the Varispeed button is lit, Logic2Drive presses it and posts a
-  notification (in Logic 12 it closes and reopens the dialog to do so). This
+  and the Varispeed button is lit, Logic2Drive closes the dialog, presses the
+  button, opens the dialog again and posts a notification. This
   reads Logic's user interface, so macOS wants the
   Accessibility permission for Logic2Drive (System Settings > Privacy &
   Security > Accessibility). The Varispeed button must be visible in Logic's
@@ -324,11 +324,15 @@ the code. Somebody has to be at the Mac for both:
   it. Its logic was run through `--varispeed selbsttest`, which switches
   Varispeed on, opens the Bounce dialog, lets the guard act and puts
   everything back: against Logic Pro 13.0 on one Mac and Logic Pro 12.4 on
-  another, both with the German interface. In Logic 13 the button can be
-  pressed while the dialog is open (off after 0.25 s). Logic 12.4 has no
-  `controlBar/varispeedButton` identifier and ignores the button while the
-  dialog is open, so there the guard closes the dialog, turns Varispeed off
-  and opens the dialog again. Not tested: other languages, several open
+  another, both with the German interface. Logic 12.4 has no
+  `controlBar/varispeedButton` identifier. A press on the button does not
+  count while the dialog is open: sometimes Logic 12.4 ignores it, and once
+  (26 Nov 2026) the button showed "off" afterwards and the bounce still came
+  out at the Varispeed rate. Since 0.7.2 the guard therefore always closes
+  the dialog, turns Varispeed off and opens the dialog again, in every Logic
+  version. That path ran on Logic 12.4 in real use on 25 Nov 2026 and on
+  Logic 13 through the self-test; it was not run again on Logic 13 after the
+  change in 0.7.2. Not tested: other languages, several open
   projects, and the other bounce and export commands (only "Bounce Project or
   Section" is watched). The guard writes what it sees to the log (lines
   starting with "Varispeed-Wache").

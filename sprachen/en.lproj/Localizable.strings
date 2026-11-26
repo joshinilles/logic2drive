@@ -866,7 +866,6 @@
 "Systemeinstellungen öffnen" = "Open System Settings";
 
 /* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
-"Varispeed war noch an. Logic2Drive hat es für den Bounce ausgeschaltet." = "Varispeed was still on. Logic2Drive turned it off for the bounce.";
 
 /* 0.6.4: Aufbewahrungsdauer und Varispeed-Wache */
 "Achtung: Varispeed ist noch an und ließ sich nicht ausschalten. Schalte es in Logic aus, bevor du bounct." = "Warning: Varispeed is still on and couldn’t be turned off. Turn it off in Logic before you bounce.";

@@ -1,5 +1,24 @@
 [
   {
+    "version": "0.7.2",
+    "datum": "2026-11-26",
+    "de": [
+      "Varispeed vor dem Bounce: Logic2Drive schließt den Bounce-Dialog jetzt immer kurz, schaltet Varispeed aus und öffnet den Dialog wieder. Bisher wurde in manchen Fällen nur der Knopf gedrückt; Logic zeigte Varispeed dann als aus und bouncte trotzdem zu schnell."
+    ],
+    "en": [
+      "Varispeed before bouncing: Logic2Drive now always closes the Bounce dialog for a moment, turns Varispeed off and opens the dialog again. Until now it sometimes only pressed the button; Logic then showed Varispeed as off and still bounced too fast."
+    ],
+    "fr": [
+      "Varispeed avant le bounce : Logic2Drive ferme maintenant toujours brièvement la fenêtre de bounce, désactive Varispeed et rouvre la fenêtre. Jusqu’ici, il se contentait parfois d’appuyer sur le bouton ; Logic affichait alors Varispeed comme désactivé et exportait quand même trop vite."
+    ],
+    "ar": [
+      "Varispeed قبل الـ Bounce: يغلق Logic2Drive الآن نافذة الـ Bounce دائمًا للحظة، ثم يوقف Varispeed ويفتح النافذة من جديد. حتى الآن كان يكتفي أحيانًا بالضغط على الزر، فيُظهر Logic أن Varispeed متوقف لكنه يصدّر الملف بسرعة زائدة."
+    ],
+    "fa": [
+      "Varispeed پیش از Bounce: Logic2Drive حالا همیشه پنجره‌ی Bounce را برای لحظه‌ای می‌بندد، Varispeed را خاموش می‌کند و پنجره را دوباره باز می‌کند. تا حالا گاهی فقط دکمه را می‌زد؛ Logic آن‌وقت Varispeed را خاموش نشان می‌داد ولی باز هم فایل را تندتر می‌ساخت."
+    ]
+  },
+  {
     "version": "0.7.1",
     "datum": "2026-11-26",
     "de": [
