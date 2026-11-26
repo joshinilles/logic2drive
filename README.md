@@ -3,7 +3,7 @@
 A small macOS menu bar app that keeps Logic Pro projects in Google Drive as
 zip files, and opens those zips in Logic with a double-click.
 
-**Status: early version (0.7.2). It has been tested on one Mac with test
+**Status: early version (0.8.0). It has been tested on one Mac with test
 projects and runs on a second one with real projects since 25 Nov 2026. Read "Known limitations" and "Not yet
 tested" before you rely on it.**
 
@@ -109,7 +109,7 @@ did.
 The first time it needs to know which projects are open, macOS asks whether
 Logic2Drive may control Logic Pro. Click "Allow".
 
-Two more things live in the settings window:
+Three more things live in the settings window:
 
 - **Keep originals:** how long the original of a packed project stays in the
   local backup folder before it goes to the Trash, 30 to 180 days (default
@@ -122,6 +122,20 @@ Two more things live in the settings window:
   Accessibility permission for Logic2Drive (System Settings > Privacy &
   Security > Accessibility). The Varispeed button must be visible in Logic's
   control bar.
+- **Check bounces after export** (on by default): when a new audio file
+  (MP3, WAV, AIFF, M4A) appears in a watched Drive folder while Logic is
+  running, Logic2Drive reads it and posts a notification if something stands
+  out: a stretch of at least 2 seconds that is 6 LU or more louder than the
+  rest (typically the jingle), a stretch of at least 5 seconds that is 8 LU
+  or more quieter, a pause of more than 4 seconds, clipped peaks, clicks and
+  dropouts. A clean file gives no notification; every check is written to
+  the log (lines starting with "Bounce-Prüfung"). If you bounce again after
+  a warning and the file is clean now, it says so. The check only reads. It
+  cannot change the balance between jingle and voice; that has to be fixed
+  in the Logic project. Only bounces saved into a watched Drive folder are
+  seen, and only files written in the last ten minutes: files that Drive
+  fetches from colleagues stay untouched, because they are placeholders
+  without content on this Mac.
 
 ## Languages
 
@@ -190,7 +204,8 @@ repository address in `update.swift` and `main.swift` and sign with your own
 Developer ID.
 
 Source files: `main.swift` (workflow and menu), `willkommen.swift` (welcome
-window), `einstellungen.swift` (settings window), `varispeed.swift` (Varispeed guard), `zeichen.swift` (menu bar
+window), `einstellungen.swift` (settings window), `varispeed.swift` (Varispeed guard), `pruefung.swift` (audio
+measurements for the bounce check), `bouncewache.swift` (notices new bounces and words the notification), `zeichen.swift` (menu bar
 icon and app icon), `update.swift` (updates), `texte.swift` (languages). Identifiers and comments are in German.
 
 | Call | Effect |
@@ -201,6 +216,8 @@ icon and app icon), `update.swift` (updates), `texte.swift` (languages). Identif
 | `--trocken <folder …>` | only lists which projects it would pack |
 | `--status` | jobs in progress as JSON |
 | `--zuletzt` | the "last thing done" line of the menu |
+| `--pruefe <audio file>` | runs the bounce check on one file and prints the findings |
+| `--pruefe-text <audio file>` | prints the notification the check would post (empty if nothing stands out) |
 | `--update-suchen` | asks for a newer version, changes nothing |
 | `--version` | version number |
 
@@ -215,6 +232,7 @@ notifications, `LOGIC2DRIVE_SPRACHE=de|en|fr|ar|fa` forces a language.
 zsh -f test/update.sh <work folder>   # updater, about 3 minutes, needs a Developer ID
 python3 test/texte.py                 # translations complete?
 zsh -f test/namen.sh <work folder>    # naming rule, about 2 minutes, no Drive, no Logic
+zsh -f test/pruefung.sh               # bounce check on generated audio, needs ffmpeg
 zsh -f test/installation.sh <work folder>   # installer file, about 3 minutes, no Logic
 zsh -f test/starten.sh                # the full run, see below
 ```
@@ -336,6 +354,22 @@ the code. Somebody has to be at the Mac for both:
   projects, and the other bounce and export commands (only "Bounce Project or
   Section" is watched). The guard writes what it sees to the log (lines
   starting with "Varispeed-Wache").
+- The bounce check (0.8.0) after a real bounce out of Logic. What ran: the
+  measurements against generated audio (`test/pruefung.sh`, 38 of 38) and
+  against real bounces (integrated loudness within 0.1 LU of ffmpeg; the
+  eight stories with a jingle 7 to 8 LU too loud are all reported, the three
+  without are not); the watcher in a test folder with copied files (a fresh
+  file is checked, an old one is not, a file deleted before the check is
+  skipped, PCM plus MP3 of one bounce give one notification, a clean
+  re-bounce after a warning says so, nothing happens while Logic is not
+  running). Not seen: Logic itself writing the file, Drive placeholders
+  being skipped (the rule is in the code, no placeholder was at hand), and
+  the notification on screen. Clicks: on 96 real voice files the check
+  reports 12 "possible clicks" in 10 files; whether those are audible edits
+  or mouth noises has not been listened to yet, so the wording stays
+  "possible". Clipping inside an MP3 is only found when it is heavy: Apple's
+  decoder caps at full scale and the encoder rounds the flat tops away.
+  Music with drums was only tested with a generated beat.
 - The welcome window on a fresh Mac, and on a Mac without Google Drive.
 - The French, Arabic and Farsi translations have not been read by native
   speakers. Right-to-left layout has only been looked at as a rendered image.

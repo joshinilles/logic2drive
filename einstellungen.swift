@@ -42,6 +42,9 @@ final class EinstellungenModell: ObservableObject {
     var setzeAufbewahrung: (Int) -> Void = { _ in }
     var liesVarispeed: () -> (ein: Bool, erlaubt: Bool) = { (false, true) }
     var setzeVarispeed: (Bool) -> Void = { _ in }
+    @Published var bouncePruefung = true
+    var liesBouncePruefung: () -> Bool = { true }
+    var setzeBouncePruefung: (Bool) -> Void = { _ in }
     let neues = Array(ladeNeues().prefix(3))
 
     func frisch() {
@@ -56,6 +59,8 @@ final class EinstellungenModell: ObservableObject {
         let v = liesVarispeed()
         if v.ein != varispeed { varispeed = v.ein }
         if v.erlaubt != varispeedErlaubt { varispeedErlaubt = v.erlaubt }
+        let b = liesBouncePruefung()
+        if b != bouncePruefung { bouncePruefung = b }
     }
 }
 
@@ -121,6 +126,10 @@ struct EinstellungenAnsicht: View {
             }
 
             Section(L("Logic")) {
+                Toggle(isOn: Binding(get: { modell.bouncePruefung }, set: { modell.bouncePruefung = $0; modell.setzeBouncePruefung($0) })) {
+                    Text(L("Bounces nach dem Export prüfen"))
+                    Text(L("Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, prüft Logic2Drive sie und meldet, wenn der Jingle viel lauter oder leiser ist als der Rest, wenn eine Pause von mehr als vier Sekunden drin ist oder wenn es übersteuert, knackt oder aussetzt."))
+                }
                 Toggle(isOn: Binding(get: { modell.varispeed }, set: { modell.varispeed = $0; modell.setzeVarispeed($0) })) {
                     Text(L("Varispeed vor dem Bouncen ausschalten"))
                     Text(L("Ist Varispeed noch an, wenn du in Logic den Bounce-Dialog öffnest, schaltet Logic2Drive es aus und meldet das. Der Varispeed-Knopf muss dafür in der Steuerungsleiste von Logic zu sehen sein."))

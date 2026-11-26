@@ -2116,6 +2116,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let einstellungen = EinstellungenFenster()
     let varispeedWache = VarispeedWache()
     var varispeedEin: Bool { UserDefaults.standard.bool(forKey: "varispeedWache") }
+    let bounceWache = BounceWache()
+    // Von Anfang an ein: Die Prüfung liest nur und meldet sich nur, wenn etwas auffällt.
+    var bouncePruefungEin: Bool { UserDefaults.standard.object(forKey: "bouncePruefung") as? Bool ?? true }
     var updateText: String?         // Zeile im Menü, wenn eine neue Version bekannt ist
     var updateSeite: URL?           // gesetzt, wenn die neue Version nur von Hand zu holen ist
     var wartendesUpdate: (app: String, version: String, team: String)?
@@ -2153,7 +2156,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         if nachProgrammeUmziehen() { return }
         beobachtet = helfer.e.ordner
-        helfer.ordnerGeaendert = { [weak self] o in DispatchQueue.main.async { self?.beobachtet = o } }
+        helfer.ordnerGeaendert = { [weak self] o in
+            DispatchQueue.main.async {
+                self?.beobachtet = o
+                if self?.bouncePruefungEin == true { self?.bounceWache.start(ordner: o) }
+            }
+        }
         helfer.start()      // lädt zuerst die Aufträge, die Warteschlange hält die Reihenfolge
         gestartet = true
         willkommen.modell.lies = { [weak self] in
@@ -2186,6 +2194,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         varispeedWache.melden = { text in helfer.q.async { melde(text) } }
         varispeedWache.notieren = { text in helfer.q.async { protokoll(text) } }
         if varispeedEin { varispeedWache.start() }
+        einstellungen.modell.liesBouncePruefung = { [weak self] in self?.bouncePruefungEin ?? true }
+        einstellungen.modell.setzeBouncePruefung = { [weak self] in self?.bouncePruefungSetzen($0) }
+        bounceWache.melden = { text in helfer.q.async { melde(text) } }
+        bounceWache.notieren = { text in helfer.q.async { protokoll(text) } }
+        if bouncePruefungEin { bounceWache.start(ordner: helfer.e.ordner) }
         if UserDefaults.standard.bool(forKey: "einstellungenNachStart") {
             UserDefaults.standard.removeObject(forKey: "einstellungenNachStart")
             einstellungenZeigen()
@@ -2373,6 +2386,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         } else {
             varispeedWache.stopp()
         }
+    }
+
+    func bouncePruefungSetzen(_ ein: Bool) {
+        UserDefaults.standard.set(ein, forKey: "bouncePruefung")
+        if ein { bounceWache.start(ordner: beobachtet.isEmpty ? helfer.e.ordner : beobachtet) } else { bounceWache.stopp() }
     }
 
     @objc func autostartUmschalten() { autostartSetzen(SMAppService.mainApp.status != .enabled) }
@@ -2730,6 +2748,28 @@ case "--varispeed":
         wache.start()
         RunLoop.main.run()
     }
+case "--pruefe", "--pruefe-text":
+    // Nur zum Prüfen: --pruefe <Audiodatei> gibt den Befund der Bounce-Prüfung aus, --pruefe-text die Mitteilung
+    // dazu (leer, wenn nichts auffällt).
+    guard argumente.count > 1 else { print("Aufruf: --pruefe <Audiodatei>"); exit(2) }
+    do {
+        let befund = try BouncePruefung.pruefe(argumente[1])
+        if argumente[0] == "--pruefe" {
+            print(befund.bericht())
+        } else if !befund.stellen.isEmpty {
+            print(BounceText.mitteilung(name: (argumente[1] as NSString).lastPathComponent, befund))
+        }
+    } catch {
+        print("Fehler: \(error.localizedDescription)")
+        exit(1)
+    }
+case "--bounce-wache":
+    // Nur zum Prüfen: lässt die Bounce-Wache im Vordergrund über die genannten Ordner laufen.
+    let wache = BounceWache()
+    wache.melden = { print("MELDUNG: " + $0); fflush(stdout) }
+    wache.notieren = { print($0); fflush(stdout) }
+    wache.start(ordner: Array(argumente.dropFirst()))
+    RunLoop.main.run()
 case "--zuletzt":
     print(letzteMeldung() ?? "")
 case "--status":

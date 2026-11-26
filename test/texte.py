@@ -13,7 +13,7 @@ import re
 import sys
 
 WURZEL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-QUELLEN = ["main.swift", "willkommen.swift", "update.swift", "zeichen.swift", "einstellungen.swift", "varispeed.swift"]
+QUELLEN = ["main.swift", "willkommen.swift", "update.swift", "zeichen.swift", "einstellungen.swift", "varispeed.swift", "bouncewache.swift"]
 SPRACHEN = ["en", "fr", "ar", "fa"]
 
 

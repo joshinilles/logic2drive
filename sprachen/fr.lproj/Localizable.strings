@@ -935,3 +935,17 @@
 "Die Installationsdatei ließ sich nicht wegräumen" = "Impossible de supprimer le fichier d’installation";
 "Wirf „Logic2Drive“ im Finder aus und leg „%@“ selbst in den Papierkorb." = "Éjecte « Logic2Drive » dans le Finder et mets toi-même « %@ » à la Corbeille.";
 "Aufruf: --dmg-bild <Ordner>" = "Utilisation : --dmg-bild <Ordner>";
+
+/* Bounce-Prüfung (0.8.0) */
+"%@ und %@ weitere" = "%@ et %@ autres";
+"%@–%@ ist %@ LU lauter als der Rest" = "%@–%@ est %@ LU plus fort que le reste";
+"%@–%@ ist %@ LU leiser als der Rest" = "%@–%@ est %@ LU plus faible que le reste";
+"Pause von %@ s ab %@" = "pause de %@ s à partir de %@";
+"übersteuert bei %@" = "saturation à %@";
+"mögliche Knackser bei %@" = "clics possibles à %@";
+"%@ weitere Stellen im Protokoll" = "%@ autres dans le journal";
+"Aussetzer bei %@" = "coupures à %@";
+"„%@“ geprüft: %@." = "« %@ » vérifié : %@.";
+"„%@“ geprüft: jetzt ohne Auffälligkeiten." = "« %@ » vérifié : plus rien à signaler.";
+"Bounces nach dem Export prüfen" = "Vérifier les bounces après l’export";
+"Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, prüft Logic2Drive sie und meldet, wenn der Jingle viel lauter oder leiser ist als der Rest, wenn eine Pause von mehr als vier Sekunden drin ist oder wenn es übersteuert, knackt oder aussetzt." = "Quand un nouveau fichier audio apparaît dans ton dossier Drive après un bounce, Logic2Drive le vérifie et te prévient si le jingle est beaucoup plus fort ou plus faible que le reste, s’il y a une pause de plus de quatre secondes, ou si le son sature, claque ou se coupe.";

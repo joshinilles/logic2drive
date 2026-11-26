@@ -935,3 +935,17 @@
 "Die Installationsdatei ließ sich nicht wegräumen" = "تعذّرت إزالة ملف التثبيت";
 "Wirf „Logic2Drive“ im Finder aus und leg „%@“ selbst in den Papierkorb." = "أخرِج «Logic2Drive» في Finder وانقل «%@» إلى سلة المهملات بنفسك.";
 "Aufruf: --dmg-bild <Ordner>" = "الاستخدام: --dmg-bild <Ordner>";
+
+/* Bounce-Prüfung (0.8.0) */
+"%@ und %@ weitere" = "%@ و%@ أخرى";
+"%@–%@ ist %@ LU lauter als der Rest" = "%@–%@ أعلى من الباقي بمقدار %@ LU";
+"%@–%@ ist %@ LU leiser als der Rest" = "%@–%@ أخفض من الباقي بمقدار %@ LU";
+"Pause von %@ s ab %@" = "توقّف لمدة %@ ث ابتداءً من %@";
+"übersteuert bei %@" = "تشبّع في الصوت عند %@";
+"mögliche Knackser bei %@" = "طقطقة محتملة عند %@";
+"%@ weitere Stellen im Protokoll" = "%@ مواضع أخرى في السجل";
+"Aussetzer bei %@" = "انقطاع عند %@";
+"„%@“ geprüft: %@." = "تم فحص «%@»: %@.";
+"„%@“ geprüft: jetzt ohne Auffälligkeiten." = "تم فحص «%@»: لا شيء غير عادي الآن.";
+"Bounces nach dem Export prüfen" = "فحص ملفات الـ Bounce بعد التصدير";
+"Liegt nach einem Bounce eine neue Audiodatei in deinem Drive-Ordner, prüft Logic2Drive sie und meldet, wenn der Jingle viel lauter oder leiser ist als der Rest, wenn eine Pause von mehr als vier Sekunden drin ist oder wenn es übersteuert, knackt oder aussetzt." = "عندما يظهر ملف صوتي جديد في مجلد Drive بعد الـ Bounce، يفحصه Logic2Drive وينبّهك إذا كانت الشارة الموسيقية أعلى أو أخفض كثيرًا من الباقي، أو إذا وُجد توقّف لأكثر من أربع ثوانٍ، أو إذا كان في الصوت تشبّع أو طقطقة أو انقطاع.";
