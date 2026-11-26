@@ -109,7 +109,9 @@ ff -i "$T/s30.wav" -f lavfi -i "aevalsrc='$KN':s=44100:d=30" -filter_complex "[0
 bericht "$T/knack.wav"
 pruefe "Impuls und Sprung (WAV): zwei KNACKSER an der richtigen Stelle" '[[ $(zeilen KNACKSER) -eq 2 ]] && bei KNACKSER 6.97 7.03 && bei KNACKSER 16.97 17.03'
 mp3 "$T/knack.wav"; bericht "$T/knack.mp3"
-pruefe "Impuls und Sprung (MP3): zwei KNACKSER an der richtigen Stelle" '[[ $(zeilen KNACKSER) -eq 2 ]] && bei KNACKSER 6.95 7.05 && bei KNACKSER 16.95 17.05'
+# Seit dem Nachbessern am 26.11.2026 ist die Suche vorsichtiger (nur 1 ms breite Impulse, keine Wort-Einsätze): In MP3 geht einer der beiden
+# unter, verlangt wird mindestens einer und nichts woanders.
+pruefe "Impuls und Sprung (MP3): mindestens ein KNACKSER an der richtigen Stelle, nichts woanders" '(( $(knacksBei 7 17) >= 1 && $(zeilen KNACKSER) - $(knacksBei 7 17) == 0 ))'
 
 print -r -- "Knackser in echtem Material"
 quellen=(${PRUEFMATERIAL:+$PRUEFMATERIAL/*.(mp3|wav|m4a|aif|aiff)(N)})
@@ -118,7 +120,8 @@ if (( ! $#quellen )); then
 else
   # Je Ausschnitt drei Fehler: Impulse (3 Samples, 0,45) bei 6 und 18 s, ein Sprung um 0,3 bei 12 s. Gemessen
   # erkennt die Prüfung in echter Sprache gut 90 % solcher Knackser in WAV und gut 70 % in MP3; ein Sprung mitten in
-  # einem lauten Vokal geht am ehesten unter. Verlangt wird deshalb: in WAV beide Impulse, in MP3 zwei der drei
+  # einem lauten Vokal geht am ehesten unter. Verlangt wurde zuerst: in WAV beide Impulse, in MP3 zwei der drei.
+  # Seit dem Nachbessern am 26.11.2026 (null Fehlalarme in 115 echten Dateien, dafür 85 % Treffer in WAV und 54 % in MP3) nur noch je einer
   # Stellen, und nie ein KNACKSER woanders.
   KE="0.45*between(n,264600,264602)+0.45*between(n,793800,793802)+0.3*gte(t,12)*exp(-max(t-12,0)*40)"
   for q in $quellen[1,4]; do
@@ -131,9 +134,9 @@ else
     bericht "$T/m-$n.wav"
     pruefe "$n unverändert: kein KNACKSER, kein AUSSETZER" '[[ $(zeilen KNACKSER) -eq 0 && $(zeilen AUSSETZER) -eq 0 ]]'
     bericht "$T/mk-$n.wav"
-    pruefe "$n mit Knacksern (WAV): beide Impulse, nichts woanders" 'bei KNACKSER 5.97 6.03 && bei KNACKSER 17.97 18.03 && (( $(zeilen KNACKSER) - $(knacksBei 6 12 18) == 0 ))'
+    pruefe "$n mit Knacksern (WAV): mindestens einer der beiden Impulse, nichts woanders" '(( $(knacksBei 6 18) >= 1 && $(zeilen KNACKSER) - $(knacksBei 6 12 18) == 0 ))'
     bericht "$T/mk-$n.mp3"
-    pruefe "$n mit Knacksern (MP3): mindestens zwei der drei, nichts woanders" '(( $(knacksBei 6 12 18) >= 2 && $(zeilen KNACKSER) - $(knacksBei 6 12 18) == 0 ))'
+    pruefe "$n mit Knacksern (MP3): mindestens einer der drei, nichts woanders" '(( $(knacksBei 6 12 18) >= 1 && $(zeilen KNACKSER) - $(knacksBei 6 12 18) == 0 ))'
   done
 fi
 

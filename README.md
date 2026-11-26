@@ -128,7 +128,7 @@ Three more things live in the settings window:
   out: a stretch of at least 2 seconds that is 6 LU or more louder than the
   rest (typically the jingle), a stretch of at least 5 seconds that is 8 LU
   or more quieter, a pause of more than 4 seconds, clipped peaks, clicks and
-  dropouts. A clean file gives no notification; every check is written to
+  dropouts (the sound breaks off for up to 4 seconds and comes back). A clean file gives no notification; every check is written to
   the log (lines starting with "Bounce-Prüfung"). If you bounce again after
   a warning and the file is clean now, it says so. The check only reads. It
   cannot change the balance between jingle and voice; that has to be fixed
@@ -364,11 +364,19 @@ the code. Somebody has to be at the Mac for both:
   re-bounce after a warning says so, nothing happens while Logic is not
   running). Not seen: Logic itself writing the file, Drive placeholders
   being skipped (the rule is in the code, no placeholder was at hand), and
-  the notification on screen. Clicks: on 96 real voice files the check
-  reports 12 "possible clicks" in 10 files; whether those are audible edits
-  or mouth noises has not been listened to yet, so the wording stays
-  "possible". Clipping inside an MP3 is only found when it is heavy: Apple's
-  decoder caps at full scale and the encoder rounds the flat tops away.
+  the notification on screen. Clicks: a first version reported 13 "possible
+  clicks" in 104 real files, and none of them was audible. The search now
+  only takes impulses one millisecond wide and skips hard word onsets after
+  a pause. With that, 115 clean files report no click at all; of clicks put
+  into real speech on purpose it finds 85 % in WAV and 54 % in MP3. Dropouts
+  were tuned on real faults: WAV exports of one season in which the sound
+  breaks off for 1.0 or 1.9 seconds on a 16-second grid. The check reports
+  0, 0, 26, 1, 1, 13 and 10 dropouts for seven of those files, which matches
+  what the radio station that received them described, except for one file
+  where they heard a few and the check finds none. A dropout needs sound on
+  both sides; one that starts or ends in a pause is not found. Clipping
+  inside an MP3 is only found when it is heavy: Apple's decoder caps at
+  full scale and the encoder rounds the flat tops away.
   Music with drums was only tested with a generated beat.
 - The welcome window on a fresh Mac, and on a Mac without Google Drive.
 - The French, Arabic and Farsi translations have not been read by native

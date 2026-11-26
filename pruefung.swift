@@ -65,7 +65,22 @@ enum PruefSchwelle {
     // in WAV meist über 22 dB, in MP3 rund 6 dB weniger (der Kodierer verschmiert den Impuls).
     static let knackDB = 20.0               // so weit muss die Spitze des Vorhersagefehlers über dem Umfeld liegen
     static let knackVorDB = 6.0             // Kandidaten bis so weit darunter zählen für die Dichte mit
-    static let knackBreiteDB = 12.0, knackBreite = 3   // höchstens 3 ms liegen weniger als 12 dB unter der Spitze
+    // Nur 1 ms breit. Zuerst galten 3 ms; damit meldeten 96 echte Sprachdateien 12 Stellen und eine Podcast-Folge
+    // eine weitere, und Joshua hörte in keiner einen Knackser (26.11.2026). 12 dieser 13 Stellen waren 2 oder 3 ms
+    // breit, von den eingebauten Knacksern dagegen fast alle 1 ms (WAV 45 von 50, MP3 21 von 22).
+    static let knackBreiteDB = 12.0, knackBreite = 1   // höchstens 1 ms liegt weniger als 12 dB unter der Spitze
+    // Kein Einsatz: Der 13. Fehlalarm (für_dich_und_für_mich, 5,34 s) saß am Anfang eines Wortes nach einer Pause,
+    // davor -46 dBFS, danach -23 dBFS. Ein harter Einsatz klingt wie ein Anschlag, nicht wie ein Knackser. Nicht
+    // gemeldet wird deshalb, wo (1) eine Seite still ist (unter -40 dBFS), (2) die andere mindestens 15 dB lauter
+    // und (3) der Klang auf der lauten Seite gleich weitergeht: Die 5 ms neben der Spitze liegen höchstens 10 dB
+    // unter ihr. Ein Impuls neben einem Wort fällt dagegen sofort wieder ab und wird gemeldet.
+    // Gemessen an 104 eingebauten Knacksern: Ohne (1) fiel die Quote in WAV von 89 auf 72 % (Sprache schwankt
+    // auch innerhalb von 50 ms um mehr als 15 dB), ohne (3) auf 74 %. Mit 10 dB bei (3) blieb der Fehlalarm
+    // stehen, mit 15 dB ist er weg; die Quote sinkt dadurch um höchstens ein Prozent.
+    // Stand mit allen Regeln (26.11.2026): 115 fehlerfreie Dateien (96 Tagesgeschichten und Gebete, 8 Podcast-
+    // Folgen und Jingles, die 11 Bounces vom Vormittag) melden keinen Knackser; von den eingebauten werden in
+    // WAV 85 % gefunden, in MP3 54 %. Das ist der Preis für null Fehlalarme.
+    static let knackKante = 15.0, knackStill = -40.0, knackWeiter = -15.0
     static let knackUmfeld = 50             // ms beiderseits als Vergleich
     // Die Spitze des Vorhersagefehlers muss mindestens -25 dBFS erreichen (ein Sprung von etwa 0,06). Leisere
     // Kandidaten waren in den echten Bounces Schmatzer in Sprechpausen (blühende_zweige 85,49 s: zwei Ticks bei
@@ -77,13 +92,22 @@ enum PruefSchwelle {
     static let knackGegenSignal = -12.0
     static let knackDichteFenster = 10.0, knackDichteMax = 5   // mehr Kandidaten in 10 s: das ist Material (Schlagzeug)
     static let knackRand = 0.005            // s am Dateianfang und -ende: dort fehlt dem Prädiktor das Umfeld
-    // Aussetzer: ein Loch unter -70 dBFS von 10 ms bis 1 s, davor und danach binnen `lochRand` ms über -35 dBFS.
+    // Aussetzer: ein Loch unter -70 dBFS von 10 ms bis 4 s, davor und danach binnen `lochRand` ms über -35 dBFS.
+    // Die Obergrenze stand zuerst bei 1 s. Geeicht an echten Fehlern (26.11.2026): die WAV-Exporte der Staffel
+    // „Jesus der Jude“ für den ERF vom Sommer 2026, in denen der Ton auf einem 16-Sekunden-Raster für 1,0 s oder
+    // 1,9 s abreißt (Bounce auf einem überlasteten Rechner). Mit 4 s meldet die Prüfung für die Dateien 02 bis 07
+    // und 11: 0, 0, 26, 1, 1, 13, 10 Aussetzer. Der ERF hatte dieselben Dateien als in Ordnung, einzelne, alle
+    // paar Sekunden, einzelne, einzelne, alle paar Sekunden, alle paar Sekunden beschrieben (nur bei 03 hörte er
+    // einzelne, die Prüfung findet keine). Mit 1 s fielen die 1,9-s-Löcher in 07 und 11 ganz durch. Über 4 s ist
+    // es eine Pause und wird als solche gemeldet.
+    // Beide Seiten müssen laut sein. Mit nur einer harten Kante meldete die fehlerfreie Datei 02 405 Stellen:
+    // Die Sprache ist dort mit einem Gate geschnitten, jeder Einsatz nach digitaler Stille sieht so aus.
     // MP3 verschmiert die Kanten: Ein 50-ms-Loch in Sprache kam aus LAME 192k über Apples Dekoder mit bis zu 18 ms
     // Übergang bei -50 bis -65 dBFS zurück, darin nur noch 20 ms unter -70. Deshalb zählt zum Loch ein Rand unter
     // `lochKante` von höchstens `lochVerschmiert` ms; außerhalb davon muss es laut sein, und zwar sprunghaft:
     // mindestens `lochSprung` dB über dem Rand. Ohne diese Bedingung meldete eine natürliche Sprechpause mit
     // leisem Raumton (ein_engel_kommt_zu_maria, 6 dB leiser, 55,7 s) einen Aussetzer.
-    static let lochLeise = -70.0, lochLaut = -35.0, lochKurz = 0.010, lochLang = 1.0, lochRand = 5   // Rand in ms
+    static let lochLeise = -70.0, lochLaut = -35.0, lochKurz = 0.010, lochLang = 4.0, lochRand = 5   // Rand in ms
     static let lochKante = -45.0, lochVerschmiert = 25, lochSprung = 25.0                            // ms, dB
 }
 
@@ -339,6 +363,22 @@ private final class Analyse {
                 var breite = 0
                 for d in -10...10 where i + d >= 0 && i + d < anz && res[i + d] >= p * breiteFaktor { breite += 1 }
                 guard breite <= PruefSchwelle.knackBreite else { continue }
+                // Davor und danach muss es ähnlich laut sein (Median der Rahmenspitzen je Seite), siehe knackKante.
+                var seiten: [Float] = []
+                for seite in [-1, 1] {
+                    umfeld.removeAll(keepingCapacity: true)
+                    for d in 4...u where i + seite * d >= 0 && i + seite * d < anz { umfeld.append(sigFr[i + seite * d]) }
+                    if umfeld.count >= 10 { umfeld.sort(); seiten.append(max(1e-6, umfeld[umfeld.count / 2])) }
+                }
+                if seiten.count == 2, 20 * log10(Double(min(seiten[0], seiten[1]))) < PruefSchwelle.knackStill,
+                   abs(20 * log10(Double(seiten[0] / seiten[1]))) > PruefSchwelle.knackKante {
+                    let laut = seiten[0] > seiten[1] ? -1 : 1
+                    umfeld.removeAll(keepingCapacity: true)
+                    for d in 1...5 where i + laut * d >= 0 && i + laut * d < anz { umfeld.append(sigFr[i + laut * d]) }
+                    umfeld.sort()
+                    if let mitte = umfeld.isEmpty ? nil : umfeld[umfeld.count / 2],
+                       mitte >= sigFr[i] * Float(pow(10, PruefSchwelle.knackWeiter / 20)) { continue }
+                }
                 // Vergleich mit beiden Seiten getrennt, der lautere Median zählt: Ein Einsatz nach einer Pause
                 // (Plosiv nach Stille) ragt nur über die stille Seite hinaus, ein Knackser über beide.
                 var bezug: Float = 1e-7
